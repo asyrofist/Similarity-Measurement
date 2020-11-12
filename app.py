@@ -1,3 +1,4 @@
+# %%writefile app.py
 import streamlit as st
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score 
@@ -32,8 +33,7 @@ if index0 is not None:
       
       # variable parameter
       st.sidebar.header('Training Parameters')
-      hasil = st.sidebar.selectbox('What Dataset you choose?', ['cosine', 'levenshtein', 'jaccard'])
-      size = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
+      hasil = st.sidebar.selectbox('What Similarity Measurement?', ['cosine', 'levenshtein', 'jaccard'])
       
       # cosine
       if hasil == 'cosine':
@@ -76,6 +76,7 @@ if index0 is not None:
       
       # variable training testing
       label_statement = fulldataset(index0, index1)['label']
+      size = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
       X_train, X_test, y_train, y_test = train_test_split(hasil, label_statement, test_size=size,random_state=109) # 70% training and 30% test
       st.subheader('User Train Test parameters')
       traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
