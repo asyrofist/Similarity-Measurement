@@ -1,9 +1,9 @@
 import streamlit as st
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score 
-from sklearn import neighbors, tree, svm
-from sklearn.naive_bayes import GaussianNB
-from sklearn.ensemble import RandomForestClassifier
+from scikit-learn.model_selection import train_test_split
+from scikit-learn.metrics import classification_report, accuracy_score, precision_score, recall_score 
+from scikit-learn import neighbors, tree, svm
+from scikit-learn.naive_bayes import GaussianNB
+from scikit-learn.ensemble import RandomForestClassifier
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, similarity_cosine, similarity_levenshtein, similarity_jaccard
 from tabulate import tabulate 
 
