@@ -5,7 +5,6 @@ from sklearn import neighbors, tree, svm
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, similarity_cosine, similarity_levenshtein, similarity_jaccard
-from tabulate import tabulate 
 
 st.write("""
 # Similarity & Classiifcation Measurements
