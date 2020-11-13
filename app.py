@@ -1,10 +1,4 @@
 import streamlit as st
-import sklearn
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score 
-from sslearn import neighbors, tree, svm
-from sklearn.naive_bayes import GaussianNB
-from sklearn.ensemble import RandomForestClassifier
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, similarity_cosine, similarity_levenshtein, similarity_jaccard
 from tabulate import tabulate 
 
@@ -75,6 +69,12 @@ if index0 is not None:
         st.dataframe(df_jaccard)
       
       # variable training testing
+      import sklearn
+      from sklearn.model_selection import train_test_split
+      from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score 
+      from sslearn import neighbors, tree, svm
+      from sklearn.naive_bayes import GaussianNB
+      from sklearn.ensemble import RandomForestClassifier
       label_statement = fulldataset(index0, index1)['label']
       size = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
       X_train, X_test, y_train, y_test = train_test_split(hasil, label_statement, test_size=size,random_state=109) # 70% training and 30% test
