@@ -1,4 +1,5 @@
 import streamlit as st
+import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score 
 from sslearn import neighbors, tree, svm
