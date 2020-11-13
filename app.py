@@ -1,12 +1,24 @@
+import re
 import streamlit as st
+from nltk.tokenize import word_tokenize
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score 
 from sklearn import neighbors, tree, svm
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
-from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np
+from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, sent_PCA
 from function import similarity_cosine, similarity_levenshtein, similarity_jaccard, tfidf, hasil_tfidf, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from gensim.models import Doc2Vec
+from gensim.models.doc2vec import TaggedDocument
+from multiprocessing import Pool
+from scipy import spatial
+from scipy.spatial import distance
+from gensim.models import Word2Vec
+from multiprocessing import Pool
+from scipy import spatial
+from sklearn.decomposition import PCA
+
 
 st.write("""
 # Similarity & Classiifcation Measurements
@@ -33,7 +45,7 @@ if index0 is not None:
       
       # variable parameter
       st.sidebar.header('Training Parameters')
-      hasil = st.sidebar.selectbox('What Similarity Measurement?', ['cosine', 'levenshtein', 'jaccard', 'tfidf', 'vsm'])
+      hasil = st.sidebar.selectbox('What Similarity Measurement?', ['cosine', 'levenshtein', 'jaccard', 'tfidf', 'vsm', 'doc2vec', 'sentencemodel'])
       
       # cosine
       if hasil == 'cosine':
@@ -97,6 +109,46 @@ if index0 is not None:
         hasil = vsm
         st.sidebar.write('anda memilih: vsm')
         st.dataframe(df_vsm)
+
+      # doc2vec
+      elif hasil == 'doc2vec':
+        st.subheader('Similarity doc2vec parameters')
+        sentences = [word_tokenize(num) for num in cleaned_text]
+        for i in range(len(sentences)):
+            sentences[i] = TaggedDocument(words = sentences[i], tags = ['sent{}'.format(i)])    # converting each sentence into a TaggedDocument
+        model = Doc2Vec(documents = sentences, dm = 1, size = 100, window = 3, min_count = 1, iter = 10, workers = Pool()._processes)
+        model.init_sims(replace = True)
+        model.save('doc2vec_model')
+        model = Doc2Vec.load('doc2vec_model')
+        nilai_vektor = [model.infer_vector("sent{}".format(num)) for num in range(0, len(cleaned_text))]
+        id_requirement = fulldataset(index0, index1)['ID']
+        df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, 100)])
+        hasil = nilai_vektor
+        st.sidebar.write('anda memilih: doc2vec')
+        st.dataframe(df_vektor)
+
+      # sentencemodel
+      elif hasil == 'sentencemodel':
+        st.subheader('Similarity sentencemodel parameters')
+        threshold = 5
+        for i in range(len(cleaned_text)):
+            if len(cleaned_text[i]) < 5:
+                cleaned_text[i] = None
+        cleaned_text = [sentence for sentence in cleaned_text if sentence is not None]
+        model = Word2Vec(sentences = cleaned_text, size = 100, sg = 1, window = 3, min_count = 1, iter = 10, workers = Pool()._processes)
+        model.init_sims(replace = True)
+        for i in range(len(cleaned_text)):
+            cleaned_text[i] = [model[word] for word in cleaned_text[i]]
+        sent_vectorized = [sent_PCA(sentence) for sentence in cleaned_text]
+        hasil_sentencemodel = []
+        for angka in range(0, len(cleaned_text)):
+          a = [distance.euclidean(sent_vectorized[angka], sent_vectorized[num]) for num in range(0, len(cleaned_text))]
+          hasil_sentencemodel.append(a)
+        id_requirement = fulldataset(index0, index1)['ID']
+        df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement)
+        hasil = hasil_sentencemodel
+        st.sidebar.write('anda memilih: Sentence Model')
+        st.dataframe(df_sentmodel)
       
       # variable training testing
       label_statement = fulldataset(index0, index1)['label']
