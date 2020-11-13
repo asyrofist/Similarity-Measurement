@@ -8,6 +8,11 @@ from nltk.tokenize import word_tokenize
 from nltk.stem.wordnet import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+# download nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+
 stemming = PorterStemmer()
 stops = set(stopwords.words("english"))
 lem = WordNetLemmatizer()
