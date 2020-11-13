@@ -316,7 +316,7 @@ setuptools-git==1.2
 Shapely==1.7.1
 simplegeneric==0.8.1
 six==1.15.0
-sklearn==0.0
+sklearn==0.22.2
 sklearn-pandas==1.8.0
 slugify==0.0.1
 smart-open==3.0.0
