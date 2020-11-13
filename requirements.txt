@@ -12,4 +12,4 @@ sklearn>=0.0
 sklearn-pandas==1.8.0
 streamlit==0.71.0
 nltk==3.2.5
-tensorflow.compat.v1==1.
+tensorflow==1.0.0
