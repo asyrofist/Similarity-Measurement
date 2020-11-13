@@ -11,6 +11,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from tabulate import tabulate 
 tf.disable_v2_behavior()
 
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+
 stemming = PorterStemmer()
 stops = set(stopwords.words("english"))
 lem = WordNetLemmatizer()
