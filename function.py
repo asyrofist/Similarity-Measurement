@@ -188,3 +188,17 @@ def npstat(data):
   dataBaru = maximum, minimum, mean, variance, median, standar_deviasi
   df = pd.DataFrame(dataBaru, index=['maximum', 'minimum', 'mean', 'variance', 'median', 'standar deviasi'], columns=['variable value'])
   return df
+
+# sentence modeling
+# define function to compute weighted vector representation of sentence
+# parameter 'n' means number of words to be accounted when computing weighted average
+def sent_PCA(sentence, n = 2):
+    pca = PCA(n_components = n)
+    pca.fit(np.array(sentence).transpose())
+    variance = np.array(pca.explained_variance_ratio_)
+    words = []
+    for _ in range(n):
+        idx = np.argmax(variance)
+        words.append(np.amax(variance) * sentence[idx])
+        variance[idx] = 0
+    return np.sum(words, axis = 0)
