@@ -7,8 +7,6 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize 
 from nltk.stem.wordnet import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
-from tabulate import tabulate 
-tf.disable_v2_behavior()
 
 stemming = PorterStemmer()
 stops = set(stopwords.words("english"))
@@ -50,27 +48,19 @@ def clean_text(raw_text):
     
     # Convert to lower case
     text = raw_text.lower()
-    
     # Tokenize
     tokens = nltk.word_tokenize(text)
-    
     # Keep only words (removes punctuation + numbers)
     # use .isalnum to keep also numbers
     token_words = [w for w in tokens if w.isalpha()]
-    
     # # Stemming
     # stemmed_words = [stemming.stem(w) for w in token_words]
-
     # Lemmatization
     lemma_words = [lem.lemmatize(w) for w in token_words]
-    
     # Remove stop words
     meaningful_words = [w for w in lemma_words if not w in stops]
-    
-
     # Rejoin meaningful stemmed words
     joined_words = ( " ".join(meaningful_words))
-    
     # Return cleaned data
     return joined_words
 
@@ -78,7 +68,6 @@ def clean_text(raw_text):
 def similarity_levenshtein(s1, s2):
     if len(s1) < len(s2):
         return similarity_levenshtein(s2, s1)
-
     # len(s1) >= len(s2)
     if len(s2) == 0:
         return len(s1)
@@ -91,8 +80,7 @@ def similarity_levenshtein(s1, s2):
             deletions = current_row[j] + 1       # than s2
             substitutions = previous_row[j] + (c1 != c2)
             current_row.append(min(insertions, deletions, substitutions))
-        previous_row = current_row
-    
+        previous_row = current_row    
     return previous_row[-1]
 
 # Cosine Similarity 
@@ -139,7 +127,7 @@ def tfidf(data1, id_requirement):
   tfidf_matrix = vect.fit_transform(data1)
   df = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names())
   hasil_tfidf.append(tfidf_matrix.toarray())
-  print(tabulate(df, headers = 'keys', tablefmt = 'psql'))
+  return df
 
 # vsm similarity
 hasil_vsm = []
@@ -151,7 +139,7 @@ def vsm_similarity(data, id_requirement):
   vsm = cosine_similarity(matrix_tfidf[0:], matrix_tfidf)
   hasil_vsm.append(vsm)
   df = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement)
-  print(tabulate(df, headers = 'keys', tablefmt = 'psql'))
+  return df
 
 # visualisasi
 def visualisasi(data, id_requirement):
@@ -160,12 +148,10 @@ def visualisasi(data, id_requirement):
     pca = PCA(n_components=len(data))
     my_pca = pca.fit_transform(data)
     plt.scatter(my_pca[:,0], my_pca[:,1])
-
     for i, word in enumerate(id_requirement):
         plt.annotate(word, xy=(my_pca[i,0], my_pca[i,1]))
         plt.xlabel('widht')
         plt.ylabel('height')
-
     plt.title('Visualisasi')
     plt.show()
 
@@ -185,7 +171,6 @@ def hitungstat(data):
     df = pd.DataFrame(data)
     dataBaru = maximum, minimum, mean, harmonicmean, pvariance, median, median_group, lowmedian, highmedian, standar_deviasi
     df = pd.DataFrame(dataBaru, index=['maximum', 'minimum', 'mean', 'harmonic mean', 'pvariance', 'median', 'median group', 'lowmedian', 'highmedian', 'standar deviasi'], columns=['variable value'])
-    df.to_csv('hitungstat.csv', sep='\t')
     return df
 
 def npstat(data):
@@ -197,5 +182,4 @@ def npstat(data):
   standar_deviasi = np.std(data)
   dataBaru = maximum, minimum, mean, variance, median, standar_deviasi
   df = pd.DataFrame(dataBaru, index=['maximum', 'minimum', 'mean', 'variance', 'median', 'standar deviasi'], columns=['variable value'])
-  df.to_csv('npstat.csv', sep='\t')
   return df
