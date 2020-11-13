@@ -199,8 +199,3 @@ def npstat(data):
   df = pd.DataFrame(dataBaru, index=['maximum', 'minimum', 'mean', 'variance', 'median', 'standar deviasi'], columns=['variable value'])
   df.to_csv('npstat.csv', sep='\t')
   return df
-
-def jumlahWupalmer(data):
-    clean = [x for x in data if x != None]
-    jumlah = sum(clean)
-    return jumlah
