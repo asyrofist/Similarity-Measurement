@@ -4,7 +4,9 @@ from sklearn.metrics import classification_report, accuracy_score, precision_sco
 from sklearn import neighbors, tree, svm
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
-from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, similarity_cosine, similarity_levenshtein, similarity_jaccard
+from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np
+from function import similarity_cosine, similarity_levenshtein, similarity_jaccard, tfidf, hasil_tfidf, TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 st.write("""
 # Similarity & Classiifcation Measurements
@@ -31,7 +33,7 @@ if index0 is not None:
       
       # variable parameter
       st.sidebar.header('Training Parameters')
-      hasil = st.sidebar.selectbox('What Similarity Measurement?', ['cosine', 'levenshtein', 'jaccard'])
+      hasil = st.sidebar.selectbox('What Similarity Measurement?', ['cosine', 'levenshtein', 'jaccard', 'tfidf', 'vsm'])
       
       # cosine
       if hasil == 'cosine':
@@ -71,6 +73,30 @@ if index0 is not None:
         hasil = hasil_jaccard
         st.sidebar.write('anda memilih: jaccard')
         st.dataframe(df_jaccard)
+
+      # tfidf
+      elif hasil == 'tfidf':
+        st.subheader('Similarity tfidf parameters')
+        vect = TfidfVectorizer()
+        tfidf_matrix = vect.fit_transform(cleaned_text)
+        id_requirement = fulldataset(index0, index1)['ID']
+        df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names())
+        hasil = tfidf_matrix.toarray()
+        st.sidebar.write('anda memilih: tfidf')
+        st.dataframe(df_tfidf)
+
+      # vsm
+      elif hasil == 'vsm':
+        st.subheader('Similarity tfidf parameters')
+        vect = TfidfVectorizer()
+        tfidf_matrix = vect.fit_transform(cleaned_text)
+        matrix_tfidf = tfidf_matrix.toarray()
+        vsm = cosine_similarity(matrix_tfidf[0:], matrix_tfidf)
+        id_requirement = fulldataset(index0, index1)['ID']
+        df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement)
+        hasil = vsm
+        st.sidebar.write('anda memilih: vsm')
+        st.dataframe(df_vsm)
       
       # variable training testing
       label_statement = fulldataset(index0, index1)['label']
