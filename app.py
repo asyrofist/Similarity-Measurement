@@ -50,6 +50,7 @@ if index0 is not None:
       # cosine
       if hasil == 'cosine':
         st.subheader('Similarity cosine parameters')
+        hasil_cosine = []
         for angka in range(0, len(cleaned_text)):
             a = [similarity_cosine(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
             hasil_cosine.append(a)
