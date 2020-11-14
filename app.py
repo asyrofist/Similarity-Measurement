@@ -88,12 +88,7 @@ if index0 is not None:
        bow_matrix = pd.DataFrame(doc_array, index= id_requirement, columns= doc_feature)
        st.dataframe(bow_matrix) 
         
-       # tfidf        
-       count_vector = CountVectorizer(text)
-       count_vector.fit(text)
-       doc_array = count_vector.transform(text).toarray()
-       doc_feature = count_vector.get_feature_names()    
-    
+       # tfidf          
        doc_term_matrix_l2 = []
        # document l2 normalizaer
        for vec in doc_array:
