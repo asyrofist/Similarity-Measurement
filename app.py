@@ -112,7 +112,7 @@ if index0 is not None:
             
        hasil_tfidf = np.matrix(doc_term_matrix_tfidf_l2)
        st.subheader('Similarity TFIDF parameters')
-       tfidf_matrix = pd.DataFrame(hasil_tfidf, index= id_requirement, columns= feature_requiremnet)
+       tfidf_matrix = pd.DataFrame(hasil_tfidf, index= id_requirement, columns= doc_feature)
        st.dataframe(bow_matrix)
      
     # similarity
