@@ -43,6 +43,12 @@ if index0 is not None:
       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
       cleaned_text = apply_cleaning_function_to_list(text_to_clean)
       
+      hasil_cosine = []  
+      def hasil_similaritascosine(data):
+            for angka in range(0, len(data)):
+                a = [similarity_cosine(data[angka], data[num]) for num in range(0, len(data))]
+                hasil_cosine.append(a)
+    
       # variable parameter
       st.sidebar.header('Training Parameters')
       hasil = st.sidebar.selectbox('What Similarity Measurement?', ['cosine', 'levenshtein', 'jaccard', 'tfidf', 'vsm', 'doc2vec', 'sentencemodel'])
@@ -50,10 +56,7 @@ if index0 is not None:
       # cosine
       if hasil == 'cosine':
         st.subheader('Similarity cosine parameters')
-        hasil_cosine = []
-        for angka in range(0, len(cleaned_text)):
-            a = [similarity_cosine(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
-            hasil_cosine.append(a)
+        hasil_similaritascosine(cleaned_text)
         id_requirement = fulldataset(index0, index1)['ID']
         df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement)
         hasil = hasil_cosine
