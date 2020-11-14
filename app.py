@@ -1,4 +1,6 @@
 import re
+import math
+import string #allows for format()
 import streamlit as st
 from nltk.tokenize import word_tokenize
 from sklearn.model_selection import train_test_split
@@ -25,6 +27,37 @@ st.write("""
 # Similarity & Classiifcation Measurements
 Berikut ini algoritma yang digunakan untuk pengukuran similaritas dan klasifikasi
 """)
+
+# variable tfidf
+def l2_normalizer(vec):
+    denom = np.sum([el**2 for el in vec])
+    return [(el / math.sqrt(denom)) for el in vec]
+
+def build_lexicon(corpus):
+    lexicon = set()
+    for doc in corpus:
+        lexicon.update([word for word in doc.split()])
+    return lexicon
+
+def freq(term, document):
+  return document.split().count(term)
+
+def numDocsContaining(word, doclist):
+    doccount = 0
+    for doc in doclist:
+        if freq(word, doc) > 0:
+            doccount +=1
+    return doccount 
+
+def idf(word, doclist):
+    n_samples = len(doclist)
+    df = numDocsContaining(word, doclist)
+    return np.log(n_samples / 1+df)
+
+def build_idf_matrix(idf_vector):
+    idf_mat = np.zeros((len(idf_vector), len(idf_vector)))
+    np.fill_diagonal(idf_mat, idf_vector)
+    return idf_mat
 
 #file upload
 index0 = st.file_uploader("Choose a file") 
@@ -53,10 +86,40 @@ if index0 is not None:
        st.subheader('Similarity BOW parameters')
        id_requirement = fulldataset(index0, index1)['ID']
        bow_matrix = pd.DataFrame(doc_array, index= id_requirement, columns= doc_feature)
-       st.dataframe(bow_matrix)  
+       st.dataframe(bow_matrix) 
         
-        
+       # tfidf        
+       count_vector = CountVectorizer(text)
+       count_vector.fit(text)
+       doc_array = count_vector.transform(text).toarray()
+       doc_feature = count_vector.get_feature_names()    
     
+       doc_term_matrix_l2 = []
+       # document l2 normalizaer
+       for vec in doc_array:
+           doc_term_matrix_l2.append(l2_normalizer(vec))
+
+       # vocabulary & idf matrix 
+       vocabulary = build_lexicon(cleaned_text)
+       mydoclist = cleaned_text
+       my_idf_vector = [idf(word, mydoclist) for word in vocabulary]
+       my_idf_matrix = build_idf_matrix(my_idf_vector)
+
+       doc_term_matrix_tfidf = []
+       #performing tf-idf matrix multiplication
+       for tf_vector in doc_array:
+           doc_term_matrix_tfidf.append(np.dot(tf_vector, my_idf_matrix))
+        
+       doc_term_matrix_tfidf_l2 = []
+       #normalizing
+       for tf_vector in doc_term_matrix_tfidf:
+            doc_term_matrix_tfidf_l2.append(l2_normalizer(tf_vector))
+            
+       hasil_tfidf = np.matrix(doc_term_matrix_tfidf_l2)
+       st.subheader('Similarity TFIDF parameters')
+       tfidf_matrix = pd.DataFrame(hasil_tfidf, index= id_requirement, columns= feature_requiremnet)
+       st.dataframe(bow_matrix)
+     
     # similarity
     elif similaritas:
       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
