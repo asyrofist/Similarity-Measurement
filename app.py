@@ -49,6 +49,7 @@ if index0 is not None:
        count_vector = CountVectorizer(cleaned_text)
        count_vector.fit(cleaned_text)
        doc_array = count_vector.transform(cleaned_text).toarray()
+       id_requiremnet = fulldataset(index0, index1)['ID']
        frequency_matrix = pd.DataFrame(doc_array, index= id_requirement, columns=count_vector.get_feature_names())
        st.dataframe(frequency_matrix)  
     
