@@ -46,9 +46,9 @@ if index0 is not None:
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
        
        # document bag of words
-       count_vector = CountVectorizer(text)
-       count_vector.fit(text)
-       doc_array = count_vector.transform(text).toarray()            
+       count_vector = CountVectorizer(cleaned_text)
+       count_vector.fit(cleaned_text)
+       doc_array = count_vector.transform(cleaned_text).toarray()            
        doc_feature = count_vector.get_feature_names()
        st.subheader('Similarity BOW parameters')
        id_requirement = fulldataset(index0, index1)['ID']
