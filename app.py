@@ -6,7 +6,7 @@ from sklearn.metrics import classification_report, accuracy_score, precision_sco
 from sklearn import neighbors, tree, svm
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.feature_extraction.text import CountVectorizer
+
 from sklearn.decomposition import PCA
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, sent_PCA
 from function import similarity_cosine, similarity_levenshtein, similarity_jaccard, tfidf, hasil_tfidf, TfidfVectorizer
@@ -48,6 +48,7 @@ if index0 is not None:
        # document bag of words
        doc_bow = []
        def bagofwords(text):
+           from sklearn.feature_extraction.text import CountVectorizer
            count_vector = CountVectorizer(text)
            count_vector.fit(text)
            doc_array = count_vector.transform(text).toarray()
