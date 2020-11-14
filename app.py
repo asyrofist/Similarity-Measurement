@@ -45,17 +45,21 @@ if index0 is not None:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
        
-       # docuement bag of words
+       # document bag of words
        doc_bow = []
        def bagofwords(text):
            count_vector = CountVectorizer(text)
            count_vector.fit(text)
            doc_array = count_vector.transform(text).toarray()
            doc_bow.append(doc_array)
+            
+       # document tfidf
        st.subheader('Similarity cosine parameters')
        id_requirement = fulldataset(index0, index1)['ID']
-       frequency_matrix = pd.DataFrame(doc_bow, index= id_requirement, columns=count_vector.get_feature_names())
-       st.dataframe(frequency_matrix)  
+       bow_matrix = pd.DataFrame(doc_bow, index= id_requirement, columns=count_vector.get_feature_names())
+       st.dataframe(bow_matrix)  
+        
+        
     
     # similarity
     elif similaritas:
