@@ -6,6 +6,8 @@ from sklearn.metrics import classification_report, accuracy_score, precision_sco
 from sklearn import neighbors, tree, svm
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import PCA
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, sent_PCA
 from function import similarity_cosine, similarity_levenshtein, similarity_jaccard, tfidf, hasil_tfidf, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -17,7 +19,6 @@ from scipy.spatial import distance
 from gensim.models import Word2Vec
 from multiprocessing import Pool
 from scipy import spatial
-from sklearn.decomposition import PCA
 
 
 st.write("""
@@ -43,8 +44,13 @@ if index0 is not None:
     if ontology:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
-       st.write(cleaned_text)
-         
+       
+       # docuement bag of words
+       count_vector = CountVectorizer(cleaned_text)
+       count_vector.fit(cleaned_text)
+       doc_array = count_vector.transform(cleaned_text).toarray()
+       frequency_matrix = pd.DataFrame(doc_array, index= id_requirement, columns=count_vector.get_feature_names())
+       st.dataframe(frequency_matrix)  
     
     # similarity
     elif similaritas:
