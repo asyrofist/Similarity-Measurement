@@ -37,9 +37,17 @@ if index0 is not None:
     # Nilai Pembanding
     st.sidebar.header('Measurement Parameter')
     similaritas = st.sidebar.checkbox("Similarity & Classification")
-
+    ontology = st.sidebar.checkbox("Ontology Construction")
+    
+    # Ontology Construction
+    if ontology:
+       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
+       cleaned_text = apply_cleaning_function_to_list(text_to_clean)
+       st.write(cleaned_text)
+         
+    
     # similarity
-    if similaritas:
+    elif similaritas:
       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
       cleaned_text = apply_cleaning_function_to_list(text_to_clean)
                                 
