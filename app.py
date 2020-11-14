@@ -42,25 +42,7 @@ if index0 is not None:
     if similaritas:
       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
       cleaned_text = apply_cleaning_function_to_list(text_to_clean)
-      
-      hasil_cosine = []  
-      def hasil_similaritascosine(data):
-            for angka in range(0, len(data)):
-                a = [similarity_cosine(data[angka], data[num]) for num in range(0, len(data))]
-                hasil_cosine.append(a)
-                
-      hasil_levenshtein = []
-      def hasil_similaritaslevenshtein(data):
-            for angka in range(0, len(data)):
-                b = [similarity_levenshtein(data[angka], data[num]) for num in range(0, len(data))]
-                hasil_levenshtein.append(b)
-      
-      hasil_jaccard = []
-      def hasil_similaritasjaccard(data):
-            for angka in range(0, len(data)):
-                b = [similarity_jaccard(data[angka], data[num]) for num in range(0, len(data))]
-                hasil_jaccard.append(b)
-    
+                                
       # variable parameter
       st.sidebar.header('Training Parameters')
       hasil = st.sidebar.selectbox('What Similarity Measurement?', ['cosine', 'levenshtein', 'jaccard', 'tfidf', 'vsm', 'doc2vec', 'sentencemodel'])
@@ -69,6 +51,10 @@ if index0 is not None:
       if hasil == 'cosine':
         st.subheader('Similarity cosine parameters')
         hasil_similaritascosine(cleaned_text)
+        hasil_cosine = []  
+        for angka in range(0, len(cleaned_text)):
+            a = [similarity_cosine(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
+            hasil_cosine.append(a)
         id_requirement = fulldataset(index0, index1)['ID']
         df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement)
         hasil = hasil_cosine
@@ -78,7 +64,10 @@ if index0 is not None:
       # levenshtein
       elif hasil == 'levenshtein':
         st.subheader('Similarity levenshtein parameters')
-        hasil_similaritaslevenshtein(cleaned_text)
+        hasil_levenshtein = []
+        for angka in range(0, len(cleaned_text)):
+            b = [similarity_levenshtein(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
+            hasil_levenshtein.append(b)
         id_requirement = fulldataset(index0, index1)['ID']
         df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement)
         hasil = hasil_levenshtein
@@ -88,7 +77,10 @@ if index0 is not None:
       # jaccard
       elif hasil == 'jaccard':
         st.subheader('Similarity jaccard parameters')
-        hasil_similaritasjaccard(cleaned_text)
+        hasil_jaccard = []
+        for angka in range(0, len(cleaned_text)):
+            b = [similarity_jaccard(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
+            hasil_jaccard.append(b)
         id_requirement = fulldataset(index0, index1)['ID']
         df_jaccard = pd.DataFrame(hasil_jaccard, index= id_requirement, columns= id_requirement)
         hasil = hasil_jaccard
