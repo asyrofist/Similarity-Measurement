@@ -48,6 +48,18 @@ if index0 is not None:
             for angka in range(0, len(data)):
                 a = [similarity_cosine(data[angka], data[num]) for num in range(0, len(data))]
                 hasil_cosine.append(a)
+                
+      hasil_levenshtein = []
+      def hasil_similaritaslevenshtein(data):
+            for angka in range(0, len(data)):
+                b = [similarity_levenshtein(data[angka], data[num]) for num in range(0, len(data))]
+                hasil_levenshtein.append(b)
+      
+      hasil_jaccard = []
+      def hasil_similaritasjaccard(data):
+            for angka in range(0, len(data)):
+                b = [similarity_jaccard(data[angka], data[num]) for num in range(0, len(data))]
+                hasil_jaccard.append(b)
     
       # variable parameter
       st.sidebar.header('Training Parameters')
@@ -66,10 +78,7 @@ if index0 is not None:
       # levenshtein
       elif hasil == 'levenshtein':
         st.subheader('Similarity levenshtein parameters')
-        hasil_levenshtein = []
-        for angka in range(0, len(cleaned_text)):
-            b = [similarity_levenshtein(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
-            hasil_levenshtein.append(b)
+        hasil_similaritaslevenshtein(cleaned_text)
         id_requirement = fulldataset(index0, index1)['ID']
         df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement)
         hasil = hasil_levenshtein
@@ -79,10 +88,7 @@ if index0 is not None:
       # jaccard
       elif hasil == 'jaccard':
         st.subheader('Similarity jaccard parameters')
-        hasil_jaccard = []
-        for angka in range(0, len(cleaned_text)):
-            b = [similarity_jaccard(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
-            hasil_jaccard.append(b)
+        hasil_similaritasjaccard(cleaned_text)
         id_requirement = fulldataset(index0, index1)['ID']
         df_jaccard = pd.DataFrame(hasil_jaccard, index= id_requirement, columns= id_requirement)
         hasil = hasil_jaccard
