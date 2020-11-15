@@ -23,7 +23,6 @@ if index0 is not None:
     st.sidebar.header('Dataset Parameter')
     x1 = pd.ExcelFile(index0)
     index1 = st.sidebar.selectbox( 'What Dataset you choose?', x1.sheet_names)
-    st.sidebar.write('You choose',index1)
     st.subheader('Dataset parameters')
     st.write(fulldataset(index0, index1))
 
@@ -242,7 +241,6 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement).describe()
             hasil = hasil_cosine
-            st.sidebar.write('You choose: cosine')
             st.dataframe(df_cos)
             fig = ff.create_distplot(hasil_cosine, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -257,7 +255,6 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement).describe()
             hasil = hasil_levenshtein
-            st.sidebar.write('You choose: levenshtein')
             st.dataframe(df_lev)
             fig = ff.create_distplot(hasil_levenshtein, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -272,7 +269,6 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_jaccard = pd.DataFrame(hasil_jaccard, index= id_requirement, columns= id_requirement).describe()
             hasil = hasil_jaccard
-            st.sidebar.write('You choose: jaccard')
             st.dataframe(df_jaccard)
             fig = ff.create_distplot(hasil_jaccard, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -285,7 +281,6 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names()).describe()
             hasil = tfidf_matrix.toarray()
-            st.sidebar.write('You choose: tfidf')
             st.dataframe(df_tfidf)
             fig = ff.create_distplot(tfidf_matrix.toarray(), id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -300,7 +295,6 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement).describe()
             hasil = vsm
-            st.sidebar.write('You choose: vsm')
             st.dataframe(df_vsm)
             fig = ff.create_distplot(vsm, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -324,7 +318,6 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
             hasil = nilai_vektor
-            st.sidebar.write('You choose: doc2vec')
             st.dataframe(df_vektor)
             fig = ff.create_distplot(nilai_vektor, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -355,21 +348,15 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement).describe()
             hasil = hasil_sentencemodel
-            st.sidebar.write('You choose: Sentence Model')
             st.dataframe(df_sentmodel)
             fig = ff.create_distplot(hasil_sentencemodel, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
       
       # variable training testing
       label_statement = fulldataset(index0, index1)['label']
-      size = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
-      profile = st.sidebar.checkbox('Profilling Parameters')
+      size            = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
+      profile         = st.sidebar.checkbox('Profilling Parameters')
       
-      X_train, X_test, y_train, y_test = train_test_split(hasil, label_statement, test_size=size,random_state=109) # 70% training and 30% test
-      st.subheader('User Train Test parameters')
-      traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
-      st.write(traintest)      
-
       # classification
       st.sidebar.header('Classification Parameters')
       SVM = st.sidebar.button('Support Vector Machine')
@@ -377,9 +364,22 @@ if index0 is not None:
       KNN = st.sidebar.button('K Nearest Neighbor')
       GNB = st.sidebar.button('Gaussian Naive Bias')
       DT  = st.sidebar.button('Decission Tree')
+      
+      X_train, X_test, y_train, y_test = train_test_split(hasil, label_statement, test_size=size,random_state=109) # 70% training and 30% test
+      st.subheader('User Train Test parameters')
+      traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
+      st.write(traintest)      
+        
+      # profilling
+      if profile:
+           # fiture svd profile
+           pr = ProfileReport(hasil, explorative=True)
+           st.title("Feature SVD Profile")
+           st.write(hasil)
+           st_profile_report(pr)
 
       # support vector machine
-      if SVM:
+      elif SVM:
           supportvectormachine = svm.SVC(decision_function_shape='ovo')
           supportvectormachine.fit(X_train, y_train)
           y_pred = supportvectormachine.predict(X_test)
@@ -447,12 +447,3 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
-        
-       # profilling
-       elif profile:
-           # fiture svd profile
-           pr = ProfileReport(hasil, explorative=True)
-           st.title("Feature SVD Profile")
-           st.write(hasil)
-           st_profile_report(pr)
-
