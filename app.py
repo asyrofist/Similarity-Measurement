@@ -37,7 +37,7 @@ if index0 is not None:
     #profiling
     if profilling:
        st.header("Profilling")
-       profile = ProfileReport(fulldataset(index0, index1))
+       profile = ProfileReport(fulldataset(index0, index1), title="Pandas Profiling Report")
        profile.to_notebook_iframe()
         
     #co-occurance 
