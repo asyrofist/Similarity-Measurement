@@ -291,9 +291,7 @@ if index0 is not None:
       X_train, X_test, y_train, y_test = train_test_split(hasil, label_statement, test_size=size,random_state=109) # 70% training and 30% test
       st.subheader('User Train Test parameters')
       traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
-#       st.write(traintest)
-      st.line_chart([y_train, y_test])
-      
+      st.write(traintest)      
 
       # classification
       st.sidebar.header('Classification Parameters')
