@@ -97,9 +97,8 @@ if index0 is not None:
        # Visualisasi
        st.subheader('Feature Parameters')
        st.dataframe(cos.describe())
-       st.line_chart(cos.describe())
-#        fig = ff.create_distplot(hasil_cosine, id_requirement)
-#        st.plotly_chart(fig, use_container_width=True)
+       fig = ff.create_distplot(hasil_cosine, id_requirement)
+       st.plotly_chart(fig, use_container_width=True)
       
     
     # Ontology Construction
