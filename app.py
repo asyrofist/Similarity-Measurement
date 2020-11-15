@@ -31,7 +31,7 @@ if index0 is not None:
     similaritas     = st.sidebar.checkbox("Similarity & Classification")
     ontology        = st.sidebar.checkbox("Ontology Construction")
     extraction      = st.sidebar.checkbox("Requirement Extraction")
-    occurance       = st.sidebar.checbox("Term Co-Occurance")
+    occurance       = st.sidebar.checkbox("Term Co-Occurance")
     stanford_func   = st.sidebar.checkbox("Stanford Function")
     
     # stanford function
