@@ -100,6 +100,15 @@ if index0 is not None:
        df_svd = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(df_svd)
     
+       # fiture svd profile
+       profile = st.sidebar.checkbox('Feature Profile')
+       if profile:
+           df_data = df_svd
+           pr = ProfileReport(df_data, explorative=True)
+           st.title("Feature Profile")
+           st.write(df_data)
+           st_profile_report(pr)
+    
     # Requirement Extraction
     elif extraction:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
@@ -146,6 +155,16 @@ if index0 is not None:
        st.dataframe(cos.describe())
        fig = ff.create_distplot(hasil_cosine, id_requirement)
        st.plotly_chart(fig, use_container_width=True)
+       
+       # fiture svd profile
+       profile = st.sidebar.checkbox('Feature Profile')
+       if profile:
+           df_data = cos
+           pr = ProfileReport(df_data, explorative=True)
+           st.title("Feature Profile")
+           st.write(df_data)
+           st_profile_report(pr)
+
         
     # Ontology Construction
     elif ontology:
@@ -375,7 +394,7 @@ if index0 is not None:
            # fiture svd profile
            df_data = pd.DataFrame(hasil)
            pr = ProfileReport(df_data, explorative=True)
-           st.title("Feature SVD Profile")
+           st.title("Feature Profile")
            st.write(df_data)
            st_profile_report(pr)
 
