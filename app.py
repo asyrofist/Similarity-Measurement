@@ -5,7 +5,7 @@ from function import neigbors, tree, svm, GaussianNB, RandomForestClassifier, Co
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, sent_PCA
 from function import similarity_cosine, similarity_levenshtein, similarity_jaccard, tfidf, hasil_tfidf, TfidfVectorizer
 from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix, pmi_measurement, pmi_jumlah, co_occurrence
-from function import KMeans, adjusted_rand_score, TruncatedSVD, TfidfVectorizer, 
+from function import KMeans, adjusted_rand_score, TruncatedSVD, TfidfVectorizer
 from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec, cosine_similarity
 
 st.write("""
