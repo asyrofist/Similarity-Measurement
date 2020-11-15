@@ -94,7 +94,12 @@ if index0 is not None:
        st.dataframe(cos)
 
        # Visualisasi
+       st.subheader('Cosine Visualisation') 
        st.line_chart(hasil_cosine, use_container_width=True) 
+        
+       c = alt.Chart(cos).mark_circle().encode(x=id_requirement[0], y=id_requirement[1], size=id_requirement[2], color=id_requirement[2], tooltip=id_requirement)
+       st.altair_chart(c, use_container_width=True)
+       
     
     # Ontology Construction
     elif ontology:
