@@ -114,6 +114,20 @@ if index0 is not None:
        st.subheader('Similarity TFIDF parameters')
        tfidf_matrix = pd.DataFrame(hasil_tfidf, index= id_requirement, columns= doc_feature)
        st.dataframe(tfidf_matrix)
+        
+      #doc2vec
+      st.subheader('Similarity doc2vec parameters')
+      sentences = [word_tokenize(num) for num in cleaned_text]
+      for i in range(len(sentences)):
+            sentences[i] = TaggedDocument(words = sentences[i], tags = ['sent{}'.format(i)])    # converting each sentence into a TaggedDocument
+      model = Doc2Vec(documents = sentences, dm = 1, size = 100, window = 3, min_count = 1, iter = 10, workers = Pool()._processes)
+      model.init_sims(replace = True)
+      model.save('doc2vec_model')
+      model = Doc2Vec.load('doc2vec_model')
+      nilai_vektor = [model.infer_vector("sent{}".format(num)) for num in range(0, len(cleaned_text))]
+      id_requirement = fulldataset(index0, index1)['ID']
+      df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, 100)])
+      st.dataframe(df_vektor)
      
     # similarity
     elif similaritas:
