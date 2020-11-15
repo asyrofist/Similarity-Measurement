@@ -2,6 +2,7 @@ import re
 import math
 import string #allows for format()
 import streamlit as st
+import altair as alt
 from nltk.tokenize import word_tokenize
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score 
@@ -183,6 +184,8 @@ if index0 is not None:
         hasil = hasil_cosine
         st.sidebar.write('anda memilih: cosine')
         st.dataframe(df_cos)
+        c = alt.Chart(df_cos).mark_circle()
+        st.write(c)
         
       # levenshtein
       elif hasil == 'levenshtein':
