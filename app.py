@@ -93,28 +93,29 @@ if index0 is not None:
        random_value = st.sidebar.slider('Berapa Random Model?', 0, 300, 122)
 
        # SVD represent documents and terms in vectors 
+       st.subheader('LSA parameters')        
        vectorizer = TfidfVectorizer(stop_words='english', max_features= feature_value, max_df = 0.5, smooth_idf= True)
        X = vectorizer.fit_transform(cleaned_text)
        fitur_id = vectorizer.get_feature_names()
        svd_model = TruncatedSVD(n_components= (X.shape[0]), algorithm='randomized', n_iter=iterasi_value, random_state=random_value)
        svd_model.fit(X)
        jumlah_kata = svd_model.components_
-       st.subheader('LSA parameters')
        tabel_lsa = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(tabel_lsa)
    
        # kMeans
+       st.subheader('KMeans parameters')
        true_k = (X.shape[0])
        # true_k = (X.shape[1]-1)
        model = KMeans(n_clusters=true_k, init='k-means++', max_iter=iterasi_value, n_init=1)
        model.fit(jumlah_kata)
        order_centroids = model.cluster_centers_.argsort()[:, ::-1]
        terms = vectorizer.get_feature_names()
-       st.subheader('KMeans parameters')
        tabel_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= terms)
        st.dataframe(tabel_kmeans)
     
        # cosine
+       st.subheader('KMeans parameters') 
        hasil_cosine = cosine_similarity(order_centroids[0:], order_centroids)
        id_term = [("term {}".format(num)) for num in range(0, (X.shape[1]-1))]
        cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement)
