@@ -239,7 +239,7 @@ def build_idf_matrix(idf_vector):
     return idf_mat  
   
   
- def pmi_measurement(text1, text2):
+def pmi_measurement(text1, text2):
     stopwords_ = set(stopwords.words('english'))
     words1 = [word.lower() for word in text1.split() if len(word) > 2 and word not in stopwords_]
     words2 = [word.lower() for word in text2.split() if len(word) > 2 and word not in stopwords_]
