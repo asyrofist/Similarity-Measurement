@@ -40,6 +40,7 @@ Berikut ini algoritma yang digunakan untuk pengukuran similaritas dan klasifikas
 #file upload
 index0 = st.file_uploader("Choose a file") 
 if index0 is not None:
+    st.sidebar.header('Dataset Parameter')
     x1 = pd.ExcelFile(index0)
     index1 = st.sidebar.selectbox( 'What Dataset you choose?', x1.sheet_names)
     st.sidebar.write('You choose',index1)
@@ -47,7 +48,7 @@ if index0 is not None:
     st.write(fulldataset(index0, index1))
 
     # Nilai Pembanding
-    st.sidebar.header('Measurement Parameter')
+    st.sidebar.subheader('Measurement Parameter')
     similaritas = st.sidebar.checkbox("Similarity & Classification")
     ontology = st.sidebar.checkbox("Ontology Construction")
     extraction = st.sidebar.checkbox("Requirement Extraction")
