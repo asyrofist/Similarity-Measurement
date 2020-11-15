@@ -97,7 +97,7 @@ if index0 is not None:
        st.subheader('Cosine Visualisation') 
        st.line_chart(hasil_cosine, use_container_width=True) 
         
-       c = alt.Chart(cos).mark_circle().encode(, tooltip=id_requirement)
+       c = alt.Chart(cos).mark_circle().encode()
        st.altair_chart(c, use_container_width=True)
        
     
