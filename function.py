@@ -9,6 +9,8 @@ from nltk.tokenize import word_tokenize
 from nltk.stem.wordnet import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
+from nltk.collocations import BigramCollocationFinder, BigramAssocMeasures
+import collections
 
 # download nltk
 nltk.download('stopwords')
@@ -236,3 +238,48 @@ def build_idf_matrix(idf_vector):
     np.fill_diagonal(idf_mat, idf_vector)
     return idf_mat  
   
+  
+ def pmi_measurement(text1, text2):
+    stopwords_ = set(stopwords.words('english'))
+    words1 = [word.lower() for word in text1.split() if len(word) > 2 and word not in stopwords_]
+    words2 = [word.lower() for word in text2.split() if len(word) > 2 and word not in stopwords_]
+
+    finder = BigramCollocationFinder.from_words(words1+words2)
+    bgm = BigramAssocMeasures()
+    score = bgm.mi_like
+    collocations = {'_'.join(bigram): pmi for bigram, pmi in finder.score_ngrams(score)}
+    return collocations
+
+def pmi_jumlah(text1, text2):
+    stopwords_ = set(stopwords.words('english'))
+    words1 = [word.lower() for word in text1.split() if len(word) > 2 and word not in stopwords_]
+    words2 = [word.lower() for word in text2.split() if len(word) > 2 and word not in stopwords_]
+    finder = BigramCollocationFinder.from_words(words1+words2)
+    bgm = BigramAssocMeasures()
+    score = bgm.mi_like
+    total_pmi = sum([math.log(pmi) for bigram, pmi in finder.score_ngrams(score)])
+    return total_pmi
+
+def co_occurrence(sentences, window_size):
+    d = collections.defaultdict(int)
+    vocab = set()
+    for text in sentences:
+        # preprocessing (use tokenizer instead)
+        text = text.lower().split()
+        # iterate over sentences
+        for i in range(len(text)):
+            token = text[i]
+            vocab.add(token)  # add to vocab
+            next_token = text[i+1 : i+1+window_size]
+            for t in next_token:
+                key = tuple( sorted([t, token]) )
+                d[key] += 1
+
+    # formulate the dictionary into dataframe
+    vocab = sorted(vocab) # sort vocab
+    df = pd.DataFrame(data=np.zeros((len(vocab), len(vocab)), dtype=np.int16), index=vocab, columns=vocab)
+    for key, value in d.items():
+        df.at[key[0], key[1]] = value
+        df.at[key[1], key[0]] = value
+    return df
+
