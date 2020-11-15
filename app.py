@@ -410,7 +410,7 @@ if index0 is not None:
 #            st_profile_report(pr)
 
       # support vector machine
-      elif SVM:
+      if SVM:
           supportvectormachine = svm.SVC(decision_function_shape='ovo')
           supportvectormachine.fit(X_train, y_train)
           y_pred = supportvectormachine.predict(X_test)
