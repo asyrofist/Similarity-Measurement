@@ -373,9 +373,10 @@ if index0 is not None:
       # profilling
       if profile:
            # fiture svd profile
-           pr = ProfileReport(hasil, explorative=True)
+           df_data = pd.DataFrame(hasil)
+           pr = ProfileReport(df_data, explorative=True)
            st.title("Feature SVD Profile")
-           st.write(hasil)
+           st.write(df_data)
            st_profile_report(pr)
 
       # support vector machine
