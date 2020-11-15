@@ -86,12 +86,11 @@ if index0 is not None:
        # LSA
        st.sidebar.subheader("Model Parameter")
        feature_value = st.sidebar.slider('Berapa Max Feature Model?', 0, 10, 1000)
-       maxdf_value = st.sidebar.slider('Berapa Max Df Model?', 0, 0.1, 0.5)
        iterasi_value = st.sidebar.slider('Berapa Dimension Model?', 0, 200, 100)
        random_value = st.sidebar.slider('Berapa Random Model?', 0, 300, 122)
 
        # SVD represent documents and terms in vectors 
-       vectorizer = TfidfVectorizer(stop_words='english', max_features= feature_value, max_df = maxdf_value, smooth_idf= True)
+       vectorizer = TfidfVectorizer(stop_words='english', max_features= feature_value, max_df = 0.5, smooth_idf= True)
        X = vectorizer.fit_transform(cleaned_text)
        fitur_id = vectorizer.get_feature_names()
        svd_model = TruncatedSVD(n_components= (X.shape[0]), algorithm='randomized', n_iter=iterasi_value, random_state=random_value)
