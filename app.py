@@ -10,6 +10,7 @@ from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec,
 import numpy as np
 import pandas as pd
 from pandas_profiling import ProfileReport
+from streamlit_pandas_profiling import st_profile_report
 
 st.write("""
 # Requirement Dependency Measurements
@@ -36,10 +37,10 @@ if index0 is not None:
     #profilling
     if profile:
         df = pd.DataFrame(np.random.rand(100, 5),columns=["a", "b", "c", "d", "e"])
-        st.dataframe(df)
-        profile = ProfileReport(df, title='Pandas Profiling Report', html={'style':{'full_width':False}})
-        hasil = profile.to_notebook_iframe()
-        st.write(hasil)
+        pr = ProfileReport(df, explorative=True)
+        st.title("Pandas Profiling in Streamlit")
+        st.write(df)
+        st_profile_report(pr)
         
     #co-occurance 
     elif  occurance:
