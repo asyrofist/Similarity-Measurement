@@ -173,7 +173,7 @@ if index0 is not None:
        # Visualisasi
        st.subheader('Feature parameters')
        st.dataframe(df_kmeans.describe())
-       st.area_chart(df_kmeans.describe())
+       st.line_chart(df_kmeans.describe())
            
     # similarity
     elif similaritas:
