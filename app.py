@@ -334,7 +334,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
-          fig = ff.create_distplot([akurasi, presisi, rekal], ['akurasi', 'presisi', 'rekal'])
+          fig = ff.create_distplot([[akurasi, presisi, rekal]], ['akurasi', 'presisi', 'rekal'])
           st.plotly_chart(fig, use_container_width=True)
 
           
@@ -352,7 +352,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
-          fig = ff.create_distplot([akurasi, presisi, rekal], ['akurasi', 'presisi', 'rekal'])
+          fig = ff.create_distplot([[akurasi, presisi, rekal]], ['akurasi', 'presisi', 'rekal'])
           st.plotly_chart(fig, use_container_width=True)
 
 
@@ -369,7 +369,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
-          fig = ff.create_distplot([akurasi, presisi, rekal], ['akurasi', 'presisi', 'rekal'])
+          fig = ff.create_distplot([[akurasi, presisi, rekal]], ['akurasi', 'presisi', 'rekal'])
           st.plotly_chart(fig, use_container_width=True)
 
 
@@ -386,7 +386,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
-          fig = ff.create_distplot([akurasi, presisi, rekal], ['akurasi', 'presisi', 'rekal'])
+          fig = ff.create_distplot([[akurasi, presisi, rekal]], ['akurasi', 'presisi', 'rekal'])
           st.plotly_chart(fig, use_container_width=True)
 
 
@@ -403,6 +403,6 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
-          fig = ff.create_distplot([akurasi, presisi, rekal], ['akurasi', 'presisi', 'rekal'])
+          fig = ff.create_distplot([[akurasi, presisi, rekal]], ['akurasi', 'presisi', 'rekal'])
           st.plotly_chart(fig, use_container_width=True)
 
