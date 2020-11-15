@@ -27,13 +27,8 @@ from scipy import spatial
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
-from sklearn.cluster import KMeans
-from sklearn.metrics.pairwise import cosine_similarity
 import scipy.sparse
-from sparsesvd import sparsesvd
-from sklearn.metrics.pairwise import cosine_similarity
 
 st.write("""
 # Similarity & Classiifcation Measurements
