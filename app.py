@@ -60,6 +60,7 @@ if index0 is not None:
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
        
        #occurance
+       st.subheader("Co-occurance Measurement Parameter")
        df_occurance = co_occurrence(cleaned_text, 2)
        st.dataframe(df_occurance)
         
@@ -71,16 +72,20 @@ if index0 is not None:
           a1 = [pmi_measurement(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
           a2.append(a1)
        tabel_pmi = pd.DataFrame(a2, index= id_requirement, columns= id_requirement)
-#        st.dataframe(tabel_pmi)
+       st.dataframe(tabel_pmi)
         
        #pmi jumlah 
-       st.subheader("PMI Measurement Parameter")
+       st.subheader("PMI Sum Parameter")
        a4 = []
        for angka in range(0, len(cleaned_text)):
           a3 = [pmi_jumlah(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
           a4.append(a3)
        tabel_jumlahpmi = pd.DataFrame(a4, index= id_requirement, columns= id_requirement)
        st.dataframe(tabel_jumlahpmi)
+       
+       #fitur pmi
+       desc_pmi = tabel_jumlahpmi.describe()
+       st.dataframe(desc_pmi)
         
     # Requirement Extraction
     elif extraction:
