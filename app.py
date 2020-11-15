@@ -24,7 +24,6 @@ from scipy import spatial
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score
-from tabulate import tabulate
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 
