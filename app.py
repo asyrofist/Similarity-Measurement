@@ -37,16 +37,9 @@ if index0 is not None:
     #profiling
     if profilling:
        st.header("Profilling")
-       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
-       cleaned_text = apply_cleaning_function_to_list(text_to_clean)
-       vect = TfidfVectorizer()
-       tfidf_matrix = vect.fit_transform(cleaned_text)
-       matrix_tfidf = tfidf_matrix.toarray()
-       vsm = cosine_similarity(matrix_tfidf[0:], matrix_tfidf)
-       id_requirement = fulldataset(index0, index1)['ID']
-       df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement)
-       st.dataframe(df_vsm)
-       profile = ProfileReport(df_vsm)
+       df_profile = pd.DataFrame(np.random.rand(100, 5),columns=["a", "b", "c", "d", "e"])
+       profile = ProfileReport(df_profile, title='Pandas Profiling Report', html={'style':{'full_width':False}})
+       profile.to_notebook_iframe()
         
     #co-occurance 
     elif  occurance:
