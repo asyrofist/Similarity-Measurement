@@ -10,7 +10,7 @@ from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec,
 
 st.write("""
 # Requirement Dependency Measurements
-Berikut ini algoritma yang digunakan untuk pengukuran similaritas dan klasifikasi
+Berikut ini algoritma yang digunakan untuk pengukuran kebergantungan antar kebutuhan
 """)
 
 #file upload
