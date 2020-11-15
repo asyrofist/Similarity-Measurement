@@ -167,7 +167,7 @@ if index0 is not None:
         st.sidebar.write('anda memilih: cosine')
 #         st.dataframe(df_cos)
         
-        col1, col2 = st.beta_columns([3, 1])
+        col1, col2 = st.beta_columns(2)
         data = df_cos
         col1.subheader("A wide column with a chart")
         col1.line_chart(data)
