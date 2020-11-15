@@ -7,8 +7,8 @@ from function import similarity_cosine, similarity_levenshtein, similarity_jacca
 from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix, pmi_measurement, pmi_jumlah, co_occurrence
 from function import KMeans, adjusted_rand_score, TruncatedSVD, TfidfVectorizer
 from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec, cosine_similarity
-from pandas_profiling import ProfileReport
-from streamlit_pandas_profiling import st_profile_report
+# from pandas_profiling import ProfileReport
+# from streamlit_pandas_profiling import st_profile_report
 
 st.write("""
 # Requirement Dependency Measurements
@@ -86,7 +86,7 @@ if index0 is not None:
        feature_value = st.sidebar.slider('Berapa Max Feature Model?', 0, 10, 1000)
        iterasi_value = st.sidebar.slider('Berapa Dimension Model?', 0, 200, 100)
        random_value = st.sidebar.slider('Berapa Random Model?', 0, 300, 122)
-       profile = st.sidebar.checkbox('Feature Profile')
+#        profile = st.sidebar.checkbox('Feature Profile')
 
        # SVD represent documents and terms in vectors 
        st.subheader('SVD parameters')        
@@ -99,13 +99,13 @@ if index0 is not None:
        df_svd = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(df_svd)
        
-       # fiture svd profile
-       if profile:
-           df_data = df_svd
-           pr = ProfileReport(df_data, explorative=True)
-           st.title("Feature Profile")
-           st.write(df_data)
-           st_profile_report(pr)
+#        # fiture svd profile
+#        if profile:
+#            df_data = df_svd
+#            pr = ProfileReport(df_data, explorative=True)
+#            st.title("Feature Profile")
+#            st.write(df_data)
+#            st_profile_report(pr)
 
         
     # Requirement Extraction
@@ -119,7 +119,7 @@ if index0 is not None:
        feature_value = st.sidebar.slider('Berapa Max Feature Model?', 0, 10, 1000)
        iterasi_value = st.sidebar.slider('Berapa Dimension Model?', 0, 200, 100)
        random_value = st.sidebar.slider('Berapa Random Model?', 0, 300, 122)
-       profile = st.sidebar.checkbox('Feature Profile')
+#        profile = st.sidebar.checkbox('Feature Profile')
 
        # SVD represent documents and terms in vectors 
        st.subheader('LSA parameters')        
@@ -156,13 +156,13 @@ if index0 is not None:
        fig = ff.create_distplot(hasil_cosine, id_requirement)
        st.plotly_chart(fig, use_container_width=True)
        
-       # fiture svd profile
-       if profile:
-           df_data = cos
-           pr = ProfileReport(df_data, explorative=True)
-           st.title("Feature Profile")
-           st.write(df_data)
-           st_profile_report(pr)
+#        # fiture svd profile
+#        if profile:
+#            df_data = cos
+#            pr = ProfileReport(df_data, explorative=True)
+#            st.title("Feature Profile")
+#            st.write(df_data)
+#            st_profile_report(pr)
 
         
     # Ontology Construction
@@ -217,7 +217,7 @@ if index0 is not None:
        iterasi_value = st.sidebar.slider('Berapa Iterasi Model?', 0, 100, 10)
        window_value = st.sidebar.slider('Berapa Window Model?', 0, 10, 3)
        dimension_value = st.sidebar.slider('Berapa Dimension Model', 0, 10, 1)
-       profile = st.sidebar.checkbox('Feature Profile')
+#        profile = st.sidebar.checkbox('Feature Profile')
         
        model = Doc2Vec(documents = sentences, dm = dimension_value, size = size_value, window = window_value, min_count = 1, iter = iterasi_value, workers = Pool()._processes)
        model.init_sims(replace = True)
@@ -242,13 +242,13 @@ if index0 is not None:
        st.dataframe(df_kmeans.describe())
        st.line_chart(df_kmeans.describe())
     
-       # fiture svd profile
-       if profile:
-           df_data = df_kmeans
-           pr = ProfileReport(df_data, explorative=True)
-           st.title("Feature Profile")
-           st.write(df_data)
-           st_profile_report(pr)
+#        # fiture svd profile
+#        if profile:
+#            df_data = df_kmeans
+#            pr = ProfileReport(df_data, explorative=True)
+#            st.title("Feature Profile")
+#            st.write(df_data)
+#            st_profile_report(pr)
                
     # similarity
     elif similaritas:
@@ -385,7 +385,7 @@ if index0 is not None:
       # variable training testing
       label_statement = fulldataset(index0, index1)['label']
       size            = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
-      profile         = st.sidebar.checkbox('Profilling Parameters')
+#       profile         = st.sidebar.checkbox('Profilling Parameters')
       
       # classification
       st.sidebar.header('Classification Parameters')
@@ -400,14 +400,14 @@ if index0 is not None:
       traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
       st.write(traintest)      
         
-      # profilling
-      if profile:
-           # fiture svd profile
-           df_data = pd.DataFrame(hasil)
-           pr = ProfileReport(df_data, explorative=True)
-           st.title("Feature Profile")
-           st.write(df_data)
-           st_profile_report(pr)
+#       # profilling
+#       if profile:
+#            # fiture svd profile
+#            df_data = pd.DataFrame(hasil)
+#            pr = ProfileReport(df_data, explorative=True)
+#            st.title("Feature Profile")
+#            st.write(df_data)
+#            st_profile_report(pr)
 
       # support vector machine
       elif SVM:
