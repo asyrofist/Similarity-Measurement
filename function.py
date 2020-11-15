@@ -1,16 +1,35 @@
-import nltk
-import math
+import nltk, math, statistics, collections, re
 import pandas as pd
-import statistics
 import numpy as np
+import scipy.sparse
+import string #allows for format()
+import plotly.figure_factory as ff
+import streamlit as st
+import altair as alt
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize 
 from nltk.stem.wordnet import WordNetLemmatizer
+from nltk.collocations import BigramCollocationFinder, BigramAssocMeasures
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
-from nltk.collocations import BigramCollocationFinder, BigramAssocMeasures
-import collections
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score, adjusted_rand_score
+from sklearn import neighbors, tree, svm
+from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import PCA
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.cluster import KMeans
+from sklearn.decomposition import TruncatedSVD
+from gensim.models import Doc2Vec
+from gensim.models.doc2vec import TaggedDocument
+from gensim.models import Word2Vec
+from scipy import spatial
+from scipy.spatial import distance
+from multiprocessing import Pool
 
 # download nltk
 nltk.download('stopwords')
