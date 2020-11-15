@@ -73,7 +73,7 @@ if index0 is not None:
        svd_model = TruncatedSVD(n_components= (X.shape[0]), algorithm='randomized', n_iter=iterasi_value, random_state=random_value)
        svd_model.fit(X)
        jumlah_kata = svd_model.components_
-       tabel_lsa = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
+       tabel_lsa = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id).describe()
        st.dataframe(tabel_lsa)
    
        # kMeans
@@ -84,14 +84,14 @@ if index0 is not None:
        model.fit(jumlah_kata)
        order_centroids = model.cluster_centers_.argsort()[:, ::-1]
        terms = vectorizer.get_feature_names()
-       tabel_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= terms)
+       tabel_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= terms).describe()
        st.dataframe(tabel_kmeans)
            
        # cosine
        st.subheader('Cosine parameters') 
        hasil_cosine = cosine_similarity(order_centroids[0:], order_centroids)
        id_term = [("term {}".format(num)) for num in range(0, (X.shape[1]-1))]
-       cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement)
+       cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement).describe()
        st.dataframe(cos)
        
        # Visualisasi
@@ -112,7 +112,7 @@ if index0 is not None:
        st.subheader('BOW parameters')
        id_requirement = fulldataset(index0, index1)['ID']
        bow_matrix = pd.DataFrame(doc_array, index= id_requirement, columns= doc_feature).describe()
-       st.dataframe(bow_matrix) 
+       st.dataframe(bow_matrix)
         
        # tfidf          
        doc_term_matrix_l2 = []
@@ -168,7 +168,7 @@ if index0 is not None:
        id_requirement = fulldataset(index0, index1)['ID']
        df_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
        st.dataframe(df_kmeans)
-          
+    
        # Visualisasi
        st.area_chart(df_kmeans)
            
@@ -243,7 +243,7 @@ if index0 is not None:
 
       # vsm
       elif hasil == 'vsm':
-        st.subheader('Similarity tfidf parameters')
+        st.subheader('Similarity vsm parameters')
         vect = TfidfVectorizer()
         tfidf_matrix = vect.fit_transform(cleaned_text)
         matrix_tfidf = tfidf_matrix.toarray()
