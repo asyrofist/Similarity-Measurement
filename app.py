@@ -40,6 +40,7 @@ if index0 is not None:
        df_profile = pd.DataFrame(np.random.rand(100, 5),columns=["a", "b", "c", "d", "e"])
        profile = ProfileReport(df_profile, title='Pandas Profiling Report', html={'style':{'full_width':False}})
        profile.to_notebook_iframe()
+       st.write(profile)
         
     #co-occurance 
     elif  occurance:
