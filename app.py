@@ -200,6 +200,8 @@ if index0 is not None:
         hasil = hasil_levenshtein
         st.sidebar.write('anda memilih: levenshtein')
         st.dataframe(df_lev)
+        fig = ff.create_distplot(hasil_levenshtein, id_requirement)
+        st.plotly_chart(fig, use_container_width=True)
       
       # jaccard
       elif hasil == 'jaccard':
@@ -213,6 +215,9 @@ if index0 is not None:
         hasil = hasil_jaccard
         st.sidebar.write('anda memilih: jaccard')
         st.dataframe(df_jaccard)
+        fig = ff.create_distplot(hasil_jaccard, id_requirement)
+        st.plotly_chart(fig, use_container_width=True)
+
 
       # tfidf
       elif hasil == 'tfidf':
@@ -224,6 +229,9 @@ if index0 is not None:
         hasil = tfidf_matrix.toarray()
         st.sidebar.write('anda memilih: tfidf')
         st.dataframe(df_tfidf)
+        fig = ff.create_distplot(tfidf_matrix.toarray(), id_requirement)
+        st.plotly_chart(fig, use_container_width=True)
+
 
       # vsm
       elif hasil == 'vsm':
@@ -237,6 +245,8 @@ if index0 is not None:
         hasil = vsm
         st.sidebar.write('anda memilih: vsm')
         st.dataframe(df_vsm)
+        fig = ff.create_distplot(vsm, id_requirement)
+        st.plotly_chart(fig, use_container_width=True)
 
       # doc2vec
       elif hasil == 'doc2vec':
@@ -259,6 +269,9 @@ if index0 is not None:
         hasil = nilai_vektor
         st.sidebar.write('anda memilih: doc2vec')
         st.dataframe(df_vektor)
+        fig = ff.create_distplot(nilai_vektor, id_requirement)
+        st.plotly_chart(fig, use_container_width=True)
+
 
       # sentencemodel
       elif hasil == 'sentencemodel':
@@ -288,6 +301,9 @@ if index0 is not None:
         hasil = hasil_sentencemodel
         st.sidebar.write('anda memilih: Sentence Model')
         st.dataframe(df_sentmodel)
+        fig = ff.create_distplot(hasil_sentencemodel, id_requirement)
+        st.plotly_chart(fig, use_container_width=True)
+
       
       # variable training testing
       label_statement = fulldataset(index0, index1)['label']
@@ -318,6 +334,10 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
+          fig = ff.create_distplot([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+          st.plotly_chart(fig, use_container_width=True)
+
+          
 
       # random forest classifier
       elif RFC:
@@ -332,6 +352,9 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
+          fig = ff.create_distplot([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+          st.plotly_chart(fig, use_container_width=True)
+
 
       # K-Nearset Neighbor
       elif KNN:
@@ -346,6 +369,9 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
+          fig = ff.create_distplot([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+          st.plotly_chart(fig, use_container_width=True)
+
 
       # Gaussian Naive Bias
       elif GNB:
@@ -360,6 +386,9 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
+          fig = ff.create_distplot([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+          st.plotly_chart(fig, use_container_width=True)
+
 
       # Decission Tree
       elif DT:
@@ -374,3 +403,6 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
+          fig = ff.create_distplot([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+          st.plotly_chart(fig, use_container_width=True)
+
