@@ -168,7 +168,7 @@ if index0 is not None:
         st.dataframe(df_cos)
         col1, col2 = st.beta_columns(2)
         col1.subheader("A wide column with a chart")
-        col1.line_chart(df_cos)
+        col1.line_chart(hasil_cosine)
         col2.subheader("A narrow column with the data")
         col2.write(df_cos)
       
