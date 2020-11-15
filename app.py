@@ -182,8 +182,7 @@ if index0 is not None:
         df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement)
         hasil = hasil_cosine
         st.sidebar.write('anda memilih: cosine')
-#         st.dataframe(df_cos)
-        st.line_chart(hasil_cosine)
+        st.dataframe(df_cos)
         
       # levenshtein
       elif hasil == 'levenshtein':
@@ -292,7 +291,9 @@ if index0 is not None:
       X_train, X_test, y_train, y_test = train_test_split(hasil, label_statement, test_size=size,random_state=109) # 70% training and 30% test
       st.subheader('User Train Test parameters')
       traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
-      st.write(traintest)
+#       st.write(traintest)
+      st.line_chart([y_train, y_test])
+      
 
       # classification
       st.sidebar.header('Classification Parameters')
