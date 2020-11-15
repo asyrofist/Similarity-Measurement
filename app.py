@@ -115,7 +115,7 @@ if index0 is not None:
        st.dataframe(tabel_kmeans)
     
        # cosine
-       st.subheader('KMeans parameters') 
+       st.subheader('Cosine parameters') 
        hasil_cosine = cosine_similarity(order_centroids[0:], order_centroids)
        id_term = [("term {}".format(num)) for num in range(0, (X.shape[1]-1))]
        cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement)
