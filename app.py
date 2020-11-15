@@ -112,21 +112,28 @@ if index0 is not None:
        st.dataframe(desc_vsm)
     
        # third order
-       st.header("Third Co-occurance")
-       st.subheader("SVD parameters")
-       mat = vsm
-       smat = scipy.sparse.csc_matrix(mat) # convert to sparse CSC format
-       ut, s, vt = sparsesvd(smat, 100) # do SVD, asking for 100 factors
-       hasil4 = ut*s*vt
-       df_svd = pd.DataFrame(hasil4, index= list(unique_tags_test), columns= list(unique_tags_test)) 
+       st.header('Thrd Co-occurance')
+       st.sidebar.subheader("Model Parameter SVD")
+       feature_value = st.sidebar.slider('Berapa Max Feature Model?', 0, 10, 1000)
+       iterasi_value = st.sidebar.slider('Berapa Dimension Model?', 0, 200, 100)
+       random_value = st.sidebar.slider('Berapa Random Model?', 0, 300, 122)
+
+       # SVD represent documents and terms in vectors 
+       st.subheader('SVD parameters')        
+       vectorizer = TfidfVectorizer(stop_words='english', max_features= feature_value, max_df = 0.5, smooth_idf= True)
+       X = vectorizer.fit_transform(cleaned_text)
+       fitur_id = vectorizer.get_feature_names()
+       svd_model = TruncatedSVD(n_components= (X.shape[0]), algorithm='randomized', n_iter=iterasi_value, random_state=random_value)
+       svd_model.fit(X)
+       jumlah_kata = svd_model.components_
+       df_svd = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(df_svd)
-    
+   
        #fitur svd
        st.subheader("Feature SVD Parameter")
-       desc_vsm = df_vsm.describe()
-       st.dataframe(desc_vsm)
-
-        
+       desc_svd = df_svd.describe()
+       st.dataframe(desc_svd)
+ 
     # Requirement Extraction
     elif extraction:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
