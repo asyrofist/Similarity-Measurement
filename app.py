@@ -185,7 +185,7 @@ if index0 is not None:
         st.sidebar.write('anda memilih: cosine')
         st.dataframe(df_cos)
         c = alt.Chart(df_cos).mark_circle()
-        st.write(c)
+        st.altair_chart(c, use_container_width=True)
         
       # levenshtein
       elif hasil == 'levenshtein':
