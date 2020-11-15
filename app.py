@@ -26,6 +26,8 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
+from sklearn.cluster import KMeans
+from sklearn.metrics.pairwise import cosine_similarity
 
 st.write("""
 # Similarity & Classiifcation Measurements
@@ -82,7 +84,8 @@ if index0 is not None:
     if extraction:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
-        
+       id_requirement = fulldataset(index0, index1)['ID']
+ 
        # LSA
        st.sidebar.subheader("Model Parameter")
        feature_value = st.sidebar.slider('Berapa Max Feature Model?', 0, 10, 1000)
@@ -96,24 +99,27 @@ if index0 is not None:
        svd_model = TruncatedSVD(n_components= (X.shape[0]), algorithm='randomized', n_iter=iterasi_value, random_state=random_value)
        svd_model.fit(X)
        jumlah_kata = svd_model.components_
-       id_requirement = fulldataset(index0, index1)['ID']
        st.subheader('LSA parameters')
        tabel_lsa = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(tabel_lsa)
-    
+   
        # kMeans
-       from sklearn.cluster import KMeans
-       from tabulate import tabulate
        true_k = (X.shape[0])
        # true_k = (X.shape[1]-1)
        model = KMeans(n_clusters=true_k, init='k-means++', max_iter=iterasi_value, n_init=1)
        model.fit(jumlah_kata)
        order_centroids = model.cluster_centers_.argsort()[:, ::-1]
        terms = vectorizer.get_feature_names()
-       id_requirement = fulldataset(index0, index1)['ID']
        st.subheader('KMeans parameters')
        tabel_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= terms)
-       st.dataframe(tabel_lsa)
+       st.dataframe(tabel_kmeans)
+    
+       # cosine
+       hasil_cosine = cosine_similarity(order_centroids[0:], order_centroids)
+       id_term = [("term {}".format(num)) for num in range(0, (X.shape[1]-1))]
+       cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement)
+       st.dataframe(cos)
+
     
     # Ontology Construction
     elif ontology:
@@ -184,7 +190,7 @@ if index0 is not None:
        id_requirement = fulldataset(index0, index1)['ID']
        df_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
        st.dataframe(df_kmeans)
-    
+           
     # similarity
     elif similaritas:
       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
