@@ -9,7 +9,7 @@ from function import KMeans, adjusted_rand_score, TruncatedSVD, TfidfVectorizer
 from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec, cosine_similarity
 
 st.write("""
-# Similarity & Classiifcation Measurements
+# Requirement Dependency Measurements
 Berikut ini algoritma yang digunakan untuk pengukuran similaritas dan klasifikasi
 """)
 
