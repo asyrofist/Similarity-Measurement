@@ -129,7 +129,7 @@ if index0 is not None:
        dimension_value = st.sidebar.slider('Berapa Dimension Model', 0, 10, 1)
        model = Doc2Vec(documents = sentences, dm = dimension_value, size = size_value, window = window_value, min_count = 1, iter = iterasi_value, workers = Pool()._processes)
        model.init_sims(replace = True)
-       model.save('doc2vec_model')
+#        model.save('doc2vec_model')
        model = Doc2Vec.load('doc2vec_model')
        nilai_vektor = [model.infer_vector("sent{}".format(num)) for num in range(0, len(cleaned_text))]
        id_requirement = fulldataset(index0, index1)['ID']
@@ -232,7 +232,7 @@ if index0 is not None:
         iterasi_value = st.sidebar.slider('Berapa Iterasi Model?', 0, 100, 10)
         model = Doc2Vec(documents = sentences, dm = dimension_value, size = size_value, window = window_value, min_count = 1, iter = iterasi_value, workers = Pool()._processes)
         model.init_sims(replace = True)
-        model.save('doc2vec_model')
+#         model.save('doc2vec_model')
         model = Doc2Vec.load('doc2vec_model')
         nilai_vektor = [model.infer_vector("sent{}".format(num)) for num in range(0, len(cleaned_text))]
         id_requirement = fulldataset(index0, index1)['ID']
