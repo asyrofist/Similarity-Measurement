@@ -137,6 +137,7 @@ if index0 is not None:
        st.dataframe(df_vektor)
         
        # Kmeans
+       st.subheader('Kmeans parameters')
        true_k = len(nilai_vektor)
        model = KMeans(n_clusters=true_k, init='k-means++', max_iter=iterasi_value, n_init=1)
        model.fit(nilai_vektor)
