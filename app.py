@@ -1,34 +1,12 @@
-import re
-import math
-import string #allows for format()
-import plotly.figure_factory as ff
-import streamlit as st
-import altair as alt
-from nltk.tokenize import word_tokenize
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score 
-from sklearn import neighbors, tree, svm
-from sklearn.naive_bayes import GaussianNB
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.decomposition import PCA
+from function import re, math, string, ff, st, alt
+from function import word_tokenize, train_test_split
+from function import classification_report, accuracy_score, precision_score, recall_score
+from function import neigbors, tree, svm, GaussianNB, RandomForestClassifier, CountVectorizer, PCA
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, sent_PCA
 from function import similarity_cosine, similarity_levenshtein, similarity_jaccard, tfidf, hasil_tfidf, TfidfVectorizer
 from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix, pmi_measurement, pmi_jumlah, co_occurrence
-from sklearn.metrics.pairwise import cosine_similarity
-from gensim.models import Doc2Vec
-from gensim.models.doc2vec import TaggedDocument
-from multiprocessing import Pool
-from scipy import spatial
-from scipy.spatial import distance
-from gensim.models import Word2Vec
-from multiprocessing import Pool
-from scipy import spatial
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.cluster import KMeans
-from sklearn.metrics import adjusted_rand_score
-from sklearn.decomposition import TruncatedSVD
-import scipy.sparse
+from function import sparse, KMeans, adjusted_rand_score, TruncatedSVD, TfidfVectorizer, 
+from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec, cosine_similarity
 
 st.write("""
 # Similarity & Classiifcation Measurements
