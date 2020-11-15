@@ -97,7 +97,22 @@ if index0 is not None:
        svd_model.fit(X)
        jumlah_kata = svd_model.components_
        id_requirement = fulldataset(index0, index1)['ID']
+       st.subheader('LSA parameters')
        tabel_lsa = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
+       st.dataframe(tabel_lsa)
+    
+       # kMeans
+       from sklearn.cluster import KMeans
+       from tabulate import tabulate
+       true_k = (X.shape[0])
+       # true_k = (X.shape[1]-1)
+       model = KMeans(n_clusters=true_k, init='k-means++', max_iter=iterasi_value, n_init=1)
+       model.fit(jumlah_kata)
+       order_centroids = model.cluster_centers_.argsort()[:, ::-1]
+       terms = vectorizer.get_feature_names()
+       id_requirement = fulldataset(index0, index1)['ID']
+       st.subheader('KMeans parameters')
+       tabel_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= terms)
        st.dataframe(tabel_lsa)
     
     # Ontology Construction
