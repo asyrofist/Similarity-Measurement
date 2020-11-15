@@ -58,8 +58,11 @@ if index0 is not None:
     if  occurance:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
-       st.write(cleaned_text)
-
+       
+       #occurance
+       df_occurance = co_occurrence(cleaned_text, 2)
+       st.dataframe(df_occurance)
+        
        #pmi measurement
        st.subheader("PMI Measurement Parameter")
        id_requirement = fulldataset(index0, index1)['ID']
@@ -68,7 +71,7 @@ if index0 is not None:
           a1 = [pmi_measurement(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
           a2.append(a1)
        tabel_pmi = pd.DataFrame(a2, index= id_requirement, columns= id_requirement)
-       st.dataframe(tabel_pmi)
+#        st.dataframe(tabel_pmi)
         
        #pmi jumlah 
        st.subheader("PMI Measurement Parameter")
