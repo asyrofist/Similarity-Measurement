@@ -33,15 +33,7 @@ if index0 is not None:
     ontology = st.sidebar.checkbox("Ontology Construction")
     extraction = st.sidebar.checkbox("Requirement Extraction")
     occurance = st.sidebar.checkbox("Term Co-Occurance")
-    profile = st.sidebar.checkbox("Profilling")
-    
-    #profilling
-    if profile:
-        pr = ProfileReport(fulldataset(index0, index1), explorative=True)
-        st.title("Pandas Profiling in Streamlit")
-        st.write(fulldataset(index0, index1))
-        st_profile_report(pr)
-        
+            
     #co-occurance 
     elif  occurance:
        st.header("First Co-occurance")
