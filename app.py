@@ -32,7 +32,14 @@ if index0 is not None:
     ontology = st.sidebar.checkbox("Ontology Construction")
     extraction = st.sidebar.checkbox("Requirement Extraction")
     occurance = st.sidebar.checkbox("Term Co-Occurance")
-            
+    profile = st.sidebar.checkbox("Profilling")
+    #profilling
+    if profile:
+        df = pd.DataFrame(np.random.rand(100, 5),columns=["a", "b", "c", "d", "e"])
+        st.dataframe(df)
+        profile = ProfileReport(df, title='Pandas Profiling Report', html={'style':{'full_width':False}})
+        profile.to_notebook_iframe()
+        
     #co-occurance 
     elif  occurance:
        st.header("First Co-occurance")
