@@ -34,12 +34,12 @@ if index0 is not None:
     extraction = st.sidebar.checkbox("Requirement Extraction")
     occurance = st.sidebar.checkbox("Term Co-Occurance")
     profile = st.sidebar.checkbox("Profilling")
+    
     #profilling
     if profile:
-        df = pd.DataFrame(np.random.rand(100, 5),columns=["a", "b", "c", "d", "e"])
-        pr = ProfileReport(df, explorative=True)
+        pr = ProfileReport(fulldataset(index0, index1), explorative=True)
         st.title("Pandas Profiling in Streamlit")
-        st.write(df)
+        st.write(fulldataset(index0, index1))
         st_profile_report(pr)
         
     #co-occurance 
