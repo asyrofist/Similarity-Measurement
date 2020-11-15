@@ -88,6 +88,7 @@ if index0 is not None:
        feature_value = st.sidebar.slider('Berapa Max Feature Model?', 0, 10, 1000)
        iterasi_value = st.sidebar.slider('Berapa Dimension Model?', 0, 200, 100)
        random_value = st.sidebar.slider('Berapa Random Model?', 0, 300, 122)
+       profile = st.sidebar.checkbox('Feature Profile')
 
        # SVD represent documents and terms in vectors 
        st.subheader('SVD parameters')        
@@ -101,7 +102,6 @@ if index0 is not None:
        st.dataframe(df_svd)
        
        # fiture svd profile
-       profile = st.sidebar.checkbox('Feature Profile')
        if profile:
            df_data = df_svd
            pr = ProfileReport(df_data, explorative=True)
@@ -121,6 +121,7 @@ if index0 is not None:
        feature_value = st.sidebar.slider('Berapa Max Feature Model?', 0, 10, 1000)
        iterasi_value = st.sidebar.slider('Berapa Dimension Model?', 0, 200, 100)
        random_value = st.sidebar.slider('Berapa Random Model?', 0, 300, 122)
+       profile = st.sidebar.checkbox('Feature Profile')
 
        # SVD represent documents and terms in vectors 
        st.subheader('LSA parameters')        
@@ -158,7 +159,6 @@ if index0 is not None:
        st.plotly_chart(fig, use_container_width=True)
        
        # fiture svd profile
-       profile = st.sidebar.checkbox('Feature Profile')
        if profile:
            df_data = cos
            pr = ProfileReport(df_data, explorative=True)
@@ -219,6 +219,8 @@ if index0 is not None:
        iterasi_value = st.sidebar.slider('Berapa Iterasi Model?', 0, 100, 10)
        window_value = st.sidebar.slider('Berapa Window Model?', 0, 10, 3)
        dimension_value = st.sidebar.slider('Berapa Dimension Model', 0, 10, 1)
+       profile = st.sidebar.checkbox('Feature Profile')
+        
        model = Doc2Vec(documents = sentences, dm = dimension_value, size = size_value, window = window_value, min_count = 1, iter = iterasi_value, workers = Pool()._processes)
        model.init_sims(replace = True)
        model = Doc2Vec.load('doc2vec_model')
@@ -243,7 +245,6 @@ if index0 is not None:
        st.line_chart(df_kmeans.describe())
     
        # fiture svd profile
-       profile = st.sidebar.checkbox('Feature Profile')
        if profile:
            df_data = df_kmeans
            pr = ProfileReport(df_data, explorative=True)
@@ -340,6 +341,7 @@ if index0 is not None:
             size_value = st.sidebar.slider('Berapa Size Model?', 0, 200, len(vocabulary))
             window_value = st.sidebar.slider('Berapa Window Model?', 0, 10, 3)
             iterasi_value = st.sidebar.slider('Berapa Iterasi Model?', 0, 100, 10)
+            
             model = Doc2Vec(documents = sentences, dm = dimension_value, size = size_value, window = window_value, min_count = 1, iter = iterasi_value, workers = Pool()._processes)
             model.init_sims(replace = True)
             model = Doc2Vec.load('doc2vec_model')
@@ -365,6 +367,7 @@ if index0 is not None:
             mode_value = st.sidebar.selectbox('What Mode?', [0, 1])
             window_value = st.sidebar.slider('Berapa Window Model?', 0, 10, 3)
             iterasi_value = st.sidebar.slider('Berapa Iterasi Model?', 0, 100, 10)
+            
             model = Word2Vec(sentences = cleaned_text, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iterasi_value, workers = Pool()._processes)
             model.init_sims(replace = True)
             for i in range(len(cleaned_text)):
