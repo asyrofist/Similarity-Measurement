@@ -74,9 +74,16 @@ if index0 is not None:
     st.sidebar.header('Measurement Parameter')
     similaritas = st.sidebar.checkbox("Similarity & Classification")
     ontology = st.sidebar.checkbox("Ontology Construction")
+    extraction = st.sidebar.checkbox("Requirement Extraction")
+    
+    # Requirement Extraction
+    if extraction:
+       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
+       cleaned_text = apply_cleaning_function_to_list(text_to_clean)
+       st.dataframe(cleaned_text)
     
     # Ontology Construction
-    if ontology:
+    elif ontology:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
        
