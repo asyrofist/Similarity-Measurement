@@ -14,7 +14,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import PCA
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, sent_PCA
 from function import similarity_cosine, similarity_levenshtein, similarity_jaccard, tfidf, hasil_tfidf, TfidfVectorizer
-from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix, pmi_measurement, pmi_jumlah, co_occurance
+from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix, pmi_measurement, pmi_jumlah, co_occurrence
 from sklearn.metrics.pairwise import cosine_similarity
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
