@@ -146,6 +146,13 @@ if index0 is not None:
        df_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
        st.dataframe(df_kmeans)
     
+       col1, col2 = st.beta_columns([3, 1])
+       data = df_kmeans
+       col1.subheader("A wide column with a chart")
+       col1.line_chart(data)
+       col2.subheader("A narrow column with the data")
+       col2.write(data)
+    
     # similarity
     elif similaritas:
       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
