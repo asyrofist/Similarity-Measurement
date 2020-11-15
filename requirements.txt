@@ -15,4 +15,5 @@ nltk==3.2.5
 xlrd >= 1.0.0
 gensim==3.6.0
 plotly
+cython
 sparsesvd
