@@ -85,9 +85,27 @@ if index0 is not None:
        st.dataframe(tabel_jumlahpmi)
        
        #fitur pmi
-       st.subheader("Feature Parameter")
+       st.subheader("Feature PMI Parameter")
        desc_pmi = tabel_jumlahpmi.describe()
        st.dataframe(desc_pmi)
+        
+       st.header("Second Co-occurance")
+       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
+       cleaned_text = apply_cleaning_function_to_list(text_to_clean)
+       
+       st.subheader('Similarity vsm parameters')
+       vect = TfidfVectorizer()
+       tfidf_matrix = vect.fit_transform(cleaned_text)
+       matrix_tfidf = tfidf_matrix.toarray()
+       vsm = cosine_similarity(matrix_tfidf[0:], matrix_tfidf)
+       id_requirement = fulldataset(index0, index1)['ID']
+       df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement)
+       st.dataframe(df_vsm)
+       
+       #fitur vsm
+       st.subheader("Feature VSM Parameter")
+       desc_vsm = df_vsm.describe()
+       st.dataframe(desc_vsm)
         
     # Requirement Extraction
     elif extraction:
