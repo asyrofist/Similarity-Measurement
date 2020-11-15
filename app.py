@@ -12,6 +12,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import PCA
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, sent_PCA
 from function import similarity_cosine, similarity_levenshtein, similarity_jaccard, tfidf, hasil_tfidf, TfidfVectorizer
+from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix
 from sklearn.metrics.pairwise import cosine_similarity
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
@@ -33,37 +34,6 @@ st.write("""
 # Similarity & Classiifcation Measurements
 Berikut ini algoritma yang digunakan untuk pengukuran similaritas dan klasifikasi
 """)
-
-# variable tfidf
-def l2_normalizer(vec):
-    denom = np.sum([el**2 for el in vec])
-    return [(el / math.sqrt(denom)) for el in vec]
-
-def build_lexicon(corpus):
-    lexicon = set()
-    for doc in corpus:
-        lexicon.update([word for word in doc.split()])
-    return lexicon
-
-def freq(term, document):
-  return document.split().count(term)
-
-def numDocsContaining(word, doclist):
-    doccount = 0
-    for doc in doclist:
-        if freq(word, doc) > 0:
-            doccount +=1
-    return doccount 
-
-def idf(word, doclist):
-    n_samples = len(doclist)
-    df = numDocsContaining(word, doclist)
-    return np.log(n_samples / 1+df)
-
-def build_idf_matrix(idf_vector):
-    idf_mat = np.zeros((len(idf_vector), len(idf_vector)))
-    np.fill_diagonal(idf_mat, idf_vector)
-    return idf_mat
 
 #file upload
 index0 = st.file_uploader("Choose a file") 
