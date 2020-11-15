@@ -28,11 +28,11 @@ if index0 is not None:
 
     # Nilai Pembanding
     st.sidebar.subheader('Measurement Parameter')
-    similaritas     = st.sidebar.radio("Similarity & Classification")
-    ontology        = st.sidebar.radio("Ontology Construction")
-    extraction      = st.sidebar.radio("Requirement Extraction")
-    occurance       = st.sidebar.radio("Term Co-Occurance")
-    stanford_func   = st.sidebar.radio("Stanford Function")
+    similaritas     = st.sidebar.checkbox("Similarity & Classification")
+    ontology        = st.sidebar.checkbox("Ontology Construction")
+    extraction      = st.sidebar.checkbox("Requirement Extraction")
+    occurance       = st.sidebar.checbox("Term Co-Occurance")
+    stanford_func   = st.sidebar.checkbox("Stanford Function")
     
     # stanford function
     if stanford_func:
