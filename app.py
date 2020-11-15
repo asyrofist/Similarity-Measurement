@@ -35,7 +35,7 @@ if index0 is not None:
     occurance = st.sidebar.checkbox("Term Co-Occurance")
             
     #co-occurance 
-    elif  occurance:
+    if  occurance:
        st.header("First Co-occurance")
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
