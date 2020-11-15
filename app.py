@@ -111,7 +111,7 @@ if index0 is not None:
        doc_feature = count_vector.get_feature_names()
        st.subheader('BOW parameters')
        id_requirement = fulldataset(index0, index1)['ID']
-       bow_matrix = pd.DataFrame(doc_array, index= id_requirement, columns= doc_feature)
+       bow_matrix = pd.DataFrame(doc_array, index= id_requirement, columns= doc_feature).describe()
        st.dataframe(bow_matrix) 
         
        # tfidf          
@@ -138,7 +138,7 @@ if index0 is not None:
             
        hasil_tfidf = np.matrix(doc_term_matrix_tfidf_l2)
        st.subheader('TFIDF parameters')
-       tfidf_matrix = pd.DataFrame(hasil_tfidf, index= id_requirement, columns= doc_feature)
+       tfidf_matrix = pd.DataFrame(hasil_tfidf, index= id_requirement, columns= doc_feature).describe()
        st.dataframe(tfidf_matrix)
         
        #doc2vec
@@ -156,7 +156,7 @@ if index0 is not None:
        model = Doc2Vec.load('doc2vec_model')
        nilai_vektor = [model.infer_vector("sent{}".format(num)) for num in range(0, len(cleaned_text))]
        id_requirement = fulldataset(index0, index1)['ID']
-       df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
+       df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
        st.dataframe(df_vektor)
         
        # Kmeans
@@ -166,7 +166,7 @@ if index0 is not None:
        model.fit(nilai_vektor)
        order_centroids = model.cluster_centers_.argsort()[:, ::-1]
        id_requirement = fulldataset(index0, index1)['ID']
-       df_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
+       df_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
        st.dataframe(df_kmeans)
           
        # Visualisasi
@@ -189,7 +189,7 @@ if index0 is not None:
             a = [similarity_cosine(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
             hasil_cosine.append(a)
         id_requirement = fulldataset(index0, index1)['ID']
-        df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement).descibe()
+        df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement).describe()
         hasil = hasil_cosine
         st.sidebar.write('anda memilih: cosine')
         st.dataframe(df_cos)
@@ -204,7 +204,7 @@ if index0 is not None:
             b = [similarity_levenshtein(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
             hasil_levenshtein.append(b)
         id_requirement = fulldataset(index0, index1)['ID']
-        df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement).descibe()
+        df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement).describe()
         hasil = hasil_levenshtein
         st.sidebar.write('anda memilih: levenshtein')
         st.dataframe(df_lev)
@@ -219,7 +219,7 @@ if index0 is not None:
             b = [similarity_jaccard(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
             hasil_jaccard.append(b)
         id_requirement = fulldataset(index0, index1)['ID']
-        df_jaccard = pd.DataFrame(hasil_jaccard, index= id_requirement, columns= id_requirement).descibe()
+        df_jaccard = pd.DataFrame(hasil_jaccard, index= id_requirement, columns= id_requirement).describe()
         hasil = hasil_jaccard
         st.sidebar.write('anda memilih: jaccard')
         st.dataframe(df_jaccard)
@@ -233,7 +233,7 @@ if index0 is not None:
         vect = TfidfVectorizer()
         tfidf_matrix = vect.fit_transform(cleaned_text)
         id_requirement = fulldataset(index0, index1)['ID']
-        df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names()).descibe()
+        df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names()).describe()
         hasil = tfidf_matrix.toarray()
         st.sidebar.write('anda memilih: tfidf')
         st.dataframe(df_tfidf)
@@ -249,7 +249,7 @@ if index0 is not None:
         matrix_tfidf = tfidf_matrix.toarray()
         vsm = cosine_similarity(matrix_tfidf[0:], matrix_tfidf)
         id_requirement = fulldataset(index0, index1)['ID']
-        df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement).descibe()
+        df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement).describe()
         hasil = vsm
         st.sidebar.write('anda memilih: vsm')
         st.dataframe(df_vsm)
@@ -273,7 +273,7 @@ if index0 is not None:
         model = Doc2Vec.load('doc2vec_model')
         nilai_vektor = [model.infer_vector("sent{}".format(num)) for num in range(0, len(cleaned_text))]
         id_requirement = fulldataset(index0, index1)['ID']
-        df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).descibe()
+        df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
         hasil = nilai_vektor
         st.sidebar.write('anda memilih: doc2vec')
         st.dataframe(df_vektor)
@@ -305,7 +305,7 @@ if index0 is not None:
           a = [distance.euclidean(sent_vectorized[angka], sent_vectorized[num]) for num in range(0, len(cleaned_text))]
           hasil_sentencemodel.append(a)
         id_requirement = fulldataset(index0, index1)['ID']
-        df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement).descibe()
+        df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement).describe()
         hasil = hasil_sentencemodel
         st.sidebar.write('anda memilih: Sentence Model')
         st.dataframe(df_sentmodel)
