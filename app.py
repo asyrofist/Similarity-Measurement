@@ -269,7 +269,7 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement).describe()
             hasil = hasil_cosine
-            st.sidebar.write('anda memilih: cosine')
+            st.sidebar.write('You choose: cosine')
             st.dataframe(df_cos)
             fig = ff.create_distplot(hasil_cosine, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -293,7 +293,7 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement).describe()
             hasil = hasil_levenshtein
-            st.sidebar.write('anda memilih: levenshtein')
+            st.sidebar.write('You choose: levenshtein')
             st.dataframe(df_lev)
             fig = ff.create_distplot(hasil_levenshtein, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -317,7 +317,7 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_jaccard = pd.DataFrame(hasil_jaccard, index= id_requirement, columns= id_requirement).describe()
             hasil = hasil_jaccard
-            st.sidebar.write('anda memilih: jaccard')
+            st.sidebar.write('You choose: jaccard')
             st.dataframe(df_jaccard)
             fig = ff.create_distplot(hasil_jaccard, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -339,7 +339,7 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names()).describe()
             hasil = tfidf_matrix.toarray()
-            st.sidebar.write('anda memilih: tfidf')
+            st.sidebar.write('You choose: tfidf')
             st.dataframe(df_tfidf)
             fig = ff.create_distplot(tfidf_matrix.toarray(), id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -363,7 +363,7 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement).describe()
             hasil = vsm
-            st.sidebar.write('anda memilih: vsm')
+            st.sidebar.write('You choose: vsm')
             st.dataframe(df_vsm)
             fig = ff.create_distplot(vsm, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -396,7 +396,7 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
             hasil = nilai_vektor
-            st.sidebar.write('anda memilih: doc2vec')
+            st.sidebar.write('You choose: doc2vec')
             st.dataframe(df_vektor)
             fig = ff.create_distplot(nilai_vektor, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
@@ -436,7 +436,7 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement).describe()
             hasil = hasil_sentencemodel
-            st.sidebar.write('anda memilih: Sentence Model')
+            st.sidebar.write('You choose: Sentence Model')
             st.dataframe(df_sentmodel)
             fig = ff.create_distplot(hasil_sentencemodel, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
