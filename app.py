@@ -365,7 +365,7 @@ if index0 is not None:
       size = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
       profile = st.sidebar.checkbox('Profilling Parameters')
       
-        X_train, X_test, y_train, y_test = train_test_split(hasil, label_statement, test_size=size,random_state=109) # 70% training and 30% test
+      X_train, X_test, y_train, y_test = train_test_split(hasil, label_statement, test_size=size,random_state=109) # 70% training and 30% test
       st.subheader('User Train Test parameters')
       traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
       st.write(traintest)      
