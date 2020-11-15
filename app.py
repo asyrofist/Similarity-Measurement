@@ -14,7 +14,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import PCA
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, sent_PCA
 from function import similarity_cosine, similarity_levenshtein, similarity_jaccard, tfidf, hasil_tfidf, TfidfVectorizer
-from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix
+from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix, pmi_measurement, pmi_jumlah, co_occurance
 from sklearn.metrics.pairwise import cosine_similarity
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
@@ -57,8 +57,26 @@ if index0 is not None:
     if  cooccurance:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
-       st.dataframe(cleaned_text)
     
+       #pmi measurement
+       st.subheader("PMI Measurement Parameter")
+       id_requirement = fulldataset(index0, index1)['ID']
+       a2 = []
+       for angka in range(0, len(cleaned_text)):
+          a1 = [pmi_measurement(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(a))]
+          a2.append(a1)
+       tabel_pmi = pd.DataFrame(a2, index= id_requirement, columns=id_requirement)
+       st.dataframe(tabel_pmi)
+        
+       #pmi jumlah 
+       st.subheader("PMI Measurement Parameter")
+       a4 = []
+       for angka in range(0, len(cleaned_text)):
+          a3 = [pmi_jumlah(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(a))]
+          a4.append(a3)
+       tabel_jumlahpmi = pd.DataFrame(a4, index= id_requirement, columns=id_requirement)
+       st.dataframe(tabel_jumlahpmi)
+        
     # Requirement Extraction
     elif extraction:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
