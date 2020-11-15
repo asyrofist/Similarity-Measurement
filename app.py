@@ -120,7 +120,7 @@ if index0 is not None:
        sentences = [word_tokenize(num) for num in cleaned_text]
        for i in range(len(sentences)):
             sentences[i] = TaggedDocument(words = sentences[i], tags = ['sent{}'.format(i)])    # converting each sentence into a TaggedDocument
-       st.sibebar.subheader("Model Parameter")
+       st.sidebar.subheader("Model Parameter")
        size_value = st.sidebar.slider('Berapa Size Model?', 0, 50, 100)
        iterasi_value = st.sidebar.slider('Berapa Iterasi Model?', 0, 100, 10)
        window_value = st.sidebar.slider('Berapa Window Model?', 0, 10, 3)
