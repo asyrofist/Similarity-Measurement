@@ -73,7 +73,7 @@ if index0 is not None:
        svd_model = TruncatedSVD(n_components= (X.shape[0]), algorithm='randomized', n_iter=iterasi_value, random_state=random_value)
        svd_model.fit(X)
        jumlah_kata = svd_model.components_
-       tabel_lsa = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id).describe()
+       tabel_lsa = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(tabel_lsa)
    
        # kMeans
@@ -84,17 +84,18 @@ if index0 is not None:
        model.fit(jumlah_kata)
        order_centroids = model.cluster_centers_.argsort()[:, ::-1]
        terms = vectorizer.get_feature_names()
-       tabel_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= terms).describe()
+       tabel_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= terms)
        st.dataframe(tabel_kmeans)
            
        # cosine
        st.subheader('Cosine parameters') 
        hasil_cosine = cosine_similarity(order_centroids[0:], order_centroids)
        id_term = [("term {}".format(num)) for num in range(0, (X.shape[1]-1))]
-       cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement).describe()
+       cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement)
        st.dataframe(cos)
        
        # Visualisasi
+       st.dataframe(cos.describe())
        fig = ff.create_distplot(hasil_cosine, id_requirement)
        st.plotly_chart(fig, use_container_width=True)
       
@@ -111,7 +112,7 @@ if index0 is not None:
        doc_feature = count_vector.get_feature_names()
        st.subheader('BOW parameters')
        id_requirement = fulldataset(index0, index1)['ID']
-       bow_matrix = pd.DataFrame(doc_array, index= id_requirement, columns= doc_feature).describe()
+       bow_matrix = pd.DataFrame(doc_array, index= id_requirement, columns= doc_feature)
        st.dataframe(bow_matrix)
         
        # tfidf          
@@ -138,7 +139,7 @@ if index0 is not None:
             
        hasil_tfidf = np.matrix(doc_term_matrix_tfidf_l2)
        st.subheader('TFIDF parameters')
-       tfidf_matrix = pd.DataFrame(hasil_tfidf, index= id_requirement, columns= doc_feature).describe()
+       tfidf_matrix = pd.DataFrame(hasil_tfidf, index= id_requirement, columns= doc_feature)
        st.dataframe(tfidf_matrix)
         
        #doc2vec
@@ -156,7 +157,7 @@ if index0 is not None:
        model = Doc2Vec.load('doc2vec_model')
        nilai_vektor = [model.infer_vector("sent{}".format(num)) for num in range(0, len(cleaned_text))]
        id_requirement = fulldataset(index0, index1)['ID']
-       df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
+       df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
        st.dataframe(df_vektor)
         
        # Kmeans
@@ -166,10 +167,11 @@ if index0 is not None:
        model.fit(nilai_vektor)
        order_centroids = model.cluster_centers_.argsort()[:, ::-1]
        id_requirement = fulldataset(index0, index1)['ID']
-       df_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
+       df_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
        st.dataframe(df_kmeans)
     
        # Visualisasi
+       st.dataframe(df_kmeans.describe())
        st.area_chart(df_kmeans)
            
     # similarity
