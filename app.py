@@ -83,7 +83,7 @@ if index0 is not None:
        count_vector.fit(cleaned_text)
        doc_array = count_vector.transform(cleaned_text).toarray()            
        doc_feature = count_vector.get_feature_names()
-       st.subheader('Similarity BOW parameters')
+       st.subheader('BOW parameters')
        id_requirement = fulldataset(index0, index1)['ID']
        bow_matrix = pd.DataFrame(doc_array, index= id_requirement, columns= doc_feature)
        st.dataframe(bow_matrix) 
@@ -111,17 +111,17 @@ if index0 is not None:
             doc_term_matrix_tfidf_l2.append(l2_normalizer(tf_vector))
             
        hasil_tfidf = np.matrix(doc_term_matrix_tfidf_l2)
-       st.subheader('Similarity TFIDF parameters')
+       st.subheader('TFIDF parameters')
        tfidf_matrix = pd.DataFrame(hasil_tfidf, index= id_requirement, columns= doc_feature)
        st.dataframe(tfidf_matrix)
         
        #doc2vec
-       st.subheader('Similarity doc2vec parameters')
+       st.subheader('doc2vec parameters')
        sentences = [word_tokenize(num) for num in cleaned_text]
        for i in range(len(sentences)):
             sentences[i] = TaggedDocument(words = sentences[i], tags = ['sent{}'.format(i)])    # converting each sentence into a TaggedDocument
        st.sidebar.subheader("Model Parameter")
-       size_value = st.sidebar.slider('Berapa Size Model?', len(doc_feature), 1000, 100)
+       size_value = st.sidebar.slider('Berapa Size Model?', 0, 200, len(doc_feature))
        iterasi_value = st.sidebar.slider('Berapa Iterasi Model?', 0, 100, 10)
        window_value = st.sidebar.slider('Berapa Window Model?', 0, 10, 3)
        dimension_value = st.sidebar.slider('Berapa Dimension Model', 0, 10, 1)
