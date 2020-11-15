@@ -57,7 +57,7 @@ if index0 is not None:
     if  cooccurance:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
-       st.dataframe(cleaned_text.describe())
+       st.dataframe(cleaned_text)
     
     # Requirement Extraction
     elif extraction:
