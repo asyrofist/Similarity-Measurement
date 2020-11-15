@@ -56,6 +56,7 @@ if index0 is not None:
     
     #co-occurance 
     if  occurance:
+       st.header("First Co-occurance")
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
        
@@ -84,6 +85,7 @@ if index0 is not None:
        st.dataframe(tabel_jumlahpmi)
        
        #fitur pmi
+       st.subheader("Feature Parameter")
        desc_pmi = tabel_jumlahpmi.describe()
        st.dataframe(desc_pmi)
         
