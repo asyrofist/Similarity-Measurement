@@ -7,8 +7,6 @@ from function import similarity_cosine, similarity_levenshtein, similarity_jacca
 from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix, pmi_measurement, pmi_jumlah, co_occurrence
 from function import KMeans, adjusted_rand_score, TruncatedSVD, TfidfVectorizer
 from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec, cosine_similarity
-import numpy as np
-import pandas as pd
 from pandas_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
 
@@ -39,7 +37,14 @@ if index0 is not None:
        st.header("First Co-occurance")
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean) 
-       st.dataframe(cleaned_text)
+       
+       def parsing(data):
+            from nltk.parse.corenlp import CoreNLPParser
+            parser = CoreNLPParser(url='http://corenlp.run/')
+            next(parser.raw_parse(data)).pretty_print()
+       
+       hasil_parsing = [parsing(num) for num in cleaned_text]
+       st.write(hasil_parsing)
         
     #co-occurance 
     elif occurance:
