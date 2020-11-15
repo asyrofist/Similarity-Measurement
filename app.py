@@ -1,7 +1,7 @@
 from function import re, math, string, ff, st, alt
 from function import word_tokenize, train_test_split
 from function import classification_report, accuracy_score, precision_score, recall_score
-from function import neigbors, tree, svm, GaussianNB, RandomForestClassifier, CountVectorizer, PCA
+from function import neighbors, tree, svm, GaussianNB, RandomForestClassifier, CountVectorizer, PCA
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, sent_PCA
 from function import similarity_cosine, similarity_levenshtein, similarity_jaccard, tfidf, hasil_tfidf, TfidfVectorizer
 from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix, pmi_measurement, pmi_jumlah, co_occurrence
