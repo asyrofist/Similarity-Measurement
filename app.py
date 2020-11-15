@@ -7,6 +7,9 @@ from function import similarity_cosine, similarity_levenshtein, similarity_jacca
 from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix, pmi_measurement, pmi_jumlah, co_occurrence
 from function import KMeans, adjusted_rand_score, TruncatedSVD, TfidfVectorizer
 from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec, cosine_similarity
+import numpy as np
+import pandas as pd
+from pandas_profiling import ProfileReport
 
 st.write("""
 # Requirement Dependency Measurements
@@ -36,7 +39,10 @@ if index0 is not None:
        st.header("Profilling")
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean) 
-       st.dataframe(cleaned_text)
+       index_requirement = fulldataset(index0, index1)['Requirement Statement']
+       df_profile = pd.DataFrame(cleaned_text, index= index_requirement, columns= ['Requirement Statement']) 
+       profile = ProfileReport(df_profile, title='Pandas Profiling Report', html={'style':{'full_width':False}})
+       profile.to_notebook_iframe()
         
     #co-occurance 
     elif  occurance:
