@@ -94,7 +94,6 @@ if index0 is not None:
        st.dataframe(cos)
        
        # Visualisasi
-       st.area_chart(cos)
        fig = ff.create_distplot(hasil_cosine, id_requirement)
        st.plotly_chart(fig, use_container_width=True)
       
