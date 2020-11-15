@@ -28,13 +28,21 @@ if index0 is not None:
 
     # Nilai Pembanding
     st.sidebar.subheader('Measurement Parameter')
-    similaritas = st.sidebar.checkbox("Similarity & Classification")
-    ontology = st.sidebar.checkbox("Ontology Construction")
-    extraction = st.sidebar.checkbox("Requirement Extraction")
-    occurance = st.sidebar.checkbox("Term Co-Occurance")
-            
+    similaritas     = st.sidebar.radio("Similarity & Classification")
+    ontology        = st.sidebar.radio("Ontology Construction")
+    extraction      = st.sidebar.radio("Requirement Extraction")
+    occurance       = st.sidebar.radio("Term Co-Occurance")
+    stanford_func   = st.sidebar.radio("Stanford Function")
+    
+    # stanford function
+    if stanford_func:
+       st.header("First Co-occurance")
+       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
+       cleaned_text = apply_cleaning_function_to_list(text_to_clean) 
+       st.dataframe(cleaned_text)
+        
     #co-occurance 
-    if occurance:
+    elif occurance:
        st.header("First Co-occurance")
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
