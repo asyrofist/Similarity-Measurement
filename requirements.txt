@@ -2,7 +2,6 @@ numpy==1.18.5
 pandas==1.1.4
 pandas-datareader==0.9.0
 pandas-gbq==0.13.3
-pandas-profiling
 pandocfilters==1.4.3
 scikit-image==0.16.2
 scikit-learn==0.22.2.post1
@@ -15,3 +14,4 @@ nltk==3.2.5
 xlrd >= 1.0.0
 gensim==3.6.0
 plotly
+https://github.com/pandas-profiling/pandas-profiling/archive/master.zip
