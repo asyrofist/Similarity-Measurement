@@ -99,7 +99,7 @@ if index0 is not None:
        jumlah_kata = svd_model.components_
        df_svd = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(df_svd)
-    
+       
        # fiture svd profile
        profile = st.sidebar.checkbox('Feature Profile')
        if profile:
@@ -108,7 +108,8 @@ if index0 is not None:
            st.title("Feature Profile")
            st.write(df_data)
            st_profile_report(pr)
-    
+
+        
     # Requirement Extraction
     elif extraction:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
@@ -240,6 +241,15 @@ if index0 is not None:
        st.subheader('Feature parameters')
        st.dataframe(df_kmeans.describe())
        st.line_chart(df_kmeans.describe())
+    
+       # fiture svd profile
+       profile = st.sidebar.checkbox('Feature Profile')
+       if profile:
+           df_data = df_kmeans
+           pr = ProfileReport(df_data, explorative=True)
+           st.title("Feature Profile")
+           st.write(df_data)
+           st_profile_report(pr)
                
     # similarity
     elif similaritas:
