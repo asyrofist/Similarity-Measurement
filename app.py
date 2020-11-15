@@ -40,7 +40,7 @@ if index0 is not None:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean) 
        index_requirement = fulldataset(index0, index1)['Requirement Statement']
-       df_profile = pd.DataFrame(cleaned_text, index= index_requirement, columns= ['Requirement Statement']) 
+       df_profile = pd.DataFrame(cleaned_text, index= index_requirement) 
        profile = ProfileReport(df_profile, title='Pandas Profiling Report', html={'style':{'full_width':False}})
        profile.to_notebook_iframe()
         
