@@ -34,7 +34,7 @@ if index0 is not None:
     
     # stanford function
     if stanford_func:
-       st.header("First Co-occurance")
+       st.header("Parsing Requirement")
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean) 
        
@@ -42,9 +42,19 @@ if index0 is not None:
             from nltk.parse.corenlp import CoreNLPParser
             parser = CoreNLPParser(url='http://corenlp.run/')
             next(parser.raw_parse(data)).pretty_print()
+            
+       def dependencyParser(data):
+            from nltk.parse.corenlp import CoreNLPDependencyParser
+            dep_parser = CoreNLPDependencyParser(url='http://corenlp.run/')
+            sent = data.split()
+            parses = list(dep_parser.parse(sent))
+            return parses[0].tree().pretty_print()       
        
        hasil_parsing = [parsing(num) for num in cleaned_text]
-       st.write(hasil_parsing)
+       st.text(hasil_parsing)
+       
+       hasil_dependencyParser = [dependencyParser(num) for num in cleaned_text]
+       st.text(hasil_dependencyParser)
         
     #co-occurance 
     elif occurance:
