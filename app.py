@@ -184,7 +184,7 @@ if index0 is not None:
         hasil = hasil_cosine
         st.sidebar.write('anda memilih: cosine')
         st.dataframe(df_cos)
-        c = alt.Chart(df_cos).mark_circle()
+        c = alt.Chart(df).mark_circle().encode(x=id_requirement, y=id_requirement)
         st.write(c)
         
       # levenshtein
