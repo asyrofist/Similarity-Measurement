@@ -24,6 +24,9 @@ from scipy import spatial
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.metrics import adjusted_rand_score
+from tabulate import tabulate
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import TruncatedSVD
 
 st.write("""
 # Similarity & Classiifcation Measurements
@@ -80,7 +83,24 @@ if index0 is not None:
     if extraction:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
-       st.dataframe(cleaned_text)
+        
+       # LSA
+       st.sidebar.subheader("Model Parameter")
+       feature_value = st.sidebar.slider('Berapa Max Feature Model?', 0, 10, 1000)
+       maxdf_value = st.sidebar.slider('Berapa Max Df Model?', 0, 1, 0.5)
+       iterasi_value = st.sidebar.slider('Berapa Dimension Model?', 0, 200, 100)
+       random_value = st.sidebar.slider('Berapa Random Model?', 0, 300, 122)
+
+       # SVD represent documents and terms in vectors 
+       vectorizer = TfidfVectorizer(stop_words='english', max_features= feature_value, max_df = maxdf_value, smooth_idf= True)
+       X = vectorizer.fit_transform(cleaned_text)
+       fitur_id = vectorizer.get_feature_names()
+       svd_model = TruncatedSVD(n_components= (X.shape[0]), algorithm='randomized', n_iter=iterasi_value, random_state=random_value)
+       svd_model.fit(X)
+       jumlah_kata = svd_model.components_
+       id_requirement = fulldataset(index0, index1)['ID']
+       tabel_lsa = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
+       st.dataframe(tabel_lsa)
     
     # Ontology Construction
     elif ontology:
