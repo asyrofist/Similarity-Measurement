@@ -203,3 +203,35 @@ def sent_PCA(sentence, n = 2):
         words.append(np.amax(variance) * sentence[idx])
         variance[idx] = 0
     return np.sum(words, axis = 0)
+
+# variable tfidf
+def l2_normalizer(vec):
+    denom = np.sum([el**2 for el in vec])
+    return [(el / math.sqrt(denom)) for el in vec]
+
+def build_lexicon(corpus):
+    lexicon = set()
+    for doc in corpus:
+        lexicon.update([word for word in doc.split()])
+    return lexicon
+
+def freq(term, document):
+  return document.split().count(term)
+
+def numDocsContaining(word, doclist):
+    doccount = 0
+    for doc in doclist:
+        if freq(word, doc) > 0:
+            doccount +=1
+    return doccount 
+
+def idf(word, doclist):
+    n_samples = len(doclist)
+    df = numDocsContaining(word, doclist)
+    return np.log(n_samples / 1+df)
+
+def build_idf_matrix(idf_vector):
+    idf_mat = np.zeros((len(idf_vector), len(idf_vector)))
+    np.fill_diagonal(idf_mat, idf_vector)
+    return idf_mat  
+  
