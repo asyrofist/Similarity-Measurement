@@ -165,10 +165,9 @@ if index0 is not None:
         df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement)
         hasil = hasil_cosine
         st.sidebar.write('anda memilih: cosine')
-#         st.dataframe(df_cos)
-        
-        col1, col2 = st.beta_columns(2)
-        data = df_cos
+        st.dataframe(df_cos)
+        col1, col2 = st.beta_columns([3,1])
+        data = hasil_cosine
         col1.subheader("A wide column with a chart")
         col1.line_chart(data)
         col2.subheader("A narrow column with the data")
