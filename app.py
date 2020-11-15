@@ -168,10 +168,7 @@ if index0 is not None:
        st.dataframe(df_kmeans)
           
        # Visualisasi
-       fig = ff.create_distplot(order_centroids, id_requirement)
-       st.plotly_chart(fig, use_container_width=True)
-
-
+       st.area_chart(df_kmeans)
            
     # similarity
     elif similaritas:
