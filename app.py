@@ -169,6 +169,7 @@ if index0 is not None:
           
        # Visualisasi
        st.area_chart(df_kmeans)
+       st.line_chart(df_kmeans) 
            
     # similarity
     elif similaritas:
