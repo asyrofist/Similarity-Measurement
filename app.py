@@ -95,6 +95,7 @@ if index0 is not None:
        st.dataframe(cos)
        
        # Visualisasi
+       st.subheader('Feature Parameters')
        st.dataframe(cos.describe())
        st.line_chart(cos.describe())
        fig = ff.create_distplot(hasil_cosine, id_requirement)
