@@ -113,6 +113,11 @@ if index0 is not None:
        st.subheader("Feature SVD Parameter")
        desc_svd = df_svd.describe()
        st.dataframe(desc_svd)
+        
+       # profile
+       st.subheader("Profiling Parameter")
+       pr = ProfileReport(desc_svd, explorative=True)
+       st_profile_report(pr)
  
     # Requirement Extraction
     elif extraction:
@@ -160,8 +165,12 @@ if index0 is not None:
        st.dataframe(cos.describe())
        fig = ff.create_distplot(hasil_cosine, id_requirement)
        st.plotly_chart(fig, use_container_width=True)
-      
-    
+        
+       # profile
+       st.subheader("Profiling Parameter")
+       pr = ProfileReport(cos.describe(), explorative=True)
+       st_profile_report(pr)
+
     # Ontology Construction
     elif ontology:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
@@ -236,6 +245,12 @@ if index0 is not None:
        st.subheader('Feature parameters')
        st.dataframe(df_kmeans.describe())
        st.line_chart(df_kmeans.describe())
+    
+       # profile
+       st.subheader("Profiling Parameter")
+       pr = ProfileReport(df_kmeans.describe(), explorative=True)
+       st_profile_report(pr)
+
            
     # similarity
     elif similaritas:
@@ -248,134 +263,162 @@ if index0 is not None:
       
       # cosine
       if hasil == 'cosine':
-        st.subheader('Similarity cosine parameters')
-        hasil_cosine = []
-        for angka in range(0, len(cleaned_text)):
-            a = [similarity_cosine(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
-            hasil_cosine.append(a)
-        id_requirement = fulldataset(index0, index1)['ID']
-        df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement).describe()
-        hasil = hasil_cosine
-        st.sidebar.write('anda memilih: cosine')
-        st.dataframe(df_cos)
-        fig = ff.create_distplot(hasil_cosine, id_requirement)
-        st.plotly_chart(fig, use_container_width=True)
+            st.subheader('Similarity cosine parameters')
+            hasil_cosine = []
+            for angka in range(0, len(cleaned_text)):
+                a = [similarity_cosine(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
+                hasil_cosine.append(a)
+            id_requirement = fulldataset(index0, index1)['ID']
+            df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement).describe()
+            hasil = hasil_cosine
+            st.sidebar.write('anda memilih: cosine')
+            st.dataframe(df_cos)
+            fig = ff.create_distplot(hasil_cosine, id_requirement)
+            st.plotly_chart(fig, use_container_width=True)
+
+            st.subheader("Profiling Parameter")
+            pr = ProfileReport(df_cos, explorative=True)
+            st_profile_report(pr)
+
         
       # levenshtein
       elif hasil == 'levenshtein':
-        st.subheader('Similarity levenshtein parameters')
-        hasil_levenshtein = []
-        for angka in range(0, len(cleaned_text)):
-            b = [similarity_levenshtein(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
-            hasil_levenshtein.append(b)
-        id_requirement = fulldataset(index0, index1)['ID']
-        df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement).describe()
-        hasil = hasil_levenshtein
-        st.sidebar.write('anda memilih: levenshtein')
-        st.dataframe(df_lev)
-        fig = ff.create_distplot(hasil_levenshtein, id_requirement)
-        st.plotly_chart(fig, use_container_width=True)
-      
+            st.subheader('Similarity levenshtein parameters')
+            hasil_levenshtein = []
+            for angka in range(0, len(cleaned_text)):
+                b = [similarity_levenshtein(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
+                hasil_levenshtein.append(b)
+            id_requirement = fulldataset(index0, index1)['ID']
+            df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement).describe()
+            hasil = hasil_levenshtein
+            st.sidebar.write('anda memilih: levenshtein')
+            st.dataframe(df_lev)
+            fig = ff.create_distplot(hasil_levenshtein, id_requirement)
+            st.plotly_chart(fig, use_container_width=True)
+
+            st.subheader("Profiling Parameter")
+            pr = ProfileReport(df_lev, explorative=True)
+            st_profile_report(pr)
+
       # jaccard
       elif hasil == 'jaccard':
-        st.subheader('Similarity jaccard parameters')
-        hasil_jaccard = []
-        for angka in range(0, len(cleaned_text)):
-            b = [similarity_jaccard(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
-            hasil_jaccard.append(b)
-        id_requirement = fulldataset(index0, index1)['ID']
-        df_jaccard = pd.DataFrame(hasil_jaccard, index= id_requirement, columns= id_requirement).describe()
-        hasil = hasil_jaccard
-        st.sidebar.write('anda memilih: jaccard')
-        st.dataframe(df_jaccard)
-        fig = ff.create_distplot(hasil_jaccard, id_requirement)
-        st.plotly_chart(fig, use_container_width=True)
+            st.subheader('Similarity jaccard parameters')
+            hasil_jaccard = []
+            for angka in range(0, len(cleaned_text)):
+                b = [similarity_jaccard(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
+                hasil_jaccard.append(b)
+            id_requirement = fulldataset(index0, index1)['ID']
+            df_jaccard = pd.DataFrame(hasil_jaccard, index= id_requirement, columns= id_requirement).describe()
+            hasil = hasil_jaccard
+            st.sidebar.write('anda memilih: jaccard')
+            st.dataframe(df_jaccard)
+            fig = ff.create_distplot(hasil_jaccard, id_requirement)
+            st.plotly_chart(fig, use_container_width=True)
 
+            st.subheader("Profiling Parameter")
+            pr = ProfileReport(df_jaccard, explorative=True)
+            st_profile_report(pr)
 
       # tfidf
       elif hasil == 'tfidf':
-        st.subheader('Similarity tfidf parameters')
-        vect = TfidfVectorizer()
-        tfidf_matrix = vect.fit_transform(cleaned_text)
-        id_requirement = fulldataset(index0, index1)['ID']
-        df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names()).describe()
-        hasil = tfidf_matrix.toarray()
-        st.sidebar.write('anda memilih: tfidf')
-        st.dataframe(df_tfidf)
-        fig = ff.create_distplot(tfidf_matrix.toarray(), id_requirement)
-        st.plotly_chart(fig, use_container_width=True)
+            st.subheader('Similarity tfidf parameters')
+            vect = TfidfVectorizer()
+            tfidf_matrix = vect.fit_transform(cleaned_text)
+            id_requirement = fulldataset(index0, index1)['ID']
+            df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names()).describe()
+            hasil = tfidf_matrix.toarray()
+            st.sidebar.write('anda memilih: tfidf')
+            st.dataframe(df_tfidf)
+            fig = ff.create_distplot(tfidf_matrix.toarray(), id_requirement)
+            st.plotly_chart(fig, use_container_width=True)
+
+            st.subheader("Profiling Parameter")
+            pr = ProfileReport(df_tfidf, explorative=True)
+            st_profile_report(pr)
 
 
       # vsm
       elif hasil == 'vsm':
-        st.subheader('Similarity vsm parameters')
-        vect = TfidfVectorizer()
-        tfidf_matrix = vect.fit_transform(cleaned_text)
-        matrix_tfidf = tfidf_matrix.toarray()
-        vsm = cosine_similarity(matrix_tfidf[0:], matrix_tfidf)
-        id_requirement = fulldataset(index0, index1)['ID']
-        df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement).describe()
-        hasil = vsm
-        st.sidebar.write('anda memilih: vsm')
-        st.dataframe(df_vsm)
-        fig = ff.create_distplot(vsm, id_requirement)
-        st.plotly_chart(fig, use_container_width=True)
+            st.subheader('Similarity vsm parameters')
+            vect = TfidfVectorizer()
+            tfidf_matrix = vect.fit_transform(cleaned_text)
+            matrix_tfidf = tfidf_matrix.toarray()
+            vsm = cosine_similarity(matrix_tfidf[0:], matrix_tfidf)
+            id_requirement = fulldataset(index0, index1)['ID']
+            df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement).describe()
+            hasil = vsm
+            st.sidebar.write('anda memilih: vsm')
+            st.dataframe(df_vsm)
+            fig = ff.create_distplot(vsm, id_requirement)
+            st.plotly_chart(fig, use_container_width=True)
+
+            st.subheader("Profiling Parameter")
+            pr = ProfileReport(df_vsm, explorative=True)
+            st_profile_report(pr)
 
       # doc2vec
       elif hasil == 'doc2vec':
-        st.subheader('Similarity doc2vec parameters')
-        sentences = [word_tokenize(num) for num in cleaned_text]
-        for i in range(len(sentences)):
-            sentences[i] = TaggedDocument(words = sentences[i], tags = ['sent{}'.format(i)])    # converting each sentence into a TaggedDocument
-        st.sidebar.subheader('Doc2Vec Parameter')
-        vocabulary = build_lexicon(cleaned_text)
-        dimension_value = st.sidebar.slider('Berapa Dimension Model', 0, 10, 1)
-        size_value = st.sidebar.slider('Berapa Size Model?', 0, 200, len(vocabulary))
-        window_value = st.sidebar.slider('Berapa Window Model?', 0, 10, 3)
-        iterasi_value = st.sidebar.slider('Berapa Iterasi Model?', 0, 100, 10)
-        model = Doc2Vec(documents = sentences, dm = dimension_value, size = size_value, window = window_value, min_count = 1, iter = iterasi_value, workers = Pool()._processes)
-        model.init_sims(replace = True)
-        model = Doc2Vec.load('doc2vec_model')
-        nilai_vektor = [model.infer_vector("sent{}".format(num)) for num in range(0, len(cleaned_text))]
-        id_requirement = fulldataset(index0, index1)['ID']
-        df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
-        hasil = nilai_vektor
-        st.sidebar.write('anda memilih: doc2vec')
-        st.dataframe(df_vektor)
-        fig = ff.create_distplot(nilai_vektor, id_requirement)
-        st.plotly_chart(fig, use_container_width=True)
+            st.subheader('Similarity doc2vec parameters')
+            sentences = [word_tokenize(num) for num in cleaned_text]
+            for i in range(len(sentences)):
+                sentences[i] = TaggedDocument(words = sentences[i], tags = ['sent{}'.format(i)])    # converting each sentence into a TaggedDocument
+            st.sidebar.subheader('Doc2Vec Parameter')
+            vocabulary = build_lexicon(cleaned_text)
+            dimension_value = st.sidebar.slider('Berapa Dimension Model', 0, 10, 1)
+            size_value = st.sidebar.slider('Berapa Size Model?', 0, 200, len(vocabulary))
+            window_value = st.sidebar.slider('Berapa Window Model?', 0, 10, 3)
+            iterasi_value = st.sidebar.slider('Berapa Iterasi Model?', 0, 100, 10)
+            model = Doc2Vec(documents = sentences, dm = dimension_value, size = size_value, window = window_value, min_count = 1, iter = iterasi_value, workers = Pool()._processes)
+            model.init_sims(replace = True)
+            model = Doc2Vec.load('doc2vec_model')
+            nilai_vektor = [model.infer_vector("sent{}".format(num)) for num in range(0, len(cleaned_text))]
+            id_requirement = fulldataset(index0, index1)['ID']
+            df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
+            hasil = nilai_vektor
+            st.sidebar.write('anda memilih: doc2vec')
+            st.dataframe(df_vektor)
+            fig = ff.create_distplot(nilai_vektor, id_requirement)
+            st.plotly_chart(fig, use_container_width=True)
+
+            st.subheader("Profiling Parameter")
+            pr = ProfileReport(df_vektor, explorative=True)
+            st_profile_report(pr)
 
 
       # sentencemodel
       elif hasil == 'sentencemodel':
-        st.subheader('Similarity sentencemodel parameters')
-        threshold = 5
-        for i in range(len(cleaned_text)):
-            if len(cleaned_text[i]) < 5:
-                cleaned_text[i] = None
-        cleaned_text = [sentence for sentence in cleaned_text if sentence is not None]
-        vocabulary = build_lexicon(cleaned_text)
-        dimension_value = st.sidebar.slider('Berapa Dimension Model', 0, 10, 1)
-        size_value = st.sidebar.slider('Berapa Size Model?', 0, 200, len(vocabulary))
-        mode_value = st.sidebar.selectbox('What Mode?', [0, 1])
-        window_value = st.sidebar.slider('Berapa Window Model?', 0, 10, 3)
-        iterasi_value = st.sidebar.slider('Berapa Iterasi Model?', 0, 100, 10)
-        model = Word2Vec(sentences = cleaned_text, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iterasi_value, workers = Pool()._processes)
-        model.init_sims(replace = True)
-        for i in range(len(cleaned_text)):
-            cleaned_text[i] = [model[word] for word in cleaned_text[i]]
-        sent_vectorized = [sent_PCA(sentence) for sentence in cleaned_text]
-        hasil_sentencemodel = []
-        for angka in range(0, len(cleaned_text)):
-          a = [distance.euclidean(sent_vectorized[angka], sent_vectorized[num]) for num in range(0, len(cleaned_text))]
-          hasil_sentencemodel.append(a)
-        id_requirement = fulldataset(index0, index1)['ID']
-        df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement).describe()
-        hasil = hasil_sentencemodel
-        st.sidebar.write('anda memilih: Sentence Model')
-        st.dataframe(df_sentmodel)
-        fig = ff.create_distplot(hasil_sentencemodel, id_requirement)
-        st.plotly_chart(fig, use_container_width=True)
+            st.subheader('Similarity sentencemodel parameters')
+            threshold = 5
+            for i in range(len(cleaned_text)):
+                if len(cleaned_text[i]) < 5:
+                    cleaned_text[i] = None
+            cleaned_text = [sentence for sentence in cleaned_text if sentence is not None]
+            vocabulary = build_lexicon(cleaned_text)
+            dimension_value = st.sidebar.slider('Berapa Dimension Model', 0, 10, 1)
+            size_value = st.sidebar.slider('Berapa Size Model?', 0, 200, len(vocabulary))
+            mode_value = st.sidebar.selectbox('What Mode?', [0, 1])
+            window_value = st.sidebar.slider('Berapa Window Model?', 0, 10, 3)
+            iterasi_value = st.sidebar.slider('Berapa Iterasi Model?', 0, 100, 10)
+            model = Word2Vec(sentences = cleaned_text, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iterasi_value, workers = Pool()._processes)
+            model.init_sims(replace = True)
+            for i in range(len(cleaned_text)):
+                cleaned_text[i] = [model[word] for word in cleaned_text[i]]
+            sent_vectorized = [sent_PCA(sentence) for sentence in cleaned_text]
+            hasil_sentencemodel = []
+            for angka in range(0, len(cleaned_text)):
+              a = [distance.euclidean(sent_vectorized[angka], sent_vectorized[num]) for num in range(0, len(cleaned_text))]
+              hasil_sentencemodel.append(a)
+            id_requirement = fulldataset(index0, index1)['ID']
+            df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement).describe()
+            hasil = hasil_sentencemodel
+            st.sidebar.write('anda memilih: Sentence Model')
+            st.dataframe(df_sentmodel)
+            fig = ff.create_distplot(hasil_sentencemodel, id_requirement)
+            st.plotly_chart(fig, use_container_width=True)
+
+            st.subheader("Profiling Parameter")
+            pr = ProfileReport(df_sentmodel, explorative=True)
+            st_profile_report(pr)
 
       
       # variable training testing
