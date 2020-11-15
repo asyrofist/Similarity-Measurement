@@ -334,10 +334,6 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
-          fig = ff.create_distplot([[akurasi, presisi, rekal]], ['akurasi', 'presisi', 'rekal'])
-          st.plotly_chart(fig, use_container_width=True)
-
-          
 
       # random forest classifier
       elif RFC:
@@ -352,9 +348,6 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
-          fig = ff.create_distplot([[akurasi, presisi, rekal]], ['akurasi', 'presisi', 'rekal'])
-          st.plotly_chart(fig, use_container_width=True)
-
 
       # K-Nearset Neighbor
       elif KNN:
@@ -369,9 +362,6 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
-          fig = ff.create_distplot([[akurasi, presisi, rekal]], ['akurasi', 'presisi', 'rekal'])
-          st.plotly_chart(fig, use_container_width=True)
-
 
       # Gaussian Naive Bias
       elif GNB:
@@ -386,9 +376,6 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
-          fig = ff.create_distplot([[akurasi, presisi, rekal]], ['akurasi', 'presisi', 'rekal'])
-          st.plotly_chart(fig, use_container_width=True)
-
 
       # Decission Tree
       elif DT:
@@ -403,6 +390,3 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
-          fig = ff.create_distplot([[akurasi, presisi, rekal]], ['akurasi', 'presisi', 'rekal'])
-          st.plotly_chart(fig, use_container_width=True)
-
