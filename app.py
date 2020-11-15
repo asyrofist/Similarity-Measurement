@@ -171,7 +171,7 @@ if index0 is not None:
         col1.subheader("A wide column with a chart")
         col1.line_chart(data)
         col2.subheader("A narrow column with the data")
-        col2.write(data)
+        col2.write(df_cos)
       
       # levenshtein
       elif hasil == 'levenshtein':
