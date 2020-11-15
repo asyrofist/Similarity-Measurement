@@ -35,12 +35,7 @@ if index0 is not None:
        st.header("First Co-occurance")
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
-       
-       #occurance
-       st.subheader("Co-occurance Measurement Parameter")
-       df_occurance = co_occurrence(cleaned_text, 2)
-       st.dataframe(df_occurance)
-        
+               
        #pmi measurement
        st.subheader("PMI Measurement Parameter")
        id_requirement = fulldataset(index0, index1)['ID']
