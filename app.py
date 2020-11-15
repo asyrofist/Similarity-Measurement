@@ -31,6 +31,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity
+import scipy.sparse
+from sparsesvd import sparsesvd
+from sklearn.metrics.pairwise import cosine_similarity
 
 st.write("""
 # Similarity & Classiifcation Measurements
@@ -89,11 +92,12 @@ if index0 is not None:
        desc_pmi = tabel_jumlahpmi.describe()
        st.dataframe(desc_pmi)
         
+       # second order
        st.header("Second Co-occurance")
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
        
-       st.subheader('Similarity vsm parameters')
+       st.subheader('VSM parameters')
        vect = TfidfVectorizer()
        tfidf_matrix = vect.fit_transform(cleaned_text)
        matrix_tfidf = tfidf_matrix.toarray()
@@ -106,6 +110,22 @@ if index0 is not None:
        st.subheader("Feature VSM Parameter")
        desc_vsm = df_vsm.describe()
        st.dataframe(desc_vsm)
+    
+       # third order
+       st.header("Third Co-occurance")
+       st.subheader("SVD parameters")
+       mat = vsm
+       smat = scipy.sparse.csc_matrix(mat) # convert to sparse CSC format
+       ut, s, vt = sparsesvd(smat, 100) # do SVD, asking for 100 factors
+       hasil4 = ut*s*vt
+       df_svd = pd.DataFrame(hasil4, index= list(unique_tags_test), columns= list(unique_tags_test)) 
+       st.dataframe(df_svd)
+    
+       #fitur svd
+       st.subheader("Feature SVD Parameter")
+       desc_vsm = df_vsm.describe()
+       st.dataframe(desc_vsm)
+
         
     # Requirement Extraction
     elif extraction:
