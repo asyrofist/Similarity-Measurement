@@ -182,7 +182,8 @@ if index0 is not None:
         df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement)
         hasil = hasil_cosine
         st.sidebar.write('anda memilih: cosine')
-        st.dataframe(df_cos)
+#         st.dataframe(df_cos)
+        st.line_chart(hasil_cosine)
         
       # levenshtein
       elif hasil == 'levenshtein':
