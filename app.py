@@ -93,10 +93,8 @@ if index0 is not None:
        cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement)
        st.dataframe(cos)
 
-        # Visualisasi
-       st.line_chart(cos, use_container_width=True)
- 
-
+       # Visualisasi
+       st.line_chart(hasil_cosine, use_container_width=True) 
     
     # Ontology Construction
     elif ontology:
@@ -169,8 +167,8 @@ if index0 is not None:
        st.dataframe(df_kmeans)
     
        # Visualisasi
-       fig = ff.create_distplot(order_centroids, id_requirement)
-       st.plotly_chart(fig, use_container_width=True)
+       st.line_chart(order_centroids, use_container_width=True)
+
 
            
     # similarity
