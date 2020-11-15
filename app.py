@@ -21,7 +21,9 @@ from scipy.spatial import distance
 from gensim.models import Word2Vec
 from multiprocessing import Pool
 from scipy import spatial
-
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.cluster import KMeans
+from sklearn.metrics import adjusted_rand_score
 
 st.write("""
 # Similarity & Classiifcation Measurements
@@ -133,7 +135,16 @@ if index0 is not None:
        id_requirement = fulldataset(index0, index1)['ID']
        df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
        st.dataframe(df_vektor)
-     
+        
+       # Kmeans
+       true_k = len(nilai_vektor)
+       model = KMeans(n_clusters=true_k, init='k-means++', max_iter=iterasi_value, n_init=1)
+       model.fit(nilai_vektor)
+       order_centroids = model.cluster_centers_.argsort()[:, ::-1]
+       id_requirement = fulldataset(index0, index1)['ID']
+       df_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
+       st.dataframe(df_kmeans)
+    
     # similarity
     elif similaritas:
       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
