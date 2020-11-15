@@ -166,12 +166,7 @@ if index0 is not None:
         hasil = hasil_cosine
         st.sidebar.write('anda memilih: cosine')
         st.dataframe(df_cos)
-        col1, col2 = st.beta_columns(2)
-        col1.subheader("A wide column with a chart")
-        col1.line_chart(hasil_cosine)
-        col2.subheader("A narrow column with the data")
-        col2.write(df_cos)
-      
+        
       # levenshtein
       elif hasil == 'levenshtein':
         st.subheader('Similarity levenshtein parameters')
