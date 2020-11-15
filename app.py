@@ -52,9 +52,10 @@ if index0 is not None:
     similaritas = st.sidebar.checkbox("Similarity & Classification")
     ontology = st.sidebar.checkbox("Ontology Construction")
     extraction = st.sidebar.checkbox("Requirement Extraction")
-    cooccurance = st.sidebar.checkbox("Term Co-Occurance")
+    occurance = st.sidebar.checkbox("Term Co-Occurance")
+    
     #co-occurance 
-    if  cooccurance:
+    if  occurance:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
        st.write(cleaned_text)
@@ -64,18 +65,18 @@ if index0 is not None:
        id_requirement = fulldataset(index0, index1)['ID']
        a2 = []
        for angka in range(0, len(cleaned_text)):
-          a1 = [pmi_measurement(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(a))]
+          a1 = [pmi_measurement(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
           a2.append(a1)
-       tabel_pmi = pd.DataFrame(a2, index= id_requirement, columns=id_requirement)
+       tabel_pmi = pd.DataFrame(a2, index= id_requirement, columns= id_requirement)
        st.dataframe(tabel_pmi)
         
        #pmi jumlah 
        st.subheader("PMI Measurement Parameter")
        a4 = []
        for angka in range(0, len(cleaned_text)):
-          a3 = [pmi_jumlah(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(a))]
+          a3 = [pmi_jumlah(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
           a4.append(a3)
-       tabel_jumlahpmi = pd.DataFrame(a4, index= id_requirement, columns=id_requirement)
+       tabel_jumlahpmi = pd.DataFrame(a4, index= id_requirement, columns= id_requirement)
        st.dataframe(tabel_jumlahpmi)
         
     # Requirement Extraction
