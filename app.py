@@ -85,18 +85,17 @@ if index0 is not None:
        terms = vectorizer.get_feature_names()
        tabel_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= terms)
        st.dataframe(tabel_kmeans)
-       
-       # Visualisasi
-       fig = ff.create_distplot(order_centroids, id_requirement)
-       st.plotly_chart(fig, use_container_width=True)
-    
+           
        # cosine
        st.subheader('Cosine parameters') 
        hasil_cosine = cosine_similarity(order_centroids[0:], order_centroids)
        id_term = [("term {}".format(num)) for num in range(0, (X.shape[1]-1))]
        cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement)
        st.dataframe(cos)
-        
+
+        # Visualisasi
+       st.line_chart(cos, use_container_width=True)
+ 
 
     
     # Ontology Construction
