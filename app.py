@@ -38,7 +38,8 @@ if index0 is not None:
         df = pd.DataFrame(np.random.rand(100, 5),columns=["a", "b", "c", "d", "e"])
         st.dataframe(df)
         profile = ProfileReport(df, title='Pandas Profiling Report', html={'style':{'full_width':False}})
-        profile.to_notebook_iframe()
+        hasil = profile.to_notebook_iframe()
+        st.write(hasil)
         
     #co-occurance 
     elif  occurance:
