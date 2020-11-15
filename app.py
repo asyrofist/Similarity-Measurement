@@ -35,7 +35,7 @@ if index0 is not None:
     occurance = st.sidebar.checkbox("Term Co-Occurance")
             
     #co-occurance 
-    if  occurance:
+    if occurance:
        st.header("First Co-occurance")
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
@@ -100,16 +100,7 @@ if index0 is not None:
        jumlah_kata = svd_model.components_
        df_svd = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(df_svd)
-   
-       profile = st.sidebar.checkbox('Profilling Parameters')
-       if profile:
-           # fiture svd profile
-           desc_svd = df_svd.describe()
-           pr = ProfileReport(desc_svd, explorative=True)
-           st.title("Feature SVD Profile")
-           st.write(desc_svd)
-           st_profile_report(pr)
- 
+    
     # Requirement Extraction
     elif extraction:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
@@ -157,15 +148,6 @@ if index0 is not None:
        fig = ff.create_distplot(hasil_cosine, id_requirement)
        st.plotly_chart(fig, use_container_width=True)
         
-       profile = st.sidebar.checkbox('Profilling Parameters')
-       if profile:
-           # fiture svd profile
-           desc_cos = cos.describe()
-           pr = ProfileReport(desc_cos, explorative=True)
-           st.title("Feature Extraction Profile")
-           st.write(desc_cos)
-           st_profile_report(pr)
-
     # Ontology Construction
     elif ontology:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
@@ -240,16 +222,7 @@ if index0 is not None:
        st.subheader('Feature parameters')
        st.dataframe(df_kmeans.describe())
        st.line_chart(df_kmeans.describe())
-    
-       profile = st.sidebar.checkbox('Profilling Parameters')
-       if profile:
-           # fiture svd profile
-           desc_kmeans = df_kmeans.describe()
-           pr = ProfileReport(desc_kmeans, explorative=True)
-           st.title("Feature Extraction Profile")
-           st.write(desc_kmeans)
-           st_profile_report(pr)
-           
+               
     # similarity
     elif similaritas:
       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
@@ -273,15 +246,6 @@ if index0 is not None:
             st.dataframe(df_cos)
             fig = ff.create_distplot(hasil_cosine, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
-            
-            profile = st.sidebar.checkbox('Profilling Parameters')
-            if profile:
-                # fiture svd profile
-                desc_cos = df_cos
-                pr = ProfileReport(desc_cos, explorative=True)
-                st.title("Feature Extraction Profile")
-                st.write(desc_cos)
-                st_profile_report(pr)
         
       # levenshtein
       elif hasil == 'levenshtein':
@@ -298,15 +262,6 @@ if index0 is not None:
             fig = ff.create_distplot(hasil_levenshtein, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
             
-            profile = st.sidebar.checkbox('Profilling Parameters')
-            if profile:
-                # fiture svd profile
-                desc_lev = df_lev
-                pr = ProfileReport(desc_lev, explorative=True)
-                st.title("Feature Extraction Profile")
-                st.write(desc_lev)
-                st_profile_report(pr)
-
       # jaccard
       elif hasil == 'jaccard':
             st.subheader('Similarity jaccard parameters')
@@ -322,15 +277,6 @@ if index0 is not None:
             fig = ff.create_distplot(hasil_jaccard, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
 
-            profile = st.sidebar.checkbox('Profilling Parameters')
-            if profile:
-                # fiture svd profile
-                desc_jaccard = df_jaccard
-                pr = ProfileReport(desc_jaccard, explorative=True)
-                st.title("Feature Extraction Profile")
-                st.write(desc_jaccard)
-                st_profile_report(pr)
-
       # tfidf
       elif hasil == 'tfidf':
             st.subheader('Similarity tfidf parameters')
@@ -343,15 +289,6 @@ if index0 is not None:
             st.dataframe(df_tfidf)
             fig = ff.create_distplot(tfidf_matrix.toarray(), id_requirement)
             st.plotly_chart(fig, use_container_width=True)
-
-            profile = st.sidebar.checkbox('Profilling Parameters')
-            if profile:
-                # fiture svd profile
-                desc_tfidf = df_tfidf
-                pr = ProfileReport(desc_tfidf, explorative=True)
-                st.title("Feature Extraction Profile")
-                st.write(desc_tfidf)
-                st_profile_report(pr)
 
       # vsm
       elif hasil == 'vsm':
@@ -367,15 +304,6 @@ if index0 is not None:
             st.dataframe(df_vsm)
             fig = ff.create_distplot(vsm, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
-
-            profile = st.sidebar.checkbox('Profilling Parameters')
-            if profile:
-                # fiture svd profile
-                desc_vsm = df_vsm
-                pr = ProfileReport(desc_vsm, explorative=True)
-                st.title("Feature Extraction Profile")
-                st.write(desc_vsm)
-                st_profile_report(pr)
 
       # doc2vec
       elif hasil == 'doc2vec':
@@ -400,15 +328,6 @@ if index0 is not None:
             st.dataframe(df_vektor)
             fig = ff.create_distplot(nilai_vektor, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
-
-            profile = st.sidebar.checkbox('Profilling Parameters')
-            if profile:
-                # fiture svd profile
-                desc_vektor = df_vektor
-                pr = ProfileReport(desc_vektor, explorative=True)
-                st.title("Feature Extraction Profile")
-                st.write(desc_vektor)
-                st_profile_report(pr)
 
       # sentencemodel
       elif hasil == 'sentencemodel':
@@ -440,20 +359,13 @@ if index0 is not None:
             st.dataframe(df_sentmodel)
             fig = ff.create_distplot(hasil_sentencemodel, id_requirement)
             st.plotly_chart(fig, use_container_width=True)
-
-            profile = st.sidebar.checkbox('Profilling Parameters')
-            if profile:
-                # fiture svd profile
-                desc_sentmodel = df_sentmodel
-                pr = ProfileReport(desc_sentmodel, explorative=True)
-                st.title("Feature Extraction Profile")
-                st.write(desc_vektor)
-                st_profile_report(pr)
       
       # variable training testing
       label_statement = fulldataset(index0, index1)['label']
       size = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
-      X_train, X_test, y_train, y_test = train_test_split(hasil, label_statement, test_size=size,random_state=109) # 70% training and 30% test
+      profile = st.sidebar.checkbox('Profilling Parameters')
+      
+        X_train, X_test, y_train, y_test = train_test_split(hasil, label_statement, test_size=size,random_state=109) # 70% training and 30% test
       st.subheader('User Train Test parameters')
       traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
       st.write(traintest)      
@@ -535,3 +447,12 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
+        
+       # profilling
+       elif profile:
+           # fiture svd profile
+           pr = ProfileReport(hasil, explorative=True)
+           st.title("Feature SVD Profile")
+           st.write(hasil)
+           st_profile_report(pr)
+
