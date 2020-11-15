@@ -85,18 +85,15 @@ if index0 is not None:
        terms = vectorizer.get_feature_names()
        tabel_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= terms)
        st.dataframe(tabel_kmeans)
-       
-       # Visualisasi
-       st.subheader('Cosine Visualisation') 
-       st.line_chart(order_centroids, use_container_width=True)
-    
+           
        # cosine
        st.subheader('Cosine parameters') 
        hasil_cosine = cosine_similarity(order_centroids[0:], order_centroids)
        id_term = [("term {}".format(num)) for num in range(0, (X.shape[1]-1))]
        cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement)
        st.dataframe(cos)
-    
+       
+       # Visualisasi
        fig = ff.create_distplot(hasil_cosine, id_requirement)
        st.plotly_chart(fig, use_container_width=True)
     
@@ -169,9 +166,10 @@ if index0 is not None:
        id_requirement = fulldataset(index0, index1)['ID']
        df_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
        st.dataframe(df_kmeans)
-    
+          
        # Visualisasi
-       st.line_chart(order_centroids, use_container_width=True)
+       fig = ff.create_distplot(order_centroids, id_requirement)
+       st.plotly_chart(fig, use_container_width=True)
 
 
            
