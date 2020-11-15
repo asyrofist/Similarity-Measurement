@@ -1,6 +1,7 @@
 import re
 import math
 import string #allows for format()
+import plotly.figure_factory as ff
 import streamlit as st
 import altair as alt
 from nltk.tokenize import word_tokenize
@@ -184,7 +185,8 @@ if index0 is not None:
         hasil = hasil_cosine
         st.sidebar.write('anda memilih: cosine')
         st.dataframe(df_cos)
-        st.vega_lite_chart(df_cos)
+        fig = ff.create_distplot(hasil_cosine, id_requirement)
+        st.plotly_chart(fig, use_container_width=True)
         
       # levenshtein
       elif hasil == 'levenshtein':
