@@ -52,9 +52,15 @@ if index0 is not None:
     similaritas = st.sidebar.checkbox("Similarity & Classification")
     ontology = st.sidebar.checkbox("Ontology Construction")
     extraction = st.sidebar.checkbox("Requirement Extraction")
+    cooccurance = st.sidebar.checkbox("Term Co-Occurance")
+    #co-occurance 
+    if  cooccurance:
+       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
+       cleaned_text = apply_cleaning_function_to_list(text_to_clean)
+       st.dataframe(cleaned_text.describe())
     
     # Requirement Extraction
-    if extraction:
+    elif extraction:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
        cleaned_text = apply_cleaning_function_to_list(text_to_clean)
        id_requirement = fulldataset(index0, index1)['ID']
