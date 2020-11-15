@@ -97,6 +97,9 @@ if index0 is not None:
        cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement)
        st.dataframe(cos)
     
+       fig = ff.create_distplot(hasil_cosine, id_requirement)
+       st.plotly_chart(fig, use_container_width=True)
+    
     # Ontology Construction
     elif ontology:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
