@@ -158,12 +158,11 @@ if index0 is not None:
         
        # feature collection
        st.subheader('Feature  parameters')
-       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count', 'max'])
        desc_cos = df_cos.describe()
        desc_cos = desc_cos.drop(options, axis=0)
        desc_cos = desc_cos.T
-       st.write(desc_cos)
-
+        
        # visusalisasi
        fig, ax = plt.subplots(figsize=(10,10))
        sns.heatmap(desc_cos, annot=True, ax=ax)
@@ -246,7 +245,6 @@ if index0 is not None:
        desc_kmeans = df_kmeans.describe()
        desc_kmeans = desc_kmeans.drop(options, axis=0)
        desc_kmeans = desc_kmeans.T
-       st.write(desc_kmeans)
         
        # Visualisasi
        fig, ax = plt.subplots(figsize=(10,10))
@@ -283,8 +281,6 @@ if index0 is not None:
             desc_cos = desc_cos.drop(options, axis=0)
             desc_cos = desc_cos.T
             hasil = desc_cos
-            st.write(desc_cos)
-            
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
@@ -312,8 +308,6 @@ if index0 is not None:
             desc_lev = desc_lev.drop(options, axis=0)
             desc_lev = desc_lev.T
             hasil = desc_lev
-            st.write(desc_lev)
-            
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
@@ -341,8 +335,6 @@ if index0 is not None:
             desc_jaccard = desc_jaccard.drop(options, axis=0)
             desc_jaccard = desc_jaccard.T
             hasil = desc_jaccard
-            st.write(desc_jaccard)
-            
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
@@ -367,8 +359,6 @@ if index0 is not None:
             desc_tfidf = desc_tfidf.drop(options, axis=0)
             desc_tfidf = desc_tfidf.T
             hasil = desc_tfidf
-            st.write(desc_tfidf)
-            
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
@@ -395,8 +385,6 @@ if index0 is not None:
             desc_vsm = desc_vsm.drop(options, axis=0)
             desc_vsm = desc_vsm.T
             hasil = desc_vsm
-            st.write(desc_vsm)
-            
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
@@ -434,8 +422,6 @@ if index0 is not None:
             desc_vektor = desc_vektor.drop(options, axis=0)
             desc_vektor = desc_vektor.T
             hasil = desc_vektor
-            st.write(desc_vektor)
-            
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
@@ -480,8 +466,6 @@ if index0 is not None:
             desc_sentmodel = desc_sentmodel.drop(options, axis=0)
             desc_sentmodel = desc_sentmodel.T
             hasil = desc_sentmodel
-            st.write(desc_sentmodel)
-            
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
