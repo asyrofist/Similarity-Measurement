@@ -255,6 +255,11 @@ if index0 is not None:
             hasil = desc_cos
             st.write(desc_cos)
             
+            fig, ax = plt.subplots(figsize=(10,10))
+            sns.heatmap(hasil, annot=True, ax=ax)
+            st.pyplot()
+
+            
       # levenshtein
       elif hasil == 'levenshtein':
             st.subheader('Similarity levenshtein parameters')
@@ -279,6 +284,11 @@ if index0 is not None:
             hasil = desc_lev
             st.write(desc_lev)
             
+            fig, ax = plt.subplots(figsize=(10,10))
+            sns.heatmap(hasil, annot=True, ax=ax)
+            st.pyplot()
+
+            
       # jaccard
       elif hasil == 'jaccard':
             st.subheader('Similarity jaccard parameters')
@@ -302,6 +312,10 @@ if index0 is not None:
             desc_jaccard = desc_jaccard.T
             hasil = desc_jaccard
             st.write(desc_jaccard)
+            
+            fig, ax = plt.subplots(figsize=(10,10))
+            sns.heatmap(hasil, annot=True, ax=ax)
+            st.pyplot()
 
       # tfidf
       elif hasil == 'tfidf':
@@ -324,6 +338,10 @@ if index0 is not None:
             desc_tfidf = desc_tfidf.T
             hasil = desc_tfidf
             st.write(desc_tfidf)
+            
+            fig, ax = plt.subplots(figsize=(10,10))
+            sns.heatmap(hasil, annot=True, ax=ax)
+            st.pyplot()
 
       # vsm
       elif hasil == 'vsm':
@@ -348,6 +366,11 @@ if index0 is not None:
             desc_vsm = desc_vsm.T
             hasil = desc_vsm
             st.write(desc_vsm)
+            
+            fig, ax = plt.subplots(figsize=(10,10))
+            sns.heatmap(hasil, annot=True, ax=ax)
+            st.pyplot()
+
 
       # doc2vec
       elif hasil == 'doc2vec':
@@ -382,6 +405,11 @@ if index0 is not None:
             desc_vektor = desc_vektor.T
             hasil = desc_vektor
             st.write(desc_vektor)
+            
+            fig, ax = plt.subplots(figsize=(10,10))
+            sns.heatmap(hasil, annot=True, ax=ax)
+            st.pyplot()
+
 
       # sentencemodel
       elif hasil == 'sentencemodel':
@@ -423,12 +451,21 @@ if index0 is not None:
             desc_sentmodel = desc_sentmodel.T
             hasil = desc_sentmodel
             st.write(desc_sentmodel)
-      
+            
+            fig, ax = plt.subplots(figsize=(10,10))
+            sns.heatmap(hasil, annot=True, ax=ax)
+            st.pyplot()
+
       # variable training testing
       kalimat         = fulldataset(index0, index1)['kalimat']
       le_Y            = LabelEncoder()
       label_kalimat   = le_Y.fit_transform(kalimat)
       size            = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
+       
+      X_train, X_test, y_train, y_test = train_test_split(hasil, label_kalimat, test_size=size,random_state=109) # 70% training and 30% test
+      st.subheader('User Train Test parameters')
+      traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
+      st.write(traintest)      
       
       # classification
       st.sidebar.header('Classification Parameters')
@@ -438,11 +475,6 @@ if index0 is not None:
       GNB = st.sidebar.button('Gaussian Naive Bias')
       DT  = st.sidebar.button('Decission Tree')
       Profile  = st.sidebar.button('Document Profilling')
-      
-      X_train, X_test, y_train, y_test = train_test_split(hasil, label_kalimat, test_size=size,random_state=109) # 70% training and 30% test
-      st.subheader('User Train Test parameters')
-      traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
-      st.write(traintest)      
         
       # support vector machine
       if SVM:
@@ -456,13 +488,6 @@ if index0 is not None:
           presisi = precision_score(y_test, y_pred, average='macro') 
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
-          fig, ax = plt.subplots()
-          ax.heatmap(results, annot=True, ax=ax)
-          st.pyplot(fig)
-          
-#           fig, ax = plt.subplots(figsize=(10,10))
-#           sns.heatmap(results, annot=True, ax=ax)
-#           st.pyplot()
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
