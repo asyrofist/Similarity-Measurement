@@ -236,6 +236,7 @@ if index0 is not None:
                 a = [similarity_cosine(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
                 hasil_cosine.append(a)
             id_requirement = fulldataset(index0, index1)['ID']
+            hasil = hasil_cosine
             df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement)
             st.write(df_cos)
             
@@ -246,7 +247,7 @@ if index0 is not None:
             # feature collection
             options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count', 'min', '25%', 'max'])
             desc_cos = desc_cos.drop(options, axis=0)
-            hasil = hasil_cosine
+            desc_cos = desc_cos.T
             st.write(desc_cos)
             
       # levenshtein
