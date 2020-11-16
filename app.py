@@ -424,10 +424,9 @@ if index0 is not None:
             st.write(desc_sentmodel)
       
       # variable training testing
-      kalimat = fulldataset(index0, index1)['kalimat']
-      le_Y = LabelEncoder()
-      label_kalimat = le_Y.fit_transform(kalimat)
-#       label_statement = fulldataset(index0, index1)['label']
+      kalimat         = fulldataset(index0, index1)['kalimat']
+      le_Y            = LabelEncoder()
+      label_kalimat   = le_Y.fit_transform(kalimat)
       size            = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
       
       # classification
@@ -530,7 +529,7 @@ if index0 is not None:
           st.bar_chart(chart_data)
       
       # Decission Tree
-      elif profile:
+      elif Profile:
           pr = ProfileReport(hasil, explorative=True)
           st.title("Document Profiling")
           st.write(hasil)
