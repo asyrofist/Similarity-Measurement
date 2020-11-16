@@ -246,6 +246,7 @@ if index0 is not None:
             st.write(desc_cos)
 
             # feature collection
+            st.subheader('Feature  parameters')
             options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count', 'min', '25%', 'max'])
             desc_cos = desc_cos.drop(options, axis=0)
             desc_cos = desc_cos.T
@@ -263,8 +264,18 @@ if index0 is not None:
             df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement).describe()
             hasil = hasil_levenshtein
             st.dataframe(df_lev)
-            fig = ff.create_distplot(hasil_levenshtein, id_requirement)
-            st.plotly_chart(fig, use_container_width=True)
+            
+            #feature description
+            desc_lev = df_lev.describe()
+            st.write(desc_lev)
+
+            # feature collection
+            st.subheader('Feature  parameters')
+            options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+            desc_lev = desc_lev.drop(options, axis=0)
+            desc_lev = desc_lev.T
+            hasil = desc_lev
+            st.write(desc_lev)
             
       # jaccard
       elif hasil == 'jaccard':
@@ -277,8 +288,18 @@ if index0 is not None:
             df_jaccard = pd.DataFrame(hasil_jaccard, index= id_requirement, columns= id_requirement).describe()
             hasil = hasil_jaccard
             st.dataframe(df_jaccard)
-            fig = ff.create_distplot(hasil_jaccard, id_requirement)
-            st.plotly_chart(fig, use_container_width=True)
+            
+            #feature description
+            desc_jaccard = df_jaccard.describe()
+            st.write(desc_jaccard)
+
+            # feature collection
+            st.subheader('Feature  parameters')
+            options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+            desc_jaccard = desc_jaccard.drop(options, axis=0)
+            desc_jaccard = desc_jaccard.T
+            hasil = desc_jaccard
+            st.write(desc_jaccard)
 
       # tfidf
       elif hasil == 'tfidf':
@@ -289,8 +310,18 @@ if index0 is not None:
             df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names()).describe()
             hasil = tfidf_matrix.toarray()
             st.dataframe(df_tfidf)
-            fig = ff.create_distplot(tfidf_matrix.toarray(), id_requirement)
-            st.plotly_chart(fig, use_container_width=True)
+            
+            #feature description
+            desc_tfidf = df_tfidf.describe()
+            st.write(desc_tfidf)
+
+            # feature collection
+            st.subheader('Feature  parameters')
+            options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+            desc_tfidf = desc_tfidf.drop(options, axis=0)
+            desc_tfidf = desc_tfidf.T
+            hasil = desc_tfidf
+            st.write(desc_tfidf)
 
       # vsm
       elif hasil == 'vsm':
@@ -303,8 +334,18 @@ if index0 is not None:
             df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement).describe()
             hasil = vsm
             st.dataframe(df_vsm)
-            fig = ff.create_distplot(vsm, id_requirement)
-            st.plotly_chart(fig, use_container_width=True)
+            
+            #feature description
+            desc_vsm = df_vsm.describe()
+            st.write(desc_vsm)
+
+            # feature collection
+            st.subheader('Feature  parameters')
+            options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+            desc_vsm = desc_vsm.drop(options, axis=0)
+            desc_vsm = desc_vsm.T
+            hasil = desc_vsm
+            st.write(desc_vsm)
 
       # doc2vec
       elif hasil == 'doc2vec':
@@ -327,8 +368,18 @@ if index0 is not None:
             df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
             hasil = nilai_vektor
             st.dataframe(df_vektor)
-            fig = ff.create_distplot(nilai_vektor, id_requirement)
-            st.plotly_chart(fig, use_container_width=True)
+            
+            #feature description
+            desc_vektor = df_vektor.describe()
+            st.write(desc_vektor)
+
+            # feature collection
+            st.subheader('Feature  parameters')
+            options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+            desc_vektor = desc_vektor.drop(options, axis=0)
+            desc_vektor = desc_vektor.T
+            hasil = desc_vektor
+            st.write(desc_vektor)
 
       # sentencemodel
       elif hasil == 'sentencemodel':
@@ -358,8 +409,18 @@ if index0 is not None:
             df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement).describe()
             hasil = hasil_sentencemodel
             st.dataframe(df_sentmodel)
-            fig = ff.create_distplot(hasil_sentencemodel, id_requirement)
-            st.plotly_chart(fig, use_container_width=True)
+            
+            #feature description
+            desc_sentmodel = df_sentmodel.describe()
+            st.write(desc_sentmodel)
+
+            # feature collection
+            st.subheader('Feature  parameters')
+            options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+            desc_sentmodel = desc_sentmodel.drop(options, axis=0)
+            desc_sentmodel = desc_sentmodel.T
+            hasil = desc_sentmodel
+            st.write(desc_sentmodel)
       
       # variable training testing
       kalimat = fulldataset(index0, index1)['kalimat']
