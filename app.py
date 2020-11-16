@@ -8,6 +8,8 @@ from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf,
 from function import KMeans, adjusted_rand_score, TruncatedSVD, TfidfVectorizer
 from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec, cosine_similarity
 
+from sklearn.preprocessing import LabelEncoder
+
 st.write("""
 # Requirement Dependency Measurements
 Berikut ini algoritma yang digunakan untuk pengukuran kebergantungan antar kebutuhan
