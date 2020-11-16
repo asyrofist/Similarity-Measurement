@@ -7,8 +7,9 @@ from function import similarity_cosine, similarity_levenshtein, similarity_jacca
 from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix, pmi_measurement, pmi_jumlah, co_occurrence
 from function import KMeans, adjusted_rand_score, TruncatedSVD, TfidfVectorizer
 from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec, cosine_similarity
-
 from sklearn.preprocessing import LabelEncoder
+import seaborn as sns
+from sklearn.metrics import confusion_matrix 
 
 st.write("""
 # Requirement Dependency Measurements
@@ -453,6 +454,9 @@ if index0 is not None:
           akurasi = accuracy_score(y_test, y_pred) 
           presisi = precision_score(y_test, y_pred, average='macro') 
           rekal = recall_score(y_test, y_pred, average='macro') 
+          results = confusion_matrix(y_test, y_pred)
+          hasil_sns = sns.heatmap(results, annot=True)
+          st.write(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -467,6 +471,9 @@ if index0 is not None:
           akurasi = accuracy_score(y_test, y_pred) 
           presisi = precision_score(y_test, y_pred, average='macro') 
           rekal = recall_score(y_test, y_pred, average='macro') 
+          results = confusion_matrix(y_test, y_pred)
+          hasil_sns = sns.heatmap(results, annot=True)
+          st.write(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -481,6 +488,9 @@ if index0 is not None:
           akurasi = accuracy_score(y_test, y_pred) 
           presisi = precision_score(y_test, y_pred, average='macro') 
           rekal = recall_score(y_test, y_pred, average='macro') 
+          results = confusion_matrix(y_test, y_pred)
+          hasil_sns = sns.heatmap(results, annot=True)
+          st.write(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -495,6 +505,9 @@ if index0 is not None:
           akurasi = accuracy_score(y_test, y_pred) 
           presisi = precision_score(y_test, y_pred, average='macro') 
           rekal = recall_score(y_test, y_pred, average='macro') 
+          results = confusion_matrix(y_test, y_pred)
+          hasil_sns = sns.heatmap(results, annot=True)
+          st.write(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -509,5 +522,8 @@ if index0 is not None:
           akurasi = accuracy_score(y_test, y_pred) 
           presisi = precision_score(y_test, y_pred, average='macro') 
           rekal = recall_score(y_test, y_pred, average='macro') 
+          results = confusion_matrix(y_test, y_pred)
+          hasil_sns = sns.heatmap(results, annot=True)
+          st.write(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
