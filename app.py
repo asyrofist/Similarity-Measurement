@@ -62,8 +62,8 @@ if index0 is not None:
        # feature collection
        st.subheader("Feature PMI Parameter")
        desc_pmi = df_jumlahpmi.describe()
-       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
-       desc_pmi = desc_pmi.drop(options, axis=0)
+       opsi_pmi = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       desc_pmi = desc_pmi.drop(opsi_pmi, axis=0)
        desc_pmi = desc_pmi.T
        hasil = desc_pmi
        st.write(desc_pmi)
@@ -91,8 +91,8 @@ if index0 is not None:
        # feature collection
        st.subheader("Feature VSM Parameter")
        desc_vsm = df_vsm.describe()
-       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
-       desc_vsm = desc_vsm.drop(options, axis=0)
+       opsi_vsm = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       desc_vsm = desc_vsm.drop(opsi_vsm, axis=0)
        desc_vsm = desc_vsm.T
        hasil = desc_vsm
        st.write(desc_vsm)
@@ -123,8 +123,8 @@ if index0 is not None:
        # feature collection
        st.subheader('Feature  parameters')
        desc_svd = df_svd.describe()
-       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
-       desc_svd = desc_svd.drop(options, axis=0)
+       opsi_svd = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       desc_svd = desc_svd.drop(opsi_svd, axis=0)
        desc_svd = desc_svd.T
        hasil = desc_svd
        st.write(desc_svd)
