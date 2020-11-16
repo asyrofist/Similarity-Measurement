@@ -457,7 +457,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           fig, ax = plt.subplots()
-          ax.heamap(results, annot=True, ax=ax)
+          ax.heatmap(results, annot=True, ax=ax)
           st.pyplot(fig)
           
 #           fig, ax = plt.subplots(figsize=(10,10))
