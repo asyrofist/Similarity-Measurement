@@ -23,14 +23,7 @@ if index0 is not None:
     index1 = st.sidebar.selectbox( 'What Dataset you choose?', x1.sheet_names)
     st.subheader('Dataset parameters')
     st.write(fulldataset(index0, index1))
-    
-    kalimat = fulldataset(index0, index1)['kalimat']
-    st.write(kalimat)
-    
-    le_Y = LabelEncoder()
-    kalimat = le_Y.fit_transform(kalimat)
-    st.write(kalimat)
-
+   
     # Nilai Pembanding
     st.sidebar.subheader('Measurement Parameter')
     similaritas     = st.sidebar.checkbox("Similarity & Classification")
@@ -369,7 +362,10 @@ if index0 is not None:
             st.plotly_chart(fig, use_container_width=True)
       
       # variable training testing
-      label_statement = fulldataset(index0, index1)['label']
+      kalimat = fulldataset(index0, index1)['kalimat']
+      le_Y = LabelEncoder()
+      label_kalimat = le_Y.fit_transform(kalimat)
+#       label_statement = fulldataset(index0, index1)['label']
       size            = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
       
       # classification
@@ -380,7 +376,7 @@ if index0 is not None:
       GNB = st.sidebar.button('Gaussian Naive Bias')
       DT  = st.sidebar.button('Decission Tree')
       
-      X_train, X_test, y_train, y_test = train_test_split(hasil, label_statement, test_size=size,random_state=109) # 70% training and 30% test
+      X_train, X_test, y_train, y_test = train_test_split(hasil, label_kalimat, test_size=size,random_state=109) # 70% training and 30% test
       st.subheader('User Train Test parameters')
       traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
       st.write(traintest)      
