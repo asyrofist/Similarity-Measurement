@@ -16,6 +16,7 @@ st.write("""
 # Requirement Dependency Measurements
 Berikut ini algoritma yang digunakan untuk pengukuran kebergantungan antar kebutuhan
 """)
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 #file upload
 index0 = st.file_uploader("Choose a file") 
