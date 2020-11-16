@@ -56,13 +56,21 @@ if index0 is not None:
        for angka in range(0, len(cleaned_text)):
           a3 = [pmi_jumlah(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
           a4.append(a3)
-       tabel_jumlahpmi = pd.DataFrame(a4, index= id_requirement, columns= id_requirement)
-       st.dataframe(tabel_jumlahpmi)
+       df_jumlahpmi = pd.DataFrame(a4, index= id_requirement, columns= id_requirement)
+       st.dataframe(df_jumlahpmi)
        
-       #fitur pmi
+       # feature collection
        st.subheader("Feature PMI Parameter")
-       desc_pmi = tabel_jumlahpmi.describe()
-       st.dataframe(desc_pmi)
+       desc_pmi = df_jumlahpmi.describe()
+       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       desc_pmi = desc_pmi.drop(options, axis=0)
+       desc_pmi = desc_pmi.T
+       hasil = desc_pmi
+       st.write(desc_pmi)
+        
+       fig, ax = plt.subplots(figsize=(10,10))
+       sns.heatmap(desc_svd, annot=True, ax=ax)
+       st.pyplot()  
         
        # second order
        st.header("Second Co-occurance")
@@ -79,9 +87,20 @@ if index0 is not None:
        st.dataframe(df_vsm)
        
        #fitur vsm
+        
+       # feature collection
        st.subheader("Feature VSM Parameter")
        desc_vsm = df_vsm.describe()
-       st.dataframe(desc_vsm)
+       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       desc_vsm = desc_vsm.drop(options, axis=0)
+       desc_vsm = desc_vsm.T
+       hasil = desc_vsm
+       st.write(desc_vsm)
+        
+       fig, ax = plt.subplots(figsize=(10,10))
+       sns.heatmap(desc_svd, annot=True, ax=ax)
+       st.pyplot()  
+
     
        # third order
        st.header('Thrd Co-occurance')
@@ -103,8 +122,8 @@ if index0 is not None:
 
        # feature collection
        st.subheader('Feature  parameters')
-       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
        desc_svd = df_svd.describe()
+       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
        desc_svd = desc_svd.drop(options, axis=0)
        desc_svd = desc_svd.T
        hasil = desc_svd
