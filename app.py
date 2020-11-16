@@ -239,12 +239,14 @@ if index0 is not None:
             df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement)
             hasil = hasil_cosine
             st.write(df_cos)
-            fig = ff.create_distplot(hasil_cosine, id_requirement)
-            st.plotly_chart(fig, use_container_width=True)
             
+            #feature description
             desc_cos = df_cos.describe()
             st.write(desc_cos)
-            desc_cos = desc_cos.drop(['count', 'min', '25%', 'max'], axis=0)
+
+            # feature collection
+            options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count', 'min', '25%', 'max'])
+            desc_cos = desc_cos.drop(options, axis=0)
             st.write(desc_cos)
             
       # levenshtein
