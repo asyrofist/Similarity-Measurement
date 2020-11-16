@@ -437,6 +437,7 @@ if index0 is not None:
       KNN = st.sidebar.button('K Nearest Neighbor')
       GNB = st.sidebar.button('Gaussian Naive Bias')
       DT  = st.sidebar.button('Decission Tree')
+      Profile  = st.sidebar.button('Document Profilling')
       
       X_train, X_test, y_train, y_test = train_test_split(hasil, label_kalimat, test_size=size,random_state=109) # 70% training and 30% test
       st.subheader('User Train Test parameters')
@@ -456,7 +457,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           hasil_sns = sns.heatmap(results, annot=True)
-          st.dataframe(hasil_sns)
+          st.pyplot(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -473,7 +474,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           hasil_sns = sns.heatmap(results, annot=True)
-          st.dataframe(hasil_sns)
+          st.pyplot(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -490,7 +491,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           hasil_sns = sns.heatmap(results, annot=True)
-          st.dataframe(hasil_sns)
+          st.pyplot(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -507,7 +508,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           hasil_sns = sns.heatmap(results, annot=True)
-          st.dataframe(hasil_sns)
+          st.pyplot(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -524,6 +525,13 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           hasil_sns = sns.heatmap(results, annot=True)
-          st.dataframe(hasil_sns)
+          st.pyplot(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
+      
+      # Decission Tree
+      elif profile:
+          pr = ProfileReport(hasil, explorative=True)
+          st.title("Document Profiling")
+          st.write(hasil)
+          st_profile_report(hasil)        
