@@ -62,15 +62,7 @@ if index0 is not None:
        # feature collection
        st.subheader("Feature PMI Parameter")
        desc_pmi = df_jumlahpmi.describe()
-       opsi_pmi = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
-       desc_pmi = desc_pmi.drop(opsi_pmi, axis=0)
-       desc_pmi = desc_pmi.T
-       hasil = desc_pmi
        st.write(desc_pmi)
-        
-       fig, ax = plt.subplots(figsize=(10,10))
-       sns.heatmap(desc_pmi, annot=True, ax=ax)
-       st.pyplot()  
         
        # second order
        st.header("Second Co-occurance")
@@ -86,21 +78,14 @@ if index0 is not None:
        df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement)
        st.dataframe(df_vsm)
        
-       #fitur vsm
-        
        # feature collection
        st.subheader("Feature VSM Parameter")
        desc_vsm = df_vsm.describe()
-       opsi_vsm = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
-       desc_vsm = desc_vsm.drop(opsi_vsm, axis=0)
-       desc_vsm = desc_vsm.T
-       hasil = desc_vsm
        st.write(desc_vsm)
         
        fig, ax = plt.subplots(figsize=(10,10))
        sns.heatmap(desc_vsm, annot=True, ax=ax)
        st.pyplot()  
-
     
        # third order
        st.header('Thrd Co-occurance')
