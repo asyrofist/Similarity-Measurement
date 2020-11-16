@@ -111,7 +111,7 @@ if index0 is not None:
         
        fig, ax = plt.subplots(figsize=(10,10))
        sns.heatmap(desc_svd, annot=True, ax=ax)
-       st.pyplot()    `  
+       st.pyplot()  
        
     # Requirement Extraction
     elif extraction:
