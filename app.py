@@ -456,7 +456,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           hasil_sns = sns.heatmap(results, annot=True)
-          st.write(hasil_sns)
+          st.dataframe(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -473,7 +473,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           hasil_sns = sns.heatmap(results, annot=True)
-          st.write(hasil_sns)
+          st.dataframe(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -490,7 +490,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           hasil_sns = sns.heatmap(results, annot=True)
-          st.write(hasil_sns)
+          st.dataframe(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -507,7 +507,7 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           hasil_sns = sns.heatmap(results, annot=True)
-          st.write(hasil_sns)
+          st.dataframe(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
@@ -524,6 +524,6 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           hasil_sns = sns.heatmap(results, annot=True)
-          st.write(hasil_sns)
+          st.dataframe(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
