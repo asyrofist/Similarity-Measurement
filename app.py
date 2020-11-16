@@ -69,7 +69,7 @@ if index0 is not None:
        st.write(desc_pmi)
         
        fig, ax = plt.subplots(figsize=(10,10))
-       sns.heatmap(desc_svd, annot=True, ax=ax)
+       sns.heatmap(desc_pmi, annot=True, ax=ax)
        st.pyplot()  
         
        # second order
@@ -98,7 +98,7 @@ if index0 is not None:
        st.write(desc_vsm)
         
        fig, ax = plt.subplots(figsize=(10,10))
-       sns.heatmap(desc_svd, annot=True, ax=ax)
+       sns.heatmap(desc_vsm, annot=True, ax=ax)
        st.pyplot()  
 
     
