@@ -244,8 +244,8 @@ if index0 is not None:
             
             desc_cos = df_cos.describe()
             st.write(desc_cos)
-#             desc_cos = desc_cos.drop(['count'], axis=1)
-#             st.write(desc_cos)
+            desc_cos = desc_cos.drop(['count', 'min', '25%', 'max'], axis=1)
+            st.write(desc_cos)
             
       # levenshtein
       elif hasil == 'levenshtein':
