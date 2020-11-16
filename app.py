@@ -62,11 +62,10 @@ if index0 is not None:
        # feature collection
        st.subheader('Feature  parameters')
        desc_pmi = df_jumlahpmi.describe()
-       st.write(desc_pmi)
-        
-       fig, ax = plt.subplots(figsize=(10,10))
-       sns.heatmap(desc_pmi, annot=True, ax=ax)
-       st.pyplot()  
+       opsi_pmi = st.multiselect('What Feature PMI do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       desc_pmi = desc_pmi.drop(opsi_pmi, axis=0)
+       desc_pmi = desc_pmi.T
+       st.write(desc_vsm)
         
        # second order
        st.header("Second Co-occurance")
@@ -85,12 +84,11 @@ if index0 is not None:
        # feature collection
        st.subheader('Feature  parameters')
        desc_vsm = df_vsm.describe()
+       opsi_vsm = st.multiselect('What Feature VSM do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       desc_vsm = desc_vsm.drop(opsi_vsm, axis=0)
+       desc_vsm = desc_vsm.T
        st.write(desc_vsm)
-        
-       fig, ax = plt.subplots(figsize=(10,10))
-       sns.heatmap(desc_vsm, annot=True, ax=ax)
-       st.pyplot()  
-            
+                    
        # third order
        st.header('Thrd Co-occurance')
        st.sidebar.subheader("Model Parameter SVD")
@@ -112,11 +110,10 @@ if index0 is not None:
        # feature collection
        st.subheader('Feature  parameters')
        desc_svd = df_svd.describe()
+       opsi_svd = st.multiselect('What Feature SVD do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       desc_svd = desc_svd.drop(opsi_svd, axis=0)
+       desc_svd = desc_svd.T
        st.write(desc_svd)
-        
-       fig, ax = plt.subplots(figsize=(10,10))
-       sns.heatmap(desc_svd, annot=True, ax=ax)
-       st.pyplot()  
        
     # Requirement Extraction
     elif extraction:
