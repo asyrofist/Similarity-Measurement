@@ -65,7 +65,7 @@ if index0 is not None:
        opsi_pmi = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
        desc_pmi = desc_pmi.drop(opsi_pmi, axis=0)
        desc_pmi = desc_pmi.T
-       st.write(desc_vsm)
+       st.write(desc_pmi)
         
        fig, ax = plt.subplots(figsize=(10,10))
        sns.heatmap(desc_pmi, annot=True, ax=ax)
