@@ -165,7 +165,7 @@ if index0 is not None:
        # visusalisasi
        fig, ax = plt.subplots(figsize=(10,10))
        sns.heatmap(desc_cos, annot=True, ax=ax)
-       st.pyplot()    `  
+       st.pyplot() 
         
     # Ontology Construction
     elif ontology:
@@ -249,7 +249,7 @@ if index0 is not None:
        # Visualisasi
        fig, ax = plt.subplots(figsize=(10,10))
        sns.heatmap(desc_kmeans, annot=True, ax=ax)
-       st.pyplot()    `  
+       st.pyplot()
     
     # similarity
     elif similaritas:
