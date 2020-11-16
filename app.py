@@ -99,6 +99,19 @@ if index0 is not None:
        jumlah_kata = svd_model.components_
        df_svd = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(df_svd)
+
+       # feature collection
+       st.subheader('Feature  parameters')
+       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       desc_svd = df_svd.describe()
+       desc_svd = desc_svd.drop(options, axis=0)
+       desc_svd = desc_svd.T
+       hasil = desc_svd
+       st.write(desc_svd)
+        
+       fig, ax = plt.subplots(figsize=(10,10))
+       sns.heatmap(desc_svd, annot=True, ax=ax)
+       st.pyplot()    `  
        
     # Requirement Extraction
     elif extraction:
@@ -138,15 +151,22 @@ if index0 is not None:
        st.subheader('Cosine parameters') 
        hasil_cosine = cosine_similarity(order_centroids[0:], order_centroids)
        id_term = [("term {}".format(num)) for num in range(0, (X.shape[1]-1))]
-       cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement)
-       st.dataframe(cos)
-       
-       # Visualisasi
-       st.subheader('Feature Parameters')
-       st.dataframe(cos.describe())
-       fig = ff.create_distplot(hasil_cosine, id_requirement)
-       st.plotly_chart(fig, use_container_width=True)
-       
+       df_cos = pd.DataFrame(hasil_cosine, index=id_requirement, columns=id_requirement)
+       st.dataframe(df_cos)
+        
+       # feature collection
+       st.subheader('Feature  parameters')
+       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       desc_cos = df_cos.describe()
+       desc_cos = desc_cos.drop(options, axis=0)
+       desc_cos = desc_cos.T
+       st.write(desc_cos)
+
+       # visusalisasi
+       fig, ax = plt.subplots(figsize=(10,10))
+       sns.heatmap(desc_cos, annot=True, ax=ax)
+       st.pyplot()    `  
+        
     # Ontology Construction
     elif ontology:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
@@ -217,11 +237,19 @@ if index0 is not None:
        id_requirement = fulldataset(index0, index1)['ID']
        df_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
        st.dataframe(df_kmeans)
-    
+       
+       # feature collection
+       st.subheader('Feature  parameters')
+       options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       desc_kmeans = df_kmeans.describe()
+       desc_kmeans = desc_kmeans.drop(options, axis=0)
+       desc_kmeans = desc_kmeans.T
+       st.write(desc_kmeans)
+        
        # Visualisasi
-       st.subheader('Feature parameters')
-       st.dataframe(df_kmeans.describe())
-       st.line_chart(df_kmeans.describe())
+       fig, ax = plt.subplots(figsize=(10,10))
+       sns.heatmap(desc_kmeans, annot=True, ax=ax)
+       st.pyplot()    `  
     
     # similarity
     elif similaritas:
@@ -488,6 +516,9 @@ if index0 is not None:
           presisi = precision_score(y_test, y_pred, average='macro') 
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
+          fig, ax = plt.subplots(figsize=(10,10))
+          sns.heatmap(results, annot=True, ax=ax)
+          st.pyplot()
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
 
