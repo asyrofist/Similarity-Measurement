@@ -423,8 +423,7 @@ if index0 is not None:
             st.write(desc_sentmodel)
       
       # variable training testing
-#       kalimat = fulldataset(index0, index1)['kalimat']
-      kalimat = hasil
+      kalimat = fulldataset(index0, index1)['kalimat']
       le_Y = LabelEncoder()
       label_kalimat = le_Y.fit_transform(kalimat)
 #       label_statement = fulldataset(index0, index1)['label']
