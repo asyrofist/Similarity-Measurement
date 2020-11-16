@@ -237,7 +237,6 @@ if index0 is not None:
                 hasil_cosine.append(a)
             id_requirement = fulldataset(index0, index1)['ID']
             df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement)
-            hasil = hasil_cosine
             st.write(df_cos)
             
             #feature description
@@ -247,6 +246,7 @@ if index0 is not None:
             # feature collection
             options = st.multiselect('What Feature do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count', 'min', '25%', 'max'])
             desc_cos = desc_cos.drop(options, axis=0)
+            hasil = desc_cos
             st.write(desc_cos)
             
       # levenshtein
