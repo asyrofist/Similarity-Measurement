@@ -261,7 +261,7 @@ if index0 is not None:
                 b = [similarity_levenshtein(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
                 hasil_levenshtein.append(b)
             id_requirement = fulldataset(index0, index1)['ID']
-            df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement).describe()
+            df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement)
             hasil = hasil_levenshtein
             st.dataframe(df_lev)
             
@@ -285,7 +285,7 @@ if index0 is not None:
                 b = [similarity_jaccard(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
                 hasil_jaccard.append(b)
             id_requirement = fulldataset(index0, index1)['ID']
-            df_jaccard = pd.DataFrame(hasil_jaccard, index= id_requirement, columns= id_requirement).describe()
+            df_jaccard = pd.DataFrame(hasil_jaccard, index= id_requirement, columns= id_requirement)
             hasil = hasil_jaccard
             st.dataframe(df_jaccard)
             
@@ -307,7 +307,7 @@ if index0 is not None:
             vect = TfidfVectorizer()
             tfidf_matrix = vect.fit_transform(cleaned_text)
             id_requirement = fulldataset(index0, index1)['ID']
-            df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names()).describe()
+            df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names())
             hasil = tfidf_matrix.toarray()
             st.dataframe(df_tfidf)
             
@@ -331,7 +331,7 @@ if index0 is not None:
             matrix_tfidf = tfidf_matrix.toarray()
             vsm = cosine_similarity(matrix_tfidf[0:], matrix_tfidf)
             id_requirement = fulldataset(index0, index1)['ID']
-            df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement).describe()
+            df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement)
             hasil = vsm
             st.dataframe(df_vsm)
             
@@ -365,7 +365,7 @@ if index0 is not None:
             model = Doc2Vec.load('doc2vec_model')
             nilai_vektor = [model.infer_vector("sent{}".format(num)) for num in range(0, len(cleaned_text))]
             id_requirement = fulldataset(index0, index1)['ID']
-            df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)]).describe()
+            df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
             hasil = nilai_vektor
             st.dataframe(df_vektor)
             
@@ -406,7 +406,7 @@ if index0 is not None:
               a = [distance.euclidean(sent_vectorized[angka], sent_vectorized[num]) for num in range(0, len(cleaned_text))]
               hasil_sentencemodel.append(a)
             id_requirement = fulldataset(index0, index1)['ID']
-            df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement).describe()
+            df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement)
             hasil = hasil_sentencemodel
             st.dataframe(df_sentmodel)
             
@@ -423,7 +423,8 @@ if index0 is not None:
             st.write(desc_sentmodel)
       
       # variable training testing
-      kalimat = fulldataset(index0, index1)['kalimat']
+#       kalimat = fulldataset(index0, index1)['kalimat']
+      kalimat = hasil
       le_Y = LabelEncoder()
       label_kalimat = le_Y.fit_transform(kalimat)
 #       label_statement = fulldataset(index0, index1)['label']
