@@ -8,6 +8,7 @@ from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf,
 from function import KMeans, adjusted_rand_score, TruncatedSVD, TfidfVectorizer
 from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec, cosine_similarity
 from sklearn.preprocessing import LabelEncoder
+import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix 
 
@@ -455,8 +456,8 @@ if index0 is not None:
           presisi = precision_score(y_test, y_pred, average='macro') 
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
-          st.write(results)
-          hasil_sns = sns.heatmap(results, annot=True)
+          fig, ax = plt.subplots(figsize=(10,10))
+          hasil_sns = sns.heatmap(results, annot=True, ax=ax)
           st.pyplot(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
@@ -474,7 +475,8 @@ if index0 is not None:
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
           st.write(results)
-          hasil_sns = sns.heatmap(results, annot=True)
+          fig, ax = plt.subplots(figsize=(10,10))
+          hasil_sns = sns.heatmap(results, annot=True, ax=ax)
           st.pyplot(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
@@ -491,8 +493,8 @@ if index0 is not None:
           presisi = precision_score(y_test, y_pred, average='macro') 
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
-          st.write(results)
-          hasil_sns = sns.heatmap(results, annot=True)
+          fig, ax = plt.subplots(figsize=(10,10))
+          hasil_sns = sns.heatmap(results, annot=True, ax=ax)
           st.pyplot(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
@@ -509,8 +511,8 @@ if index0 is not None:
           presisi = precision_score(y_test, y_pred, average='macro') 
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
-          st.write(results)
-          hasil_sns = sns.heatmap(results, annot=True)
+          fig, ax = plt.subplots(figsize=(10,10))
+          hasil_sns = sns.heatmap(results, annot=True, ax=ax)
           st.pyplot(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
@@ -527,13 +529,13 @@ if index0 is not None:
           presisi = precision_score(y_test, y_pred, average='macro') 
           rekal = recall_score(y_test, y_pred, average='macro') 
           results = confusion_matrix(y_test, y_pred)
-          st.write(results)
-          hasil_sns = sns.heatmap(results, annot=True)
+          fig, ax = plt.subplots(figsize=(10,10))
+          hasil_sns = sns.heatmap(results, annot=True, ax=ax)
           st.pyplot(hasil_sns)
           chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
           st.bar_chart(chart_data)
       
-      # Decission Tree
+      # Document Profile
       elif Profile:
           pr = ProfileReport(hasil, explorative=True)
           st.title("Document Profiling")
