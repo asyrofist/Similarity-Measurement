@@ -84,7 +84,7 @@ if index0 is not None:
        # feature collection
        st.subheader('Feature  parameters')
        desc_vsm = df_vsm.describe()
-       opsi_vsm = st.multiselect('What Feature VSM do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count'])
+       opsi_vsm = st.multiselect('What Feature VSM do you remove?',['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],['count', 'min', '25%', 'max'])
        desc_vsm = desc_vsm.drop(opsi_vsm, axis=0)
        desc_vsm = desc_vsm.T
        st.write(desc_vsm)
