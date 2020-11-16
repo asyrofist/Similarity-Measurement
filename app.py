@@ -21,6 +21,13 @@ if index0 is not None:
     index1 = st.sidebar.selectbox( 'What Dataset you choose?', x1.sheet_names)
     st.subheader('Dataset parameters')
     st.write(fulldataset(index0, index1))
+    
+    kalimat = fulldataset(index0, index1)['kalimat']
+    st.write(kalimat)
+    
+    le_Y = LabelEncoder()
+    kalimat = le_Y.fit_transform(kalimat)
+    st.write(kalimat)
 
     # Nilai Pembanding
     st.sidebar.subheader('Measurement Parameter')
