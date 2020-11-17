@@ -117,12 +117,11 @@ if index0 is not None:
        desc_svd = desc_svd.T
        st.write(desc_svd)
     
-      # Document Profile
-      hasil = st.sidebar.selectbox('What Profile Measurement?', [dec_svd, desc_vsm, desc_pmi])  
-      profile = st.checkbox("Profile parameter")
-      if Profile:
+       # Document Profile
+       hasil = st.sidebar.selectbox('What Profile Measurement?', [dec_svd, desc_vsm, desc_pmi])  
+       profile = st.checkbox("Profile parameter")
+       if Profile:
           pr = ProfileReport(hasil, explorative=True)
-#           pr = ProfileReport(hasil, explorative=True)
           st.title("Document Profiling")
           st.write(hasil)
           st_profile_report(pr)        
