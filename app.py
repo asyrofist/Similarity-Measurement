@@ -69,6 +69,13 @@ if index0 is not None:
        desc_pmi = desc_pmi.T
        st.write(desc_pmi)
         
+       # Document Profile
+       profile = st.checkbox("Profile parameter")
+       if Profile:
+          pr = ProfileReport(a4, explorative=True)
+          st.title("Document Profiling")
+          st_profile_report(pr)
+        
        # second order
        st.header("Second Co-occurance")
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
@@ -90,6 +97,13 @@ if index0 is not None:
        desc_vsm = desc_vsm.drop(opsi_vsm, axis=0)
        desc_vsm = desc_vsm.T
        st.write(desc_vsm)
+    
+       # Document Profile
+       profile = st.checkbox("Profile parameter")
+       if Profile:
+          pr = ProfileReport(vsm, explorative=True)
+          st.title("Document Profiling")
+          st_profile_report(pr)
                     
        # third order
        st.header('Thrd Co-occurance')
@@ -118,12 +132,10 @@ if index0 is not None:
        st.write(desc_svd)
     
        # Document Profile
-       hasil = st.sidebar.selectbox('What Profile Measurement?', [dec_svd, desc_vsm, desc_pmi])  
        profile = st.checkbox("Profile parameter")
        if Profile:
-          pr = ProfileReport(hasil, explorative=True)
+          pr = ProfileReport(jumlah_kata, explorative=True)
           st.title("Document Profiling")
-          st.write(hasil)
           st_profile_report(pr)        
 
        
@@ -149,6 +161,14 @@ if index0 is not None:
        jumlah_kata = svd_model.components_
        tabel_lsa = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(tabel_lsa)
+    
+       # Document Profile
+       profile = st.checkbox("Profile parameter")
+       if Profile:
+          pr = ProfileReport(jumlah_kata, explorative=True)
+          st.title("Document Profiling")
+          st_profile_report(pr)
+
    
        # kMeans
        st.subheader('KMeans parameters')
@@ -160,6 +180,14 @@ if index0 is not None:
        terms = vectorizer.get_feature_names()
        tabel_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= terms)
        st.dataframe(tabel_kmeans)
+        
+       # Document Profile
+       profile = st.checkbox("Profile parameter")
+       if Profile:
+          pr = ProfileReport(order_centroids, explorative=True)
+          st.title("Document Profiling")
+          st_profile_report(pr)
+
            
        # cosine
        st.subheader('Cosine parameters') 
@@ -180,6 +208,14 @@ if index0 is not None:
        sns.heatmap(desc_cos, annot=True, ax=ax)
        st.pyplot() 
         
+       # Document Profile
+       profile = st.checkbox("Profile parameter")
+       if Profile:
+          pr = ProfileReport(hasil_cosine, explorative=True)
+          st.title("Document Profiling")
+          st_profile_report(pr)
+
+        
     # Ontology Construction
     elif ontology:
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
@@ -194,6 +230,14 @@ if index0 is not None:
        id_requirement = fulldataset(index0, index1)['ID']
        bow_matrix = pd.DataFrame(doc_array, index= id_requirement, columns= doc_feature)
        st.dataframe(bow_matrix)
+        
+       # Document Profile
+       profile = st.checkbox("Profile parameter")
+       if Profile:
+          pr = ProfileReport(doc_array, explorative=True)
+          st.title("Document Profiling")
+          st_profile_report(pr)
+
         
        # tfidf          
        doc_term_matrix_l2 = []
@@ -222,6 +266,14 @@ if index0 is not None:
        tfidf_matrix = pd.DataFrame(hasil_tfidf, index= id_requirement, columns= doc_feature)
        st.dataframe(tfidf_matrix)
         
+       # Document Profile
+       profile = st.checkbox("Profile parameter")
+       if Profile:
+          pr = ProfileReport(hasil_tfidf, explorative=True)
+          st.title("Document Profiling")
+          st_profile_report(pr)
+
+        
        #doc2vec
        st.subheader('doc2vec parameters')
        sentences = [word_tokenize(num) for num in cleaned_text]
@@ -240,6 +292,13 @@ if index0 is not None:
        id_requirement = fulldataset(index0, index1)['ID']
        df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
        st.dataframe(df_vektor)
+    
+       # Document Profile
+       profile = st.checkbox("Profile parameter")
+       if Profile:
+          pr = ProfileReport(nilai_vektor, explorative=True)
+          st.title("Document Profiling")
+          st_profile_report(pr)
         
        # Kmeans
        st.subheader('Kmeans parameters')
@@ -262,7 +321,14 @@ if index0 is not None:
        fig, ax = plt.subplots(figsize=(10,10))
        sns.heatmap(desc_kmeans, annot=True, ax=ax)
        st.pyplot()
-    
+       
+       # Document Profile
+       profile = st.checkbox("Profile parameter")
+       if Profile:
+          pr = ProfileReport(order_centroids, explorative=True)
+          st.title("Document Profiling")
+          st_profile_report(pr)
+       
     # similarity
     elif similaritas:
       text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
@@ -296,6 +362,13 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
+            
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if Profile:
+              pr = ProfileReport(hasil_cosine, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
 
             
       # levenshtein
@@ -307,7 +380,6 @@ if index0 is not None:
                 hasil_levenshtein.append(b)
             id_requirement = fulldataset(index0, index1)['ID']
             df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement)
-            hasil = hasil_levenshtein
             st.dataframe(df_lev)
             
             #feature description
@@ -323,7 +395,13 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
-
+            
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if Profile:
+              pr = ProfileReport(hasil_levenshtein, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
             
       # jaccard
       elif hasil == 'jaccard':
@@ -350,6 +428,13 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
+            
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if Profile:
+              pr = ProfileReport(hasil_jaccard, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
 
       # tfidf
       elif hasil == 'tfidf':
@@ -358,7 +443,6 @@ if index0 is not None:
             tfidf_matrix = vect.fit_transform(cleaned_text)
             id_requirement = fulldataset(index0, index1)['ID']
             df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names())
-            hasil = tfidf_matrix.toarray()
             st.dataframe(df_tfidf)
             
             #feature description
@@ -374,6 +458,13 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
+            
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if Profile:
+              pr = ProfileReport(tfidf_matrix.toarray(), explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
 
       # vsm
       elif hasil == 'vsm':
@@ -400,6 +491,13 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
+            
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if Profile:
+              pr = ProfileReport(vsm, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
 
 
       # doc2vec
@@ -421,7 +519,6 @@ if index0 is not None:
             nilai_vektor = [model.infer_vector("sent{}".format(num)) for num in range(0, len(cleaned_text))]
             id_requirement = fulldataset(index0, index1)['ID']
             df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
-            hasil = nilai_vektor
             st.dataframe(df_vektor)
             
             #feature description
@@ -437,7 +534,13 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
-
+            
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if Profile:
+              pr = ProfileReport(nilai_vektor, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
 
       # sentencemodel
       elif hasil == 'sentencemodel':
@@ -465,7 +568,6 @@ if index0 is not None:
               hasil_sentencemodel.append(a)
             id_requirement = fulldataset(index0, index1)['ID']
             df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement)
-            hasil = hasil_sentencemodel
             st.dataframe(df_sentmodel)
             
             #feature description
@@ -481,6 +583,14 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
+            
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if Profile:
+              pr = ProfileReport(hasil_sentencemodel, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
+
 
       # variable training testing
       kalimat         = fulldataset(index0, index1)['kalimat']
