@@ -68,14 +68,7 @@ if index0 is not None:
        desc_pmi = desc_pmi.drop(opsi_pmi, axis=0)
        desc_pmi = desc_pmi.T
        st.write(desc_pmi)
-        
-       # Document Profile
-       profile = st.checkbox("Profile parameter")
-       if profile:
-          pr = ProfileReport(a4, explorative=True)
-          st.title("Document Profiling")
-          st_profile_report(pr)
-        
+                
        # second order
        st.header("Second Co-occurance")
        text_to_clean = list(fulldataset(index0, index1)['Requirement Statement'])
@@ -97,14 +90,7 @@ if index0 is not None:
        desc_vsm = desc_vsm.drop(opsi_vsm, axis=0)
        desc_vsm = desc_vsm.T
        st.write(desc_vsm)
-    
-       # Document Profile
-       profile = st.checkbox("Profile parameter")
-       if profile:
-          pr = ProfileReport(vsm, explorative=True)
-          st.title("Document Profiling")
-          st_profile_report(pr)
-                    
+                        
        # third order
        st.header('Thrd Co-occurance')
        st.sidebar.subheader("Model Parameter SVD")
@@ -161,14 +147,6 @@ if index0 is not None:
        jumlah_kata = svd_model.components_
        tabel_lsa = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(tabel_lsa)
-    
-       # Document Profile
-       profile = st.checkbox("Profile parameter")
-       if profile:
-          pr = ProfileReport(jumlah_kata, explorative=True)
-          st.title("Document Profiling")
-          st_profile_report(pr)
-
    
        # kMeans
        st.subheader('KMeans parameters')
@@ -181,14 +159,6 @@ if index0 is not None:
        tabel_kmeans = pd.DataFrame(order_centroids, index= id_requirement, columns= terms)
        st.dataframe(tabel_kmeans)
         
-       # Document Profile
-       profile = st.checkbox("Profile parameter")
-       if profile:
-          pr = ProfileReport(order_centroids, explorative=True)
-          st.title("Document Profiling")
-          st_profile_report(pr)
-
-           
        # cosine
        st.subheader('Cosine parameters') 
        hasil_cosine = cosine_similarity(order_centroids[0:], order_centroids)
@@ -230,15 +200,7 @@ if index0 is not None:
        id_requirement = fulldataset(index0, index1)['ID']
        bow_matrix = pd.DataFrame(doc_array, index= id_requirement, columns= doc_feature)
        st.dataframe(bow_matrix)
-        
-       # Document Profile
-       profile = st.checkbox("Profile parameter")
-       if profile:
-          pr = ProfileReport(doc_array, explorative=True)
-          st.title("Document Profiling")
-          st_profile_report(pr)
-
-        
+                
        # tfidf          
        doc_term_matrix_l2 = []
        # document l2 normalizaer
@@ -265,15 +227,7 @@ if index0 is not None:
        st.subheader('TFIDF parameters')
        tfidf_matrix = pd.DataFrame(hasil_tfidf, index= id_requirement, columns= doc_feature)
        st.dataframe(tfidf_matrix)
-        
-       # Document Profile
-       profile = st.checkbox("Profile parameter")
-       if profile:
-          pr = ProfileReport(hasil_tfidf, explorative=True)
-          st.title("Document Profiling")
-          st_profile_report(pr)
-
-        
+                
        #doc2vec
        st.subheader('doc2vec parameters')
        sentences = [word_tokenize(num) for num in cleaned_text]
@@ -292,14 +246,7 @@ if index0 is not None:
        id_requirement = fulldataset(index0, index1)['ID']
        df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
        st.dataframe(df_vektor)
-    
-       # Document Profile
-       profile = st.checkbox("Profile parameter")
-       if profile:
-          pr = ProfileReport(nilai_vektor, explorative=True)
-          st.title("Document Profiling")
-          st_profile_report(pr)
-        
+            
        # Kmeans
        st.subheader('Kmeans parameters')
        true_k = len(nilai_vektor)
