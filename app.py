@@ -46,7 +46,10 @@ if index0 is not None:
           a2.append(a1)
        tabel_pmi = pd.DataFrame(a2, index= id_requirement, columns= id_requirement)
        st.dataframe(tabel_pmi)
-        
+
+       st.subheader("Document Profiling")
+       profile1 = st.checkbox("Profile PMI parameter")
+ 
        #pmi jumlah 
        st.subheader("PMI Sum Parameter")
        a4 = []
@@ -77,6 +80,9 @@ if index0 is not None:
        id_requirement = fulldataset(index0, index1)['ID']
        df_vsm = pd.DataFrame(vsm, index=id_requirement,  columns = id_requirement)
        st.dataframe(df_vsm)
+    
+       st.subheader("Document Profiling")
+       profile2 = st.checkbox("Profile VSM parameter")
        
        # feature collection
        st.subheader('Feature  parameters')
@@ -103,6 +109,10 @@ if index0 is not None:
        jumlah_kata = svd_model.components_
        df_svd = pd.DataFrame(jumlah_kata, index= id_requirement, columns= fitur_id)
        st.dataframe(df_svd)
+        
+       st.subheader("Document Profiling")
+       profile3 = st.checkbox("Profile SVD parameter")
+
 
        # feature collection
        st.subheader('Feature  parameters')
@@ -113,12 +123,18 @@ if index0 is not None:
        st.write(desc_svd)
     
        # Document Profile
-       st.subheader("Document Profiling")
-       profile = st.checkbox("Profile parameter")
-       if profile:
+       if profile1:
+          pr = ProfileReport(df_pmi, explorative=True)
+          pr.to_file("profile_report.html")
+          st_profile_report(pr)
+       if profile2:
+          pr = ProfileReport(df_vsm, explorative=True)
+          pr.to_file("profile_report.html")
+          st_profile_report(pr)
+      if profile3:
           pr = ProfileReport(df_svd, explorative=True)
-          st_profile_report(pr)        
-
+          pr.to_file("profile_report.html")
+          st_profile_report(pr)
        
     # Requirement Extraction
     elif extraction:
@@ -178,6 +194,7 @@ if index0 is not None:
        profile = st.checkbox("Profile parameter")
        if profile:
           pr = ProfileReport(df_cos, explorative=True)
+          pr.to_file("profile_report.html")
           st_profile_report(pr)
 
         
@@ -269,6 +286,7 @@ if index0 is not None:
        profile = st.checkbox("Profile parameter")
        if profile:
           pr = ProfileReport(df_kmeans, explorative=True)
+          pr.to_file("profile_report.html")
           st_profile_report(pr)
        
     # similarity
@@ -310,6 +328,7 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_cos, explorative=True)
+              pr.to_file("profile_report.html")
               st_profile_report(pr)
 
             
@@ -343,6 +362,7 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_lev, explorative=True)
+              pr.to_file("profile_report.html")
               st_profile_report(pr)
 
                         
@@ -377,6 +397,7 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_jaccard, explorative=True)
+              pr.to_file("profile_report.html")
               st_profile_report(pr)
 
       # tfidf
@@ -407,6 +428,7 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_tfidf, explorative=True)
+              pr.to_file("profile_report.html")
               st_profile_report(pr)
 
             
@@ -441,6 +463,7 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_vsm, explorative=True)
+              pr.to_file("profile_report.html")
               st_profile_report(pr)
 
 
@@ -484,6 +507,7 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_vektor, explorative=True)
+              pr.to_file("profile_report.html")
               st_profile_report(pr)
 
       # sentencemodel
@@ -533,6 +557,7 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_sentmodel, explorative=True)
+              pr.to_file("profile_report.html")
               st_profile_report(pr)
 
       
@@ -652,6 +677,7 @@ if index0 is not None:
           # Document Profile
           elif Profile:
               pr = ProfileReport(hasil, explorative=True)
+              pr.to_file("profile_report.html")
               st.title("Document Profiling")
               st.write(hasil)
               st_profile_report(pr)        
