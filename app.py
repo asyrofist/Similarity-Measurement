@@ -124,7 +124,7 @@ if index0 is not None:
     
        # Document Profile
        if profile1:
-          pr = ProfileReport(df_pmi, explorative=True)
+          pr = ProfileReport(df_jumlahpmi, explorative=True)
           pr.to_file("profile_report.html")
           st_profile_report(pr)
        if profile2:
