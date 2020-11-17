@@ -1,3 +1,4 @@
+import nltk
 from function import nltk, re, math, string, st, alt
 from function import word_tokenize, train_test_split
 from function import classification_report, accuracy_score, precision_score, recall_score
