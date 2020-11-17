@@ -4,7 +4,6 @@ import collections
 import re
 import pandas as pd
 import numpy as np
-# import scipy.sparse
 import string #allows for format()
 import plotly.figure_factory as ff
 import streamlit as st
