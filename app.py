@@ -116,6 +116,17 @@ if index0 is not None:
        desc_svd = desc_svd.drop(opsi_svd, axis=0)
        desc_svd = desc_svd.T
        st.write(desc_svd)
+    
+      # Document Profile
+      hasil = st.sidebar.selectbox('What Profile Measurement?', [dec_svd, desc_vsm, desc_pmi])  
+      profile = st.checkbox("Profile parameter")
+      if Profile:
+          pr = ProfileReport(hasil, explorative=True)
+#           pr = ProfileReport(hasil, explorative=True)
+          st.title("Document Profiling")
+          st.write(hasil)
+          st_profile_report(pr)        
+
        
     # Requirement Extraction
     elif extraction:
@@ -490,7 +501,7 @@ if index0 is not None:
       KNN = st.sidebar.button('K Nearest Neighbor')
       GNB = st.sidebar.button('Gaussian Naive Bias')
       DT  = st.sidebar.button('Decission Tree')
-      Profile  = st.sidebar.button('Document Profilling')
+      Profile  = st.checkbox('Document Profilling')
         
       # support vector machine
       if SVM:
