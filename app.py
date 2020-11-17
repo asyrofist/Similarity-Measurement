@@ -1,6 +1,12 @@
 import nltk
-from function import nltk, re, math, string, st, alt
-from function import word_tokenize, train_test_split
+from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize 
+from nltk.stem.wordnet import WordNetLemmatizer
+from nltk.collocations import BigramCollocationFinder, BigramAssocMeasures
+
+from function import re, math, string, st, alt
+from function import train_test_split
 from function import classification_report, accuracy_score, precision_score, recall_score
 from function import neighbors, tree, svm, GaussianNB, RandomForestClassifier, CountVectorizer, PCA
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, sent_PCA
