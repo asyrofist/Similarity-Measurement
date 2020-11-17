@@ -131,7 +131,7 @@ if index0 is not None:
           pr = ProfileReport(df_vsm, explorative=True)
           pr.to_file("profile_report.html")
           st_profile_report(pr)
-      if profile3:
+       if profile3:
           pr = ProfileReport(df_svd, explorative=True)
           pr.to_file("profile_report.html")
           st_profile_report(pr)
