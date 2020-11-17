@@ -1,13 +1,12 @@
-import math 
-import statistics 
-import collections 
-import re
+import nltk, math, statistics
+import re, collections
 import pandas as pd
 import numpy as np
 import string #allows for format()
 import streamlit as st
 import altair as alt
-import nltk 
+import matplotlib.pyplot as plt
+import seaborn as sns
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize 
@@ -26,12 +25,16 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.decomposition import TruncatedSVD
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import confusion_matrix 
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
 from gensim.models import Word2Vec
 from scipy import spatial
 from scipy.spatial import distance
 from multiprocessing import Pool
+from pandas_profiling import ProfileReport
+from streamlit_pandas_profiling import st_profile_report
 
 # download nltk
 nltk.download('stopwords')
