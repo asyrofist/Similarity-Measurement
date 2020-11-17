@@ -303,13 +303,6 @@ if index0 is not None:
             df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement)
             st.write(df_cos)
                        
-            # Document Profile
-            profile = st.checkbox("Profile parameter")
-            if profile:
-              pr = ProfileReport(df_cos, explorative=True)
-              st.title("Document Profiling")
-              st_profile_report(pr)
-
             #feature description
             desc_cos = df_cos.describe()
             st.write(desc_cos)
@@ -324,6 +317,14 @@ if index0 is not None:
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
             
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if profile:
+              pr = ProfileReport(df_cos, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
+
+            
       # levenshtein
       elif hasil == 'levenshtein':
             st.subheader('Similarity levenshtein parameters')
@@ -334,14 +335,7 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement)
             st.dataframe(df_lev)
-            
-            # Document Profile
-            profile = st.checkbox("Profile parameter")
-            if profile:
-              pr = ProfileReport(df_lev, explorative=True)
-              st.title("Document Profiling")
-              st_profile_report(pr)
-            
+                        
             #feature description
             desc_lev = df_lev.describe()
             st.write(desc_lev)
@@ -355,6 +349,14 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
+
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if profile:
+              pr = ProfileReport(df_lev, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
+
                         
       # jaccard
       elif hasil == 'jaccard':
@@ -397,14 +399,7 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names())
             st.dataframe(df_tfidf)
-            
-            # Document Profile
-            profile = st.checkbox("Profile parameter")
-            if profile:
-              pr = ProfileReport(df_tfidf, explorative=True)
-              st.title("Document Profiling")
-              st_profile_report(pr)
-            
+                        
             #feature description
             desc_tfidf = df_tfidf.describe()
             st.write(desc_tfidf)
@@ -418,6 +413,14 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
+            
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if profile:
+              pr = ProfileReport(df_tfidf, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
+
             
       # vsm
       elif hasil == 'vsm':
@@ -473,14 +476,7 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
             st.dataframe(df_vektor)
-            
-            # Document Profile
-            profile = st.checkbox("Profile parameter")
-            if profile:
-              pr = ProfileReport(df_vektor, explorative=True)
-              st.title("Document Profiling")
-              st_profile_report(pr)
-            
+                        
             #feature description
             desc_vektor = df_vektor.describe()
             st.write(desc_vektor)
@@ -495,6 +491,12 @@ if index0 is not None:
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
             
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if profile:
+              pr = ProfileReport(df_vektor, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
 
       # sentencemodel
       elif hasil == 'sentencemodel':
@@ -544,120 +546,122 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
-
-      # variable training testing
-      kalimat         = fulldataset(index0, index1)['kalimat']
-      le_Y            = LabelEncoder()
-      label_kalimat   = le_Y.fit_transform(kalimat)
-      size            = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
-       
-      X_train, X_test, y_train, y_test = train_test_split(hasil, label_kalimat, test_size=size,random_state=109) # 70% training and 30% test
-      st.subheader('User Train Test parameters')
-      traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
-      st.write(traintest)      
       
-      # classification
-      st.sidebar.header('Classification Parameters')
-      SVM = st.sidebar.button('Support Vector Machine')
-      RFC = st.sidebar.button('Random Forest Classifier')
-      KNN = st.sidebar.button('K Nearest Neighbor')
-      GNB = st.sidebar.button('Gaussian Naive Bias')
-      DT  = st.sidebar.button('Decission Tree')
-      Profile  = st.checkbox('Document Profilling')
-        
-      # support vector machine
-      if SVM:
-          supportvectormachine = svm.SVC(decision_function_shape='ovo')
-          supportvectormachine.fit(X_train, y_train)
-          y_pred = supportvectormachine.predict(X_test)
-          st.subheader('Classification based on SVM')
-          st.write(classification_report(y_test, y_pred))
-          st.subheader("cetak Prediksi setiap classifier")
-          akurasi = accuracy_score(y_test, y_pred) 
-          presisi = precision_score(y_test, y_pred, average='macro') 
-          rekal = recall_score(y_test, y_pred, average='macro') 
-          results = confusion_matrix(y_test, y_pred)
-          fig, ax = plt.subplots(figsize=(10,10))
-          sns.heatmap(results, annot=True, ax=ax)
-          st.pyplot()
-          chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
-          st.bar_chart(chart_data)
+      traintest = st.checkbox("Train/Test Data")
+      if traintest:
+          # variable training testing
+          kalimat         = fulldataset(index0, index1)['kalimat']
+          le_Y            = LabelEncoder()
+          label_kalimat   = le_Y.fit_transform(kalimat)
+          size            = st.sidebar.slider('test_size', 0.1, 0.6, 0.3)
 
-      # random forest classifier
-      elif RFC:
-          RFC = RandomForestClassifier()
-          RFC.fit(X_train, y_train)
-          y_pred = RFC.predict(X_test)
-          st.subheader('Classification based on RFC')
-          st.write(classification_report(y_test, y_pred))
-          st.subheader("cetak Prediksi setiap classifier")
-          akurasi = accuracy_score(y_test, y_pred) 
-          presisi = precision_score(y_test, y_pred, average='macro') 
-          rekal = recall_score(y_test, y_pred, average='macro') 
-          results = confusion_matrix(y_test, y_pred)
-          fig, ax = plt.subplots(figsize=(10,10))
-          sns.heatmap(results, annot=True, ax=ax)
-          st.pyplot()
-          chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
-          st.bar_chart(chart_data)
+          X_train, X_test, y_train, y_test = train_test_split(hasil, label_kalimat, test_size=size,random_state=109) # 70% training and 30% test
+          st.subheader('User Train Test parameters')
+          traintest = pd.DataFrame([y_train, y_test], index=['TRAIN', 'TEST'])
+          st.write(traintest)      
 
-      # K-Nearset Neighbor
-      elif KNN:
-          kNN = neighbors.KNeighborsClassifier(n_neighbors = 10, weights='distance')
-          kNN.fit(X_train, y_train)
-          y_pred = kNN.predict(X_test)
-          st.subheader('Classification based on KNN')
-          st.write(classification_report(y_test, y_pred))
-          st.subheader("cetak Prediksi setiap classifier")
-          akurasi = accuracy_score(y_test, y_pred) 
-          presisi = precision_score(y_test, y_pred, average='macro') 
-          rekal = recall_score(y_test, y_pred, average='macro') 
-          results = confusion_matrix(y_test, y_pred)
-          fig, ax = plt.subplots(figsize=(10,10))
-          sns.heatmap(results, annot=True, ax=ax)
-          st.pyplot()
-          chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
-          st.bar_chart(chart_data)
+          # classification
+          st.sidebar.header('Classification Parameters')
+          SVM = st.sidebar.button('Support Vector Machine')
+          RFC = st.sidebar.button('Random Forest Classifier')
+          KNN = st.sidebar.button('K Nearest Neighbor')
+          GNB = st.sidebar.button('Gaussian Naive Bias')
+          DT  = st.sidebar.button('Decission Tree')
+          Profile  = st.checkbox('Document Profilling')
 
-      # Gaussian Naive Bias
-      elif GNB:
-          GNB = GaussianNB()
-          GNB.fit(X_train, y_train) 
-          y_pred = GNB.predict(X_test)
-          st.subheader('Classification based on GNB')
-          st.write(classification_report(y_test, y_pred))
-          st.subheader("cetak Prediksi setiap classifier")
-          akurasi = accuracy_score(y_test, y_pred) 
-          presisi = precision_score(y_test, y_pred, average='macro') 
-          rekal = recall_score(y_test, y_pred, average='macro') 
-          results = confusion_matrix(y_test, y_pred)
-          fig, ax = plt.subplots(figsize=(10,10))
-          sns.heatmap(results, annot=True, ax=ax)
-          st.pyplot()
-          chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
-          st.bar_chart(chart_data)
+          # support vector machine
+          if SVM:
+              supportvectormachine = svm.SVC(decision_function_shape='ovo')
+              supportvectormachine.fit(X_train, y_train)
+              y_pred = supportvectormachine.predict(X_test)
+              st.subheader('Classification based on SVM')
+              st.write(classification_report(y_test, y_pred))
+              st.subheader("cetak Prediksi setiap classifier")
+              akurasi = accuracy_score(y_test, y_pred) 
+              presisi = precision_score(y_test, y_pred, average='macro') 
+              rekal = recall_score(y_test, y_pred, average='macro') 
+              results = confusion_matrix(y_test, y_pred)
+              fig, ax = plt.subplots(figsize=(10,10))
+              sns.heatmap(results, annot=True, ax=ax)
+              st.pyplot()
+              chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+              st.bar_chart(chart_data)
 
-      # Decission Tree
-      elif DT:
-          DT = tree.DecisionTreeClassifier()
-          DT.fit(X_train, y_train)
-          y_pred = DT.predict(X_test)
-          st.subheader('Classification based on DT')
-          st.write(classification_report(y_test, y_pred))
-          st.subheader("cetak Prediksi setiap classifier")
-          akurasi = accuracy_score(y_test, y_pred) 
-          presisi = precision_score(y_test, y_pred, average='macro') 
-          rekal = recall_score(y_test, y_pred, average='macro') 
-          results = confusion_matrix(y_test, y_pred)
-          fig, ax = plt.subplots(figsize=(10,10))
-          sns.heatmap(results, annot=True, ax=ax)
-          st.pyplot()
-          chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
-          st.bar_chart(chart_data)
-      
-      # Document Profile
-      elif Profile:
-          pr = ProfileReport(hasil, explorative=True)
-          st.title("Document Profiling")
-          st.write(hasil)
-          st_profile_report(pr)        
+          # random forest classifier
+          elif RFC:
+              RFC = RandomForestClassifier()
+              RFC.fit(X_train, y_train)
+              y_pred = RFC.predict(X_test)
+              st.subheader('Classification based on RFC')
+              st.write(classification_report(y_test, y_pred))
+              st.subheader("cetak Prediksi setiap classifier")
+              akurasi = accuracy_score(y_test, y_pred) 
+              presisi = precision_score(y_test, y_pred, average='macro') 
+              rekal = recall_score(y_test, y_pred, average='macro') 
+              results = confusion_matrix(y_test, y_pred)
+              fig, ax = plt.subplots(figsize=(10,10))
+              sns.heatmap(results, annot=True, ax=ax)
+              st.pyplot()
+              chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+              st.bar_chart(chart_data)
+
+          # K-Nearset Neighbor
+          elif KNN:
+              kNN = neighbors.KNeighborsClassifier(n_neighbors = 10, weights='distance')
+              kNN.fit(X_train, y_train)
+              y_pred = kNN.predict(X_test)
+              st.subheader('Classification based on KNN')
+              st.write(classification_report(y_test, y_pred))
+              st.subheader("cetak Prediksi setiap classifier")
+              akurasi = accuracy_score(y_test, y_pred) 
+              presisi = precision_score(y_test, y_pred, average='macro') 
+              rekal = recall_score(y_test, y_pred, average='macro') 
+              results = confusion_matrix(y_test, y_pred)
+              fig, ax = plt.subplots(figsize=(10,10))
+              sns.heatmap(results, annot=True, ax=ax)
+              st.pyplot()
+              chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+              st.bar_chart(chart_data)
+
+          # Gaussian Naive Bias
+          elif GNB:
+              GNB = GaussianNB()
+              GNB.fit(X_train, y_train) 
+              y_pred = GNB.predict(X_test)
+              st.subheader('Classification based on GNB')
+              st.write(classification_report(y_test, y_pred))
+              st.subheader("cetak Prediksi setiap classifier")
+              akurasi = accuracy_score(y_test, y_pred) 
+              presisi = precision_score(y_test, y_pred, average='macro') 
+              rekal = recall_score(y_test, y_pred, average='macro') 
+              results = confusion_matrix(y_test, y_pred)
+              fig, ax = plt.subplots(figsize=(10,10))
+              sns.heatmap(results, annot=True, ax=ax)
+              st.pyplot()
+              chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+              st.bar_chart(chart_data)
+
+          # Decission Tree
+          elif DT:
+              DT = tree.DecisionTreeClassifier()
+              DT.fit(X_train, y_train)
+              y_pred = DT.predict(X_test)
+              st.subheader('Classification based on DT')
+              st.write(classification_report(y_test, y_pred))
+              st.subheader("cetak Prediksi setiap classifier")
+              akurasi = accuracy_score(y_test, y_pred) 
+              presisi = precision_score(y_test, y_pred, average='macro') 
+              rekal = recall_score(y_test, y_pred, average='macro') 
+              results = confusion_matrix(y_test, y_pred)
+              fig, ax = plt.subplots(figsize=(10,10))
+              sns.heatmap(results, annot=True, ax=ax)
+              st.pyplot()
+              chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+              st.bar_chart(chart_data)
+
+          # Document Profile
+          elif Profile:
+              pr = ProfileReport(hasil, explorative=True)
+              st.title("Document Profiling")
+              st.write(hasil)
+              st_profile_report(pr)        
