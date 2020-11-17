@@ -1,12 +1,5 @@
-import nltk
-from nltk.stem import PorterStemmer
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize 
-from nltk.stem.wordnet import WordNetLemmatizer
-from nltk.collocations import BigramCollocationFinder, BigramAssocMeasures
-
-from function import re, math, string, st, alt
-from function import train_test_split
+# import
+from function import nltk, re, math, string, st, alt, train_test_split
 from function import classification_report, accuracy_score, precision_score, recall_score
 from function import neighbors, tree, svm, GaussianNB, RandomForestClassifier, CountVectorizer, PCA
 from function import preprocessing, fulldataset, apply_cleaning_function_to_list, pd, np, sent_PCA
@@ -14,12 +7,7 @@ from function import similarity_cosine, similarity_levenshtein, similarity_jacca
 from function import l2_normalizer, build_lexicon, freq, numDocsContaining, idf, build_idf_matrix, pmi_measurement, pmi_jumlah, co_occurrence
 from function import KMeans, adjusted_rand_score, TruncatedSVD, TfidfVectorizer
 from function import spatial, Pool, Word2Vec, distance, TaggedDocument, Doc2Vec, cosine_similarity
-from sklearn.preprocessing import LabelEncoder
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.metrics import confusion_matrix 
-from pandas_profiling import ProfileReport
-from streamlit_pandas_profiling import st_profile_report
+from function import LabelEncoder, plt, sns, confusion_matrix, ProfileReport, st_profile_report
 
 st.write("""
 # Requirement Dependency Measurements
