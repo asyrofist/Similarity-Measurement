@@ -46,10 +46,7 @@ if index0 is not None:
           a2.append(a1)
        tabel_pmi = pd.DataFrame(a2, index= id_requirement, columns= id_requirement)
        st.dataframe(tabel_pmi)
-
-       st.subheader("Document Profiling")
-       profile1 = st.checkbox("Profile PMI parameter")
- 
+        
        #pmi jumlah 
        st.subheader("PMI Sum Parameter")
        a4 = []
@@ -59,6 +56,9 @@ if index0 is not None:
        df_jumlahpmi = pd.DataFrame(a4, index= id_requirement, columns= id_requirement)
        st.dataframe(df_jumlahpmi)
        
+       st.subheader("Document Profiling")
+       profile1 = st.checkbox("Profile PMI parameter")
+
        # feature collection
        st.subheader('Feature  parameters')
        desc_pmi = df_jumlahpmi.describe()
@@ -125,15 +125,12 @@ if index0 is not None:
        # Document Profile
        if profile1:
           pr = ProfileReport(df_jumlahpmi, explorative=True)
-          pr.to_file("profile_report.html")
           st_profile_report(pr)
        elif profile2:
           pr = ProfileReport(df_vsm, explorative=True)
-          pr.to_file("profile_report.html")
           st_profile_report(pr)
        elif profile3:
           pr = ProfileReport(df_svd, explorative=True)
-          pr.to_file("profile_report.html")
           st_profile_report(pr)
        
     # Requirement Extraction
@@ -194,9 +191,7 @@ if index0 is not None:
        profile = st.checkbox("Profile parameter")
        if profile:
           pr = ProfileReport(df_cos, explorative=True)
-          pr.to_file("profile_report.html")
           st_profile_report(pr)
-
         
     # Ontology Construction
     elif ontology:
@@ -286,7 +281,6 @@ if index0 is not None:
        profile = st.checkbox("Profile parameter")
        if profile:
           pr = ProfileReport(df_kmeans, explorative=True)
-          pr.to_file("profile_report.html")
           st_profile_report(pr)
        
     # similarity
@@ -362,9 +356,7 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_lev, explorative=True)
-              pr.to_file("profile_report.html")
               st_profile_report(pr)
-
                         
       # jaccard
       elif hasil == 'jaccard':
@@ -397,7 +389,6 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_jaccard, explorative=True)
-              pr.to_file("profile_report.html")
               st_profile_report(pr)
 
       # tfidf
@@ -463,7 +454,6 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_vsm, explorative=True)
-              pr.to_file("profile_report.html")
               st_profile_report(pr)
 
 
@@ -507,7 +497,6 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_vektor, explorative=True)
-              pr.to_file("profile_report.html")
               st_profile_report(pr)
 
       # sentencemodel
@@ -557,7 +546,6 @@ if index0 is not None:
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_sentmodel, explorative=True)
-              pr.to_file("profile_report.html")
               st_profile_report(pr)
 
       
@@ -677,7 +665,6 @@ if index0 is not None:
           # Document Profile
           elif Profile:
               pr = ProfileReport(hasil, explorative=True)
-              pr.to_file("profile_report.html")
               st.title("Document Profiling")
               st.write(hasil)
               st_profile_report(pr)        
