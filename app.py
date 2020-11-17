@@ -120,7 +120,7 @@ if index0 is not None:
        # Document Profile
        profile = st.checkbox("Profile parameter")
        if profile:
-          pr = ProfileReport(jumlah_kata, explorative=True)
+          pr = ProfileReport(df_svd, explorative=True)
           st.title("Document Profiling")
           st_profile_report(pr)        
 
@@ -181,7 +181,7 @@ if index0 is not None:
        # Document Profile
        profile = st.checkbox("Profile parameter")
        if profile:
-          pr = ProfileReport(hasil_cosine, explorative=True)
+          pr = ProfileReport(df_cos, explorative=True)
           st.title("Document Profiling")
           st_profile_report(pr)
 
@@ -272,7 +272,7 @@ if index0 is not None:
        # Document Profile
        profile = st.checkbox("Profile parameter")
        if profile:
-          pr = ProfileReport(order_centroids, explorative=True)
+          pr = ProfileReport(df_kmeans, explorative=True)
           st.title("Document Profiling")
           st_profile_report(pr)
        
@@ -313,7 +313,7 @@ if index0 is not None:
             # Document Profile
             profile = st.checkbox("Profile parameter")
             if profile:
-              pr = ProfileReport(hasil_cosine, explorative=True)
+              pr = ProfileReport(df_cos, explorative=True)
               st.title("Document Profiling")
               st_profile_report(pr)
 
@@ -346,7 +346,7 @@ if index0 is not None:
             # Document Profile
             profile = st.checkbox("Profile parameter")
             if profile:
-              pr = ProfileReport(hasil_levenshtein, explorative=True)
+              pr = ProfileReport(df_lev, explorative=True)
               st.title("Document Profiling")
               st_profile_report(pr)
             
@@ -379,7 +379,7 @@ if index0 is not None:
             # Document Profile
             profile = st.checkbox("Profile parameter")
             if profile:
-              pr = ProfileReport(hasil_jaccard, explorative=True)
+              pr = ProfileReport(df_jaccard, explorative=True)
               st.title("Document Profiling")
               st_profile_report(pr)
 
@@ -409,7 +409,7 @@ if index0 is not None:
             # Document Profile
             profile = st.checkbox("Profile parameter")
             if profile:
-              pr = ProfileReport(tfidf_matrix.toarray(), explorative=True)
+              pr = ProfileReport(df_tfidf, explorative=True)
               st.title("Document Profiling")
               st_profile_report(pr)
 
@@ -442,7 +442,7 @@ if index0 is not None:
             # Document Profile
             profile = st.checkbox("Profile parameter")
             if profile:
-              pr = ProfileReport(vsm, explorative=True)
+              pr = ProfileReport(df_vsm, explorative=True)
               st.title("Document Profiling")
               st_profile_report(pr)
 
@@ -485,7 +485,7 @@ if index0 is not None:
             # Document Profile
             profile = st.checkbox("Profile parameter")
             if profile:
-              pr = ProfileReport(nilai_vektor, explorative=True)
+              pr = ProfileReport(df_vektor, explorative=True)
               st.title("Document Profiling")
               st_profile_report(pr)
 
@@ -534,7 +534,7 @@ if index0 is not None:
             # Document Profile
             profile = st.checkbox("Profile parameter")
             if profile:
-              pr = ProfileReport(hasil_sentencemodel, explorative=True)
+              pr = ProfileReport(df_sentmodel, explorative=True)
               st.title("Document Profiling")
               st_profile_report(pr)
 
