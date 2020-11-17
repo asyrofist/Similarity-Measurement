@@ -295,7 +295,14 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_cos = pd.DataFrame(hasil_cosine, index= id_requirement, columns= id_requirement)
             st.write(df_cos)
-            
+                       
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if profile:
+              pr = ProfileReport(df_cos, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
+
             #feature description
             desc_cos = df_cos.describe()
             st.write(desc_cos)
@@ -310,14 +317,6 @@ if index0 is not None:
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
             
-            # Document Profile
-            profile = st.checkbox("Profile parameter")
-            if profile:
-              pr = ProfileReport(df_cos, explorative=True)
-              st.title("Document Profiling")
-              st_profile_report(pr)
-
-            
       # levenshtein
       elif hasil == 'levenshtein':
             st.subheader('Similarity levenshtein parameters')
@@ -328,6 +327,13 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_lev = pd.DataFrame(hasil_levenshtein, index= id_requirement, columns= id_requirement)
             st.dataframe(df_lev)
+            
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if profile:
+              pr = ProfileReport(df_lev, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
             
             #feature description
             desc_lev = df_lev.describe()
@@ -342,14 +348,7 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
-            
-            # Document Profile
-            profile = st.checkbox("Profile parameter")
-            if profile:
-              pr = ProfileReport(df_lev, explorative=True)
-              st.title("Document Profiling")
-              st_profile_report(pr)
-            
+                        
       # jaccard
       elif hasil == 'jaccard':
             st.subheader('Similarity jaccard parameters')
@@ -392,6 +391,13 @@ if index0 is not None:
             df_tfidf = pd.DataFrame(tfidf_matrix.toarray(), index=id_requirement,  columns = vect.get_feature_names())
             st.dataframe(df_tfidf)
             
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if profile:
+              pr = ProfileReport(df_tfidf, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
+            
             #feature description
             desc_tfidf = df_tfidf.describe()
             st.write(desc_tfidf)
@@ -406,13 +412,6 @@ if index0 is not None:
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
             
-            # Document Profile
-            profile = st.checkbox("Profile parameter")
-            if profile:
-              pr = ProfileReport(df_tfidf, explorative=True)
-              st.title("Document Profiling")
-              st_profile_report(pr)
-
       # vsm
       elif hasil == 'vsm':
             st.subheader('Similarity vsm parameters')
@@ -468,6 +467,13 @@ if index0 is not None:
             df_vektor = pd.DataFrame(nilai_vektor, index=id_requirement, columns= ['vektor {}'.format(num) for num in range(0, size_value)])
             st.dataframe(df_vektor)
             
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if profile:
+              pr = ProfileReport(df_vektor, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
+            
             #feature description
             desc_vektor = df_vektor.describe()
             st.write(desc_vektor)
@@ -482,12 +488,6 @@ if index0 is not None:
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
             
-            # Document Profile
-            profile = st.checkbox("Profile parameter")
-            if profile:
-              pr = ProfileReport(df_vektor, explorative=True)
-              st.title("Document Profiling")
-              st_profile_report(pr)
 
       # sentencemodel
       elif hasil == 'sentencemodel':
@@ -517,6 +517,13 @@ if index0 is not None:
             df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement)
             st.dataframe(df_sentmodel)
             
+            # Document Profile
+            profile = st.checkbox("Profile parameter")
+            if profile:
+              pr = ProfileReport(df_sentmodel, explorative=True)
+              st.title("Document Profiling")
+              st_profile_report(pr)
+            
             #feature description
             desc_sentmodel = df_sentmodel.describe()
             st.write(desc_sentmodel)
@@ -530,14 +537,6 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
-            
-            # Document Profile
-            profile = st.checkbox("Profile parameter")
-            if profile:
-              pr = ProfileReport(df_sentmodel, explorative=True)
-              st.title("Document Profiling")
-              st_profile_report(pr)
-
 
       # variable training testing
       kalimat         = fulldataset(index0, index1)['kalimat']
