@@ -547,6 +547,7 @@ if index0 is not None:
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
       
+      st.subheader("Train Test Parameter")
       traintest = st.checkbox("Train/Test Data")
       if traintest:
           # variable training testing
