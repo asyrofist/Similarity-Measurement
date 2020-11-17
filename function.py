@@ -1,4 +1,7 @@
-import nltk, math, statistics, collections, re
+import math 
+import statistics 
+import collections 
+import re
 import pandas as pd
 import numpy as np
 import scipy.sparse
@@ -6,6 +9,7 @@ import string #allows for format()
 import plotly.figure_factory as ff
 import streamlit as st
 import altair as alt
+import nltk 
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize 
