@@ -182,7 +182,7 @@ if index0 is not None:
        desc_cos = desc_cos.T
         
        # visusalisasi
-       fig, ax = plt.subplots(figsize=(10,10))
+       fig, ax = plt.subplots()
        sns.heatmap(desc_cos, annot=True, ax=ax)
        st.pyplot() 
         
@@ -272,7 +272,7 @@ if index0 is not None:
        desc_kmeans = desc_kmeans.T
         
        # Visualisasi
-       fig, ax = plt.subplots(figsize=(10,10))
+       fig, ax = plt.subplots()
        sns.heatmap(desc_kmeans, annot=True, ax=ax)
        st.pyplot()
        
@@ -313,7 +313,7 @@ if index0 is not None:
             desc_cos = desc_cos.drop(options, axis=0)
             desc_cos = desc_cos.T
             hasil = desc_cos
-            fig, ax = plt.subplots(figsize=(10,10))
+            fig, ax = plt.subplots()
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
             
@@ -347,7 +347,7 @@ if index0 is not None:
             desc_lev = desc_lev.drop(options, axis=0)
             desc_lev = desc_lev.T
             hasil = desc_lev
-            fig, ax = plt.subplots(figsize=(10,10))
+            fig, ax = plt.subplots()
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
 
@@ -410,7 +410,7 @@ if index0 is not None:
             desc_tfidf = desc_tfidf.drop(options, axis=0)
             desc_tfidf = desc_tfidf.T
             hasil = desc_tfidf
-            fig, ax = plt.subplots(figsize=(10,10))
+            fig, ax = plt.subplots()
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
             
@@ -445,7 +445,7 @@ if index0 is not None:
             desc_vsm = desc_vsm.drop(options, axis=0)
             desc_vsm = desc_vsm.T
             hasil = desc_vsm
-            fig, ax = plt.subplots(figsize=(10,10))
+            fig, ax = plt.subplots()
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
             
@@ -488,7 +488,7 @@ if index0 is not None:
             desc_vektor = desc_vektor.drop(options, axis=0)
             desc_vektor = desc_vektor.T
             hasil = desc_vektor
-            fig, ax = plt.subplots(figsize=(10,10))
+            fig, ax = plt.subplots()
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
             
@@ -584,7 +584,7 @@ if index0 is not None:
               presisi = precision_score(y_test, y_pred, average='macro') 
               rekal = recall_score(y_test, y_pred, average='macro') 
               results = confusion_matrix(y_test, y_pred)
-              fig, ax = plt.subplots(figsize=(10,10))
+              fig, ax = plt.subplots()
               sns.heatmap(results, annot=True, ax=ax)
               st.pyplot()
               chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
@@ -602,7 +602,7 @@ if index0 is not None:
               presisi = precision_score(y_test, y_pred, average='macro') 
               rekal = recall_score(y_test, y_pred, average='macro') 
               results = confusion_matrix(y_test, y_pred)
-              fig, ax = plt.subplots(figsize=(10,10))
+              fig, ax = plt.subplots()
               sns.heatmap(results, annot=True, ax=ax)
               st.pyplot()
               chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
@@ -638,7 +638,7 @@ if index0 is not None:
               presisi = precision_score(y_test, y_pred, average='macro') 
               rekal = recall_score(y_test, y_pred, average='macro') 
               results = confusion_matrix(y_test, y_pred)
-              fig, ax = plt.subplots(figsize=(10,10))
+              fig, ax = plt.subplots()
               sns.heatmap(results, annot=True, ax=ax)
               st.pyplot()
               chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
@@ -656,7 +656,8 @@ if index0 is not None:
               presisi = precision_score(y_test, y_pred, average='macro') 
               rekal = recall_score(y_test, y_pred, average='macro') 
               results = confusion_matrix(y_test, y_pred)
-              fig, ax = plt.subplots(figsize=(10,10))
+              # visual
+              fig, ax = plt.subplots()
               sns.heatmap(results, annot=True, ax=ax)
               st.pyplot()
               chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
