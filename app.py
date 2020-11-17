@@ -125,10 +125,10 @@ if index0 is not None:
        st.write(desc_svd)
     
        # Document Profile
+       st.subheader("Document Profiling")
        profile = st.checkbox("Profile parameter")
        if profile:
           pr = ProfileReport(df_svd, explorative=True)
-          st.title("Document Profiling")
           st_profile_report(pr)        
 
        
@@ -186,10 +186,10 @@ if index0 is not None:
        st.pyplot() 
         
        # Document Profile
+       st.subheader("Document Profiling")
        profile = st.checkbox("Profile parameter")
        if profile:
           pr = ProfileReport(df_cos, explorative=True)
-          st.title("Document Profiling")
           st_profile_report(pr)
 
         
@@ -277,10 +277,10 @@ if index0 is not None:
        st.pyplot()
        
        # Document Profile
+       st.subheader("Document Profiling")
        profile = st.checkbox("Profile parameter")
        if profile:
           pr = ProfileReport(df_kmeans, explorative=True)
-          st.title("Document Profiling")
           st_profile_report(pr)
        
     # similarity
@@ -318,10 +318,10 @@ if index0 is not None:
             st.pyplot()
             
             # Document Profile
+            st.subheader("Document Profiling")
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_cos, explorative=True)
-              st.title("Document Profiling")
               st_profile_report(pr)
 
             
@@ -351,10 +351,10 @@ if index0 is not None:
             st.pyplot()
 
             # Document Profile
+            st.subheader("Document Profiling")
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_lev, explorative=True)
-              st.title("Document Profiling")
               st_profile_report(pr)
 
                         
@@ -385,10 +385,10 @@ if index0 is not None:
             st.pyplot()
             
             # Document Profile
+            st.subheader("Document Profiling")
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_jaccard, explorative=True)
-              st.title("Document Profiling")
               st_profile_report(pr)
 
       # tfidf
@@ -415,10 +415,10 @@ if index0 is not None:
             st.pyplot()
             
             # Document Profile
+            st.title("Document Profiling")
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_tfidf, explorative=True)
-              st.title("Document Profiling")
               st_profile_report(pr)
 
             
@@ -449,10 +449,10 @@ if index0 is not None:
             st.pyplot()
             
             # Document Profile
+            st.subheader("Document Profiling")
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_vsm, explorative=True)
-              st.title("Document Profiling")
               st_profile_report(pr)
 
 
@@ -492,10 +492,10 @@ if index0 is not None:
             st.pyplot()
             
             # Document Profile
+            st.subheader("Document Profiling")
             profile = st.checkbox("Profile parameter")
             if profile:
               pr = ProfileReport(df_vektor, explorative=True)
-              st.title("Document Profiling")
               st_profile_report(pr)
 
       # sentencemodel
@@ -525,14 +525,7 @@ if index0 is not None:
             id_requirement = fulldataset(index0, index1)['ID']
             df_sentmodel = pd.DataFrame(hasil_sentencemodel, index=id_requirement, columns=id_requirement)
             st.dataframe(df_sentmodel)
-            
-            # Document Profile
-            profile = st.checkbox("Profile parameter")
-            if profile:
-              pr = ProfileReport(df_sentmodel, explorative=True)
-              st.title("Document Profiling")
-              st_profile_report(pr)
-            
+                        
             #feature description
             desc_sentmodel = df_sentmodel.describe()
             st.write(desc_sentmodel)
@@ -546,6 +539,14 @@ if index0 is not None:
             fig, ax = plt.subplots(figsize=(10,10))
             sns.heatmap(hasil, annot=True, ax=ax)
             st.pyplot()
+            
+            # Document Profile
+            st.subheader("Document Profiling")
+            profile = st.checkbox("Profile parameter")
+            if profile:
+              pr = ProfileReport(df_sentmodel, explorative=True)
+              st_profile_report(pr)
+
       
       st.subheader("Train Test Parameter")
       traintest = st.checkbox("Train/Test Data")
