@@ -587,4 +587,4 @@ if index0 is not None:
           pr = ProfileReport(hasil, explorative=True)
           st.title("Document Profiling")
           st.write(hasil)
-          st_profile_report(hasil)        
+          st_profile_report(pr)        
