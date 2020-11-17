@@ -11,6 +11,8 @@ from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix 
+from pandas_profiling import ProfileReport
+from streamlit_pandas_profiling import st_profile_report
 
 st.write("""
 # Requirement Dependency Measurements
