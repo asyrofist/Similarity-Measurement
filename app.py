@@ -720,7 +720,7 @@ if index0 is not None:
                          layer1, layer2, layer3, learning_rate, 
                          verbose_value, batch_value, epoch_value)
             results_ = confusion_matrix(text_x, test_y)
-            st.write(results_
+            st.write(results_)
             
           # Document Profile
           elif Profile:
