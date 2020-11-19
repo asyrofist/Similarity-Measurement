@@ -35,9 +35,6 @@ def traintestANN(x, y, rasio,  input1, input2, input3,
     # Train the model
     model.fit(train_x, train_y, verbose= verbose_value, batch_size= batch_value, epochs= epoch_value)  
     results = model.evaluate(test_x, test_y)
-    st.write('Evaluasi ANN:')
-    st.write(results)
-
 
 st.write("""
 # Requirement Dependency Measurements
@@ -702,6 +699,7 @@ if index0 is not None:
             y = encoder.fit_transform(y_)
             
             # Test on unseen data
+            st.sidebar.header('ANN Parameters')            
             rasio = size
             input1 = st.sidebar.slider('input1?', 0, 100, 10)
             input2 = st.sidebar.slider('input2?', 0, 100, 10)
