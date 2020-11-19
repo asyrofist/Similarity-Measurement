@@ -714,7 +714,8 @@ if index0 is not None:
                          layer1, layer2, layer3, learning_rate, 
                          verbose_value, batch_value, epoch_value)
             st.write('Neural Network Model Summary: ')
-            st.write(model.summary())
+            hasil_model = model.summary()
+            st.write(hasli_model)
 
             # Train the model
             model.fit(train_x, train_y, verbose= verbose_value, batch_size= batch_value, epochs= epoch_value)  
