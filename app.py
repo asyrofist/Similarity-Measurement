@@ -579,9 +579,9 @@ if index0 is not None:
 
           # support vector machine
           if SVM:
-              tipe_svm = st.sidebar.selectbox('Tipe SVM?', ['auto', 'kernel'])
+              tipe_svm = st.sidebar.selectbox('Tipe SVM?', ['auto-ovo', 'kernel'])
               if tipe_svm == 'kernel':
-                    list_kernel = st.sidebar.selectbox('What Kernel?', ['linear', 'poly', 'rbf', 'sigmoid'])
+                    list_kernel = st.sidebar.selectbox('What Kernel?', ['rbf', 'linear', 'poly', 'sigmoid'])
                     supportvectormachine = svm.SVC(kernel= list_kernel, gamma= 'auto')
                     supportvectormachine.fit(X_train, y_train)
                     y_pred = supportvectormachine.predict(X_test)
@@ -598,7 +598,7 @@ if index0 is not None:
                     chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
                     st.bar_chart(chart_data)                
 
-              elif tipe_svm == 'auto':
+              elif tipe_svm == 'auto-ovo':
                     supportvectormachine = svm.SVC(decision_function_shape='ovo')
                     supportvectormachine.fit(X_train, y_train)
                     y_pred = supportvectormachine.predict(X_test)
@@ -687,7 +687,14 @@ if index0 is not None:
               st.pyplot()
               chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
               st.bar_chart(chart_data)
-                
+            
+            # Document Profile
+            elif Profile:
+              pr = ProfileReport(hasil, explorative=True)
+              st.title("Document Profiling")
+              st.write(hasil)
+              st_profile_report(pr)        
+
 #           elif ANN:
 #             x = hasil
 #             y_ = label_kalimat.reshape(-1, 1) # Convert data to a single column
@@ -729,9 +736,3 @@ if index0 is not None:
 #             model.fit(train_x, train_y, verbose= verbose_value, batch_size= batch_value, epochs= epoch_value)  
 #             results = model.evaluate(test_x, test_y)
             
-          # Document Profile
-          elif Profile:
-              pr = ProfileReport(hasil, explorative=True)
-              st.title("Document Profiling")
-              st.write(hasil)
-              st_profile_report(pr)        
