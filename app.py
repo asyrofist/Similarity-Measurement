@@ -570,17 +570,17 @@ if index0 is not None:
           # classification
           st.sidebar.header('Classification Parameters')
           SVM = st.sidebar.checkbox('Support Vector Machine')
-          RFC = st.sidebar.button('Random Forest Classifier')
-          KNN = st.sidebar.button('K Nearest Neighbor')
-          GNB = st.sidebar.button('Gaussian Naive Bias')
-          DT  = st.sidebar.button('Decission Tree')
+          RFC = st.sidebar.checkbox('Random Forest Classifier')
+          KNN = st.sidebar.checkbox('K Nearest Neighbor')
+          GNB = st.sidebar.checkbox('Gaussian Naive Bias')
+          DT  = st.sidebar.checkbox('Decission Tree')
 #           ANN  = st.sidebar.checkbox('Artificial Neural Network')
           Profile  = st.checkbox('Document Profilling')
 
           # support vector machine
           if SVM:
               tipe_svm = st.sidebar.selectbox('Tipe SVM?', ['auto', 'kernel'])
-              if tipe_sm == 'kernel':
+              if tipe_svm == 'kernel':
                     list_kernel = st.sidebar.selectbox('What Kernel?', ['linear', 'poly', 'rbf', 'sigmoid'])
                     supportvectormachine = svm.SVC(kernel= list_kernel, gamma= 'auto')
                     supportvectormachine.fit(X_train, y_train)
