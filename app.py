@@ -694,6 +694,7 @@ if index0 is not None:
             epoch_value = st.sidebar.slider('epoch size?', 0, 1000, 200)
             
             # Build the model
+            train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=rasio)
             model = Sequential()
             model.add(Dense(input1, input_shape=(4,), activation= aktivasi1, name= layer1))
             model.add(Dense(input2, activation= aktivasi2, name= layer2))
