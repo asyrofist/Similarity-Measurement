@@ -569,31 +569,51 @@ if index0 is not None:
 
           # classification
           st.sidebar.header('Classification Parameters')
-          SVM = st.sidebar.button('Support Vector Machine')
+          SVM = st.sidebar.checkbox('Support Vector Machine')
           RFC = st.sidebar.button('Random Forest Classifier')
           KNN = st.sidebar.button('K Nearest Neighbor')
           GNB = st.sidebar.button('Gaussian Naive Bias')
           DT  = st.sidebar.button('Decission Tree')
-          ANN  = st.sidebar.checkbox('Artificial Neural Network')
+#           ANN  = st.sidebar.checkbox('Artificial Neural Network')
           Profile  = st.checkbox('Document Profilling')
 
           # support vector machine
           if SVM:
-              supportvectormachine = svm.SVC(decision_function_shape='ovo')
-              supportvectormachine.fit(X_train, y_train)
-              y_pred = supportvectormachine.predict(X_test)
-              st.subheader('Classification based on SVM')
-              st.write(classification_report(y_test, y_pred))
-              st.subheader("cetak Prediksi setiap classifier")
-              akurasi = accuracy_score(y_test, y_pred) 
-              presisi = precision_score(y_test, y_pred, average='macro') 
-              rekal = recall_score(y_test, y_pred, average='macro') 
-              results = confusion_matrix(y_test, y_pred)
-              fig, ax = plt.subplots()
-              sns.heatmap(results, annot=True, ax=ax)
-              st.pyplot()
-              chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
-              st.bar_chart(chart_data)
+              tipe_svm = st.sidebar.selectbox('Tipe SVM?', ['auto', 'kernel'])
+              if tipe_sm = 'kernel':
+                    list_kernel = st.sidebar.selectbox('What Kernel?', ['linear', 'poly', 'rbf', 'sigmoid'])
+                    supportvectormachine = svm.SVC(kernel= list_kernel, gamma= 'auto')
+                    supportvectormachine.fit(X_train, y_train)
+                    y_pred = supportvectormachine.predict(X_test)
+                    st.subheader('Classification based on SVM')
+                    st.write(classification_report(y_test, y_pred))
+                    st.subheader("cetak Prediksi setiap classifier")
+                    akurasi = accuracy_score(y_test, y_pred) 
+                    presisi = precision_score(y_test, y_pred, average='macro') 
+                    rekal = recall_score(y_test, y_pred, average='macro') 
+                    results = confusion_matrix(y_test, y_pred)
+                    fig, ax = plt.subplots()
+                    sns.heatmap(results, annot=True, ax=ax)
+                    st.pyplot()
+                    chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+                    st.bar_chart(chart_data)                
+
+              elif tipe_svm = 'auto':
+                    supportvectormachine = svm.SVC(decision_function_shape='ovo')
+                    supportvectormachine.fit(X_train, y_train)
+                    y_pred = supportvectormachine.predict(X_test)
+                    st.subheader('Classification based on SVM')
+                    st.write(classification_report(y_test, y_pred))
+                    st.subheader("cetak Prediksi setiap classifier")
+                    akurasi = accuracy_score(y_test, y_pred) 
+                    presisi = precision_score(y_test, y_pred, average='macro') 
+                    rekal = recall_score(y_test, y_pred, average='macro') 
+                    results = confusion_matrix(y_test, y_pred)
+                    fig, ax = plt.subplots()
+                    sns.heatmap(results, annot=True, ax=ax)
+                    st.pyplot()
+                    chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
+                    st.bar_chart(chart_data)
 
           # random forest classifier
           elif RFC:
@@ -668,46 +688,46 @@ if index0 is not None:
               chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
               st.bar_chart(chart_data)
                 
-          elif ANN:
-            x = hasil
-            y_ = label_kalimat.reshape(-1, 1) # Convert data to a single column
+#           elif ANN:
+#             x = hasil
+#             y_ = label_kalimat.reshape(-1, 1) # Convert data to a single column
 
-            # One Hot encode the class labels
-            encoder = OneHotEncoder(sparse=False)
-            y = encoder.fit_transform(y_)
+#             # One Hot encode the class labels
+#             encoder = OneHotEncoder(sparse=False)
+#             y = encoder.fit_transform(y_)
             
-            # Test on unseen data
-            st.sidebar.header('ANN Parameters')            
-            rasio = size
-            input1 = st.sidebar.slider('input1?', 0, 100, 10)
-            input2 = st.sidebar.slider('input2?', 0, 100, 10)
-            input3 = st.sidebar.slider('input3?', 0, 10, 3)
-            aktivasi1 = st.sidebar.selectbox('aktivasi1?', ['relu', 'softmax'])
-            aktivasi2 = st.sidebar.selectbox('aktivasi2?', ['relu', 'softmax'])
-            aktivasi3 = st.sidebar.selectbox('aktivasi3?', ['softmax', 'relu'])
-            layer1 = st.sidebar.selectbox('layer1?', ['fc1', 'fc2', 'output'])
-            layer2 = st.sidebar.selectbox('layer2?', ['fc2', 'fc1', 'output'])
-            layer3 = st.sidebar.selectbox('layer3?', ['output', 'fc1', 'fc2'])
-            learning_rate = 0.001
-            verbose_value = st.sidebar.slider('verbose size?', 0, 5, 2)
-            batch_value = st.sidebar.slider('batch size?', 0, 10, 5)
-            epoch_value = st.sidebar.slider('epoch size?', 0, 1000, 200)
+#             # Test on unseen data
+#             st.sidebar.header('ANN Parameters')            
+#             rasio = size
+#             input1 = st.sidebar.slider('input1?', 0, 100, 10)
+#             input2 = st.sidebar.slider('input2?', 0, 100, 10)
+#             input3 = st.sidebar.slider('input3?', 0, 10, 3)
+#             aktivasi1 = st.sidebar.selectbox('aktivasi1?', ['relu', 'softmax'])
+#             aktivasi2 = st.sidebar.selectbox('aktivasi2?', ['relu', 'softmax'])
+#             aktivasi3 = st.sidebar.selectbox('aktivasi3?', ['softmax', 'relu'])
+#             layer1 = st.sidebar.selectbox('layer1?', ['fc1', 'fc2', 'output'])
+#             layer2 = st.sidebar.selectbox('layer2?', ['fc2', 'fc1', 'output'])
+#             layer3 = st.sidebar.selectbox('layer3?', ['output', 'fc1', 'fc2'])
+#             learning_rate = 0.001
+#             verbose_value = st.sidebar.slider('verbose size?', 0, 5, 2)
+#             batch_value = st.sidebar.slider('batch size?', 0, 10, 5)
+#             epoch_value = st.sidebar.slider('epoch size?', 0, 1000, 200)
             
-            # Build the model
-            train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=rasio)
-            model = Sequential()
-            model.add(Dense(input1, input_shape=(4,), activation= aktivasi1, name= layer1))
-            model.add(Dense(input2, activation= aktivasi2, name= layer2))
-            model.add(Dense(input3, activation= aktivasi3, name= layer3))
+#             # Build the model
+#             train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=rasio)
+#             model = Sequential()
+#             model.add(Dense(input1, input_shape=(4,), activation= aktivasi1, name= layer1))
+#             model.add(Dense(input2, activation= aktivasi2, name= layer2))
+#             model.add(Dense(input3, activation= aktivasi3, name= layer3))
 
-            # Adam optimizer with learning rate of 0.001
-            optimizer = Adam(lr= learning_rate)
-            model.compile(optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
-            model.summary()
+#             # Adam optimizer with learning rate of 0.001
+#             optimizer = Adam(lr= learning_rate)
+#             model.compile(optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
+#             model.summary()
 
-            # Train the model
-            model.fit(train_x, train_y, verbose= verbose_value, batch_size= batch_value, epochs= epoch_value)  
-            results = model.evaluate(test_x, test_y)
+#             # Train the model
+#             model.fit(train_x, train_y, verbose= verbose_value, batch_size= batch_value, epochs= epoch_value)  
+#             results = model.evaluate(test_x, test_y)
             
           # Document Profile
           elif Profile:
