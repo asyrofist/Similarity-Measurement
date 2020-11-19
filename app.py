@@ -695,9 +695,9 @@ if index0 is not None:
             
             # Test on unseen data
             rasio = size
-            input1 = st.sidebar.slider('input1?', 0.1, 100, 10)
-            input2 = st.sidebar.slider('input2?', 0.1, 100, 10)
-            input3 = st.sidebar.slider('input3?', 0.1, 10, 3)
+            input1 = st.sidebar.slider('input1?', 0, 100, 10)
+            input2 = st.sidebar.slider('input2?', 0, 100, 10)
+            input3 = st.sidebar.slider('input3?', 0, 10, 3)
             aktivasi1 = st.sidebar.selectbox('aktivasi1?', ['relu', 'softmax'])
             aktivasi2 = st.sidebar.selectbox('aktivasi2?', ['relu', 'softmax'])
             aktivasi3 = st.sidebar.selectbox('aktivasi3?', ['softmax', 'relu'])
