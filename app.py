@@ -591,7 +591,7 @@ if index0 is not None:
           KNN = st.sidebar.button('K Nearest Neighbor')
           GNB = st.sidebar.button('Gaussian Naive Bias')
           DT  = st.sidebar.button('Decission Tree')
-          ANN  = st.sidebar.selectbox('Artificial Neural Network')
+          ANN  = st.sidebar.checkbox('Artificial Neural Network')
           Profile  = st.checkbox('Document Profilling')
 
           # support vector machine
