@@ -15,4 +15,5 @@ gensim==3.6.0
 plotly
 streamlit-pandas-profiling
 seaborn
+tensorflow
 keras
