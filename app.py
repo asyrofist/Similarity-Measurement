@@ -569,13 +569,14 @@ if index0 is not None:
 
           # classification
           st.sidebar.header('Classification Parameters')
-          SVM = st.sidebar.checkbox('Support Vector Machine')
           RFC = st.sidebar.checkbox('Random Forest Classifier')
           KNN = st.sidebar.checkbox('K Nearest Neighbor')
           GNB = st.sidebar.checkbox('Gaussian Naive Bias')
           DT  = st.sidebar.checkbox('Decission Tree')
+          Profile  = st.sidebar.checkbox('Document Profilling')
+          SVM = st.sidebar.checkbox('Support Vector Machine')
 #           ANN  = st.sidebar.checkbox('Artificial Neural Network')
-          Profile  = st.checkbox('Document Profilling')
+        
 
           # support vector machine
           if SVM:
@@ -688,8 +689,8 @@ if index0 is not None:
               chart_data = pd.DataFrame([akurasi, presisi, rekal], index=['akurasi', 'presisi', 'rekal'])
               st.bar_chart(chart_data)
             
-            # Document Profile
-            elif Profile:
+          # Document Profile
+          elif Profile:
               pr = ProfileReport(hasil, explorative=True)
               st.title("Document Profiling")
               st.write(hasil)
