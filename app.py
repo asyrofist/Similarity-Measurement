@@ -14,28 +14,6 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.optimizers import Adam
 
-def traintestANN(x, y, rasio,  input1, input2, input3, 
-                 aktivasi1, aktivasi2, aktivasi3, 
-                 layer1, layer2, layer3, learning_rate, 
-                 verbose_value, batch_value, epoch_value):
-    # Split the data for training and testing
-    train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=rasio)
-
-    # Build the model
-    model = Sequential()
-    model.add(Dense(input1, input_shape=(4,), activation= aktivasi1, name= layer1))
-    model.add(Dense(input2, activation= aktivasi2, name= layer2))
-    model.add(Dense(input3, activation= aktivasi3, name= layer3))
-
-    # Adam optimizer with learning rate of 0.001
-    optimizer = Adam(lr= learning_rate)
-    model.compile(optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
-    model.summary()
-
-    # Train the model
-    model.fit(train_x, train_y, verbose= verbose_value, batch_size= batch_value, epochs= epoch_value)  
-    results = model.evaluate(test_x, test_y)
-
 st.write("""
 # Requirement Dependency Measurements
 Berikut ini algoritma yang digunakan untuk pengukuran kebergantungan antar kebutuhan
@@ -714,13 +692,21 @@ if index0 is not None:
             verbose_value = st.sidebar.slider('verbose size?', 0, 5, 2)
             batch_value = st.sidebar.slider('batch size?', 0, 10, 5)
             epoch_value = st.sidebar.slider('epoch size?', 0, 1000, 200)
+            
+            # Build the model
+            model = Sequential()
+            model.add(Dense(input1, input_shape=(4,), activation= aktivasi1, name= layer1))
+            model.add(Dense(input2, activation= aktivasi2, name= layer2))
+            model.add(Dense(input3, activation= aktivasi3, name= layer3))
 
-            traintestANN(x, y, rasio,  input1, input2, input3, 
-                         aktivasi1, aktivasi2, aktivasi3, 
-                         layer1, layer2, layer3, learning_rate, 
-                         verbose_value, batch_value, epoch_value)
-            results_ = confusion_matrix(text_x, test_y)
-            st.write(results_)
+            # Adam optimizer with learning rate of 0.001
+            optimizer = Adam(lr= learning_rate)
+            model.compile(optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
+            model.summary()
+
+            # Train the model
+            model.fit(train_x, train_y, verbose= verbose_value, batch_size= batch_value, epochs= epoch_value)  
+            results = model.evaluate(test_x, test_y)
             
           # Document Profile
           elif Profile:
