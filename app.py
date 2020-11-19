@@ -704,7 +704,7 @@ if index0 is not None:
             layer1 = st.sidebar.selectbox('layer1?', ['fc1', 'fc2', 'output'])
             layer2 = st.sidebar.selectbox('layer2?', ['fc2', 'fc1', 'output'])
             layer3 = st.sidebar.selectbox('layer3?', ['output', 'fc1', 'fc2'])
-            learning_rate = st.sidebar.slider('learning rate?', 0, 0.01, 0.001)
+            learning_rate = 0.001
             verbose_value = st.sidebar.slider('verbose size?', 0, 5, 2)
             batch_value = st.sidebar.slider('batch size?', 0, 10, 5)
             epoch_value = st.sidebar.slider('epoch size?', 0, 1000, 200)
