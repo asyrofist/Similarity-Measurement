@@ -30,14 +30,12 @@ def traintestANN(x, y, rasio,  input1, input2, input3,
     # Adam optimizer with learning rate of 0.001
     optimizer = Adam(lr= learning_rate)
     model.compile(optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
-    hasil_model = model.summary()
-    st.write('Neural Network Model Summary: ')
-    st.write(hasli_model)
+    model.summary()
 
     # Train the model
     model.fit(train_x, train_y, verbose= verbose_value, batch_size= batch_value, epochs= epoch_value)  
     results = model.evaluate(test_x, test_y)
-    st.write('Evaluasi ANN: ')
+    st.write('Evaluasi ANN:')
     st.write(results)
 
 
