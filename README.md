@@ -1,4 +1,4 @@
-# Similarity-Measurement
+# Similarity-Measurement [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/asyrofist/similarity-measurement/main/app.py)
 This is the similarity repository about similarity measurement
 
 Demo Application
